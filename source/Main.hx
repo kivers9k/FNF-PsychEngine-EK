@@ -64,11 +64,19 @@ class Main extends Sprite
 		super();
 
 		// Credits to MAJigsaw77 (he's the og author for this code)
+		// I'm sorry but I'm not using this one lol
+		//#if android
+		//Sys.setCwd(Path.addTrailingSlash(Context.getExternalFilesDir()));
+		//#elseif ios
+		//Sys.setCwd(lime.system.System.applicationStorageDirectory);
+		//#end
+		#if mobile
 		#if android
-		Sys.setCwd(Path.addTrailingSlash(Context.getExternalFilesDir()));
-		#elseif ios
-		Sys.setCwd(lime.system.System.applicationStorageDirectory);
+		SUtil.doPermissionsShit();
 		#end
+		Sys.setCwd(SUtil.getStorageDirectory());
+		#end
+		mobile.backend.CrashHandler.init();
 
 		if (stage != null)
 		{
@@ -113,7 +121,7 @@ class Main extends Sprite
 		#if ACHIEVEMENTS_ALLOWED Achievements.load(); #end
 		addChild(new FlxGame(game.width, game.height, game.initialState, #if (flixel < "5.0.0") game.zoom, #end game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
 
-		#if !mobile
+		
 		fpsVar = new FPSCounter(10, 3, 0xFFFFFF);
 		addChild(fpsVar);
 		Lib.current.stage.align = "tl";
@@ -121,7 +129,7 @@ class Main extends Sprite
 		if(fpsVar != null) {
 			fpsVar.visible = ClientPrefs.data.showFPS;
 		}
-		#end
+		
 
 		#if linux
 		var icon = Image.fromFile("icon.png");
@@ -140,6 +148,8 @@ class Main extends Sprite
 		#if DISCORD_ALLOWED
 		DiscordClient.prepare();
 		#end
+
+		#if android FlxG.android.preventDefaultKeys = [BACK]; #end
 
 		// shader coords fix
 		FlxG.signals.gameResized.add(function (w, h) {
