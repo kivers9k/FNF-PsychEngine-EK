@@ -31,6 +31,7 @@ jobs:
           haxelib install flixel-tools 1.5.1 --quiet
           haxelib install flixel-ui 
           haxelib install json2object
+          haxelib install hxCodec
           haxelib git SScript https://github.com/MobilePorting/SScript c4e241b254595531396d5e52e8401c9adc3f344f --quiet
           haxelib install tjson 1.4.0 --quiet
           haxelib git flxanimate https://github.com/Dot-Stuff/flxanimate 768740a56b26aa0c072720e0d1236b94afe68e3e --quiet
