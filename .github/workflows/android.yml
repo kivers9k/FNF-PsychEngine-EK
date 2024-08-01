@@ -1,5 +1,7 @@
 name: Android Build Test
-on: workflow_dispatch
+on: pull_request:
+    branches: [ 0.7.3 ]
+    workflow_dispatch
 jobs:
   Android:
     runs-on: ubuntu-latest
