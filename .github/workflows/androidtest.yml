@@ -34,7 +34,7 @@ jobs:
           haxelib install hxCodec
           haxelib git SScript https://github.com/MobilePorting/SScript c4e241b254595531396d5e52e8401c9adc3f344f --quiet
           haxelib install tjson 1.4.0 --quiet
-          haxelib git flxanimate https://github.com/Dot-Stuff/flxanimate 768740a56b26aa0c072720e0d1236b94afe68e3e --quiet
+          haxelib git flxanimate https://github.com/ShadowMario/flxanimate --quiet
           haxelib git linc_luajit https://github.com/mcagabe19-stuff/linc_luajit-legacy 923a8262a7a8dcd166264dcf22cb7395a11fba65 --quiet
           haxelib git hxdiscord_rpc https://github.com/MAJigsaw77/hxdiscord_rpc 3538a1c2bb07b04208cd014220207f8173acdb21 --quiet --skip-dependencies
           haxelib git hxvlc https://github.com/MAJigsaw77/hxvlc 70e7f5f3e76d526ac6fb8f0e6665efe7dfda589d --quiet --skip-dependencies
