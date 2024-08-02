@@ -1710,6 +1710,7 @@ class ChartingState extends MusicBeatState
 
 	var lastConductorPos:Float;
 	var colorSine:Float = 0;
+	var timePos:Array<Float> = [0, 0];
 	override function update(elapsed:Float)
 	{
 		curStep = recalculateSteps();
@@ -1770,7 +1771,7 @@ class ChartingState extends MusicBeatState
 			dummyArrow.visible = false;
 		}
 
-		if (FlxG.mouse.justPressed)
+		if (FlxG.mouse.justReleased && !FlxG.mouse.justMoved)
 		{
 			if (FlxG.mouse.overlaps(curRenderedNotes))
 			{
@@ -1842,7 +1843,7 @@ class ChartingState extends MusicBeatState
 
 		if (!blockInput)
 		{
-			if (FlxG.keys.justPressed.ESCAPE)
+			if (FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased #end)
 			{
 				if(FlxG.sound.music != null)
 					FlxG.sound.music.stop();
@@ -1864,7 +1865,7 @@ class ChartingState extends MusicBeatState
 				playtestingOnComplete = FlxG.sound.music.onComplete;
 				openSubState(new states.editors.EditorPlayState(playbackSpeed));
 			}
-			else if (FlxG.keys.justPressed.ENTER)
+			else if (FlxG.keys.justPressed.ENTER #if android || _virtualpad.buttonA.justReleased #end)
 			{
 				autosaveSong();
 				FlxG.mouse.visible = false;
@@ -1929,7 +1930,7 @@ class ChartingState extends MusicBeatState
 				}
 			}
 
-			if (FlxG.keys.justPressed.SPACE)
+			if (FlxG.keys.justPressed.SPACE #if android || _virtualpad.buttonX.justReleased #end)
 			{
 				if(vocals != null) vocals.play();
 				if(opponentVocals != null) opponentVocals.play();
@@ -1988,6 +1989,15 @@ class ChartingState extends MusicBeatState
 
 				FlxG.sound.music.time += daTime * (FlxG.keys.pressed.W ? -1 : 1);
 
+				pauseAndSetVocalsTime();
+			}
+
+            var mouse = FlxG.mouse.getScreenPosition();
+		    if (FlxG.mouse.justPressed) {
+				FlxG.sound.music.pause();
+                timePos[0] = FlxG.sound.music.time + mouse.y;
+			} else if (FlxG.mouse.pressed) {
+                FlxG.sound.music.time = timePos[0] - mouse.y;
 				pauseAndSetVocalsTime();
 			}
 
