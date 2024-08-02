@@ -1710,7 +1710,7 @@ class ChartingState extends MusicBeatState
 
 	var lastConductorPos:Float;
 	var colorSine:Float = 0;
-	var timePos:Array<Float> = [0, 0];
+	var timePos:Float;
 	override function update(elapsed:Float)
 	{
 		curStep = recalculateSteps();
@@ -1995,7 +1995,7 @@ class ChartingState extends MusicBeatState
             var overlapsGridBg = (FlxG.mouse.x > gridBG.x
 			&& FlxG.mouse.x < gridBG.x + gridBG.width
 			&& FlxG.mouse.y > gridBG.y
-		    && FlxG.mouse.y < gridBG.y + (GRID_SIZE * getSectionBeats() * 4) * zoomList[curZoom])
+		    && FlxG.mouse.y < gridBG.y + (GRID_SIZE * getSectionBeats() * 4) * zoomList[curZoom]);
 
             var mouse = FlxG.mouse.getScreenPosition();
 
@@ -2003,9 +2003,9 @@ class ChartingState extends MusicBeatState
 				FlxG.sound.music.pause();
 
 		        if (FlxG.mouse.justPressed) {
-                    timePos[0] = FlxG.sound.music.time + mouse.y;
+                    timePos = FlxG.sound.music.time + mouse.y;
 		    	} else if (FlxG.mouse.pressed) {
-                    FlxG.sound.music.time = timePos[0] - mouse.y;
+                    FlxG.sound.music.time = timePos - mouse.y;
 			    }
 
 				pauseAndSetVocalsTime();
