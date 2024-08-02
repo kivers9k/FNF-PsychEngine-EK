@@ -610,6 +610,10 @@ class WeekEditorFreeplayState extends MusicBeatState
 			// songText.screenCenter(X);
 		}
 
+		#if android
+		addVirualPad(UP_DOWN, NONE);
+		#end
+
 		addEditorBox();
 		changeSelection();
 		super.create();
