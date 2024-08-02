@@ -1890,8 +1890,7 @@ class ChartingState extends MusicBeatState
 				}
 			}
 
-
-			if (FlxG.keys.justPressed.BACKSPACE) {
+			if (FlxG.keys.justPressed.BACKSPACE #if android || _virtualpad.buttonB.justReleased #end) {
 				// Protect against lost data when quickly leaving the chart editor.
 				autosaveSong();
 				PlayState.chartingMode = false;
@@ -1905,11 +1904,11 @@ class ChartingState extends MusicBeatState
 				undo();
 			}
 
-			if(FlxG.keys.justPressed.Z && curZoom > 0 && !FlxG.keys.pressed.CONTROL) {
+			if((FlxG.keys.justPressed.Z #if android || _virtualpad.buttonC.justReleased #end) && curZoom > 0 && !FlxG.keys.pressed.CONTROL) {
 				--curZoom;
 				updateZoom();
 			}
-			if(FlxG.keys.justPressed.X && curZoom < zoomList.length-1) {
+			if((FlxG.keys.justPressed.X #if android || _virtualpad.buttonZ.justReleased #end) && curZoom < zoomList.length-1) {
 				curZoom++;
 				updateZoom();
 			}
@@ -1992,14 +1991,26 @@ class ChartingState extends MusicBeatState
 				pauseAndSetVocalsTime();
 			}
 
+			#if android
+            var overlapsGridBg = (FlxG.mouse.x > gridBG.x
+			&& FlxG.mouse.x < gridBG.x + gridBG.width
+			&& FlxG.mouse.y > gridBG.y
+		    && FlxG.mouse.y < gridBG.y + (GRID_SIZE * getSectionBeats() * 4) * zoomList[curZoom])
+
             var mouse = FlxG.mouse.getScreenPosition();
-		    if (FlxG.mouse.justPressed) {
+
+			if (overlapsGridBg && FlxG.mouse.justMoved) {
 				FlxG.sound.music.pause();
-                timePos[0] = FlxG.sound.music.time + mouse.y;
-			} else if (FlxG.mouse.pressed) {
-                FlxG.sound.music.time = timePos[0] - mouse.y;
+
+		        if (FlxG.mouse.justPressed) {
+                    timePos[0] = FlxG.sound.music.time + mouse.y;
+		    	} else if (FlxG.mouse.pressed) {
+                    FlxG.sound.music.time = timePos[0] - mouse.y;
+			    }
+
 				pauseAndSetVocalsTime();
 			}
+            #end
 
 			if(!vortex){
 				if (FlxG.keys.justPressed.UP || FlxG.keys.justPressed.DOWN  )
@@ -2120,9 +2131,9 @@ class ChartingState extends MusicBeatState
 			if (FlxG.keys.pressed.SHIFT)
 				shiftThing = 4;
 
-			if (FlxG.keys.justPressed.D)
+			if (FlxG.keys.justPressed.D #if android || _virtualpad.buttonRight.justPressed #end)
 				changeSection(curSec + shiftThing);
-			if (FlxG.keys.justPressed.A) {
+			if (FlxG.keys.justPressed.A #if android || _virtualpad.buttonLeft.justPressed #end) {
 				if(curSec <= 0) {
 					changeSection(_song.notes.length-1);
 				} else {
