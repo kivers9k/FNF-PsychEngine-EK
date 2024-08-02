@@ -611,7 +611,7 @@ class WeekEditorFreeplayState extends MusicBeatState
 		}
 
 		#if android
-		addVirualPad(UP_DOWN, NONE);
+		addVirtualPad(UP_DOWN, NONE);
 		#end
 
 		addEditorBox();
