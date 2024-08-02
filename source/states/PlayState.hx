@@ -2760,31 +2760,29 @@ class PlayState extends MusicBeatState
 		for (key in keysArray)
 		{
 			holdArray.push(controls.pressed(key));
-			#if android
-			for (hbox in _hitbox.array) {
-				holdArray.push(hbox.pressed);
-			}
-			#end
 			if(controls.controllerMode)
 			{
 				pressArray.push(controls.justPressed(key));
 				releaseArray.push(controls.justReleased(key));
 			}
-			#if android
-			for (hbox in _hitbox.array) {
-				pressArray.push(hbox.justPressed);
-				releaseArray.push(hbox.justReleased);
-			}
-			#end
 		}
+
+		#if android
+		for (hbox in _hitbox.array) {
+	        holdArray.push(hbox.pressed);
+			pressArray.push(hbox.justPressed);
+			releaseArray.push(hbox.justReleased);
+		}
+        #end
 
 		// TO DO: Find a better way to handle controller inputs, this should work for now
 		if(controls.controllerMode && pressArray.contains(true))
 			for (i in 0...pressArray.length)
 				if(pressArray[i] && strumsBlocked[i] != true)
 					keyPressed(i);
+ 
 		#if android
-		if(pressArray.contains(true))
+		if (pressArray.contains(true))
 			for (i in 0...pressArray.length)
 				if(pressArray[i] && strumsBlocked[i] != true)
 					keyPressed(i);
@@ -2822,6 +2820,7 @@ class PlayState extends MusicBeatState
 			for (i in 0...releaseArray.length)
 				if(releaseArray[i] || strumsBlocked[i] == true)
 					keyReleased(i);
+	    
 		#if android
 		if((strumsBlocked.contains(true)) && releaseArray.contains(true))
 			for (i in 0...releaseArray.length)
