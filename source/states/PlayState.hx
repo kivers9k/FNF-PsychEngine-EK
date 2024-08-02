@@ -572,6 +572,9 @@ class PlayState extends MusicBeatState
 		noteGroup.cameras = [camHUD];
 		comboGroup.cameras = [camHUD];
 
+		addHitbox(SONG.mania);
+		_hitbox.visible = false;
+
 		startingSong = true;
 
 		#if LUA_ALLOWED
@@ -1213,7 +1216,7 @@ class PlayState extends MusicBeatState
 
 	function startSong():Void
 	{
-		startingSong = false;
+        startingSong = false;
 
 		@:privateAccess
 		FlxG.sound.playMusic(inst._sound, 1, false);
@@ -1236,6 +1239,10 @@ class PlayState extends MusicBeatState
 		songLength = FlxG.sound.music.length;
 		FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 		FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+
+		#if android
+		_hitbox.visible = true;
+		#end
 
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence (with Time Left)
@@ -2339,7 +2346,11 @@ class PlayState extends MusicBeatState
 		endingSong = true;
 		camZooming = false;
 		inCutscene = false;
-		updateTime = false;
+		updateTime = false; 
+        #if android
+		_hitbox.visible = false;
+	    #end
+
 
 		deathCounter = 0;
 		seenCutscene = false;
