@@ -2761,7 +2761,7 @@ class PlayState extends MusicBeatState
 		{
 			holdArray.push(controls.pressed(key));
 			#if android
-			holdArray.push(_hitbox.pressed(key));
+			holdArray.push(_hitbox.array[key].pressed);
 			#end
 			if(controls.controllerMode)
 			{
@@ -2769,8 +2769,8 @@ class PlayState extends MusicBeatState
 				releaseArray.push(controls.justReleased(key));
 			}
 			#if android
-			pressArray.push(_hitbox.justPressed(key));
-			releaseArray.push(_hitbox.justReleased(key));
+			pressArray.push(_hitbox.array[key].justPressed);
+			releaseArray.push(_hitbox.array[key].justReleased);
 			#end
 		}
 
