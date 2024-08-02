@@ -2760,11 +2760,18 @@ class PlayState extends MusicBeatState
 		for (key in keysArray)
 		{
 			holdArray.push(controls.pressed(key));
+			#if android
+			holdArray.push(_hitbox.pressed(key));
+			#end
 			if(controls.controllerMode)
 			{
 				pressArray.push(controls.justPressed(key));
 				releaseArray.push(controls.justReleased(key));
 			}
+			#if android
+			pressArray.push(_hitbox.justPressed(key));
+			releaseArray.push(_hitbox.justReleased(key));
+			#end
 		}
 
 		// TO DO: Find a better way to handle controller inputs, this should work for now
@@ -2772,6 +2779,12 @@ class PlayState extends MusicBeatState
 			for (i in 0...pressArray.length)
 				if(pressArray[i] && strumsBlocked[i] != true)
 					keyPressed(i);
+		#if android
+		if(pressArray.contains(true))
+			for (i in 0...pressArray.length)
+				if(pressArray[i] && strumsBlocked[i] != true)
+					keyPressed(i);
+		#end
 
 		if (startedCountdown && !inCutscene && !boyfriend.stunned && generatedMusic)
 		{
@@ -2805,6 +2818,12 @@ class PlayState extends MusicBeatState
 			for (i in 0...releaseArray.length)
 				if(releaseArray[i] || strumsBlocked[i] == true)
 					keyReleased(i);
+		#if android
+		if((strumsBlocked.contains(true)) && releaseArray.contains(true))
+			for (i in 0...releaseArray.length)
+				if(releaseArray[i] || strumsBlocked[i] == true)
+					keyReleased(i);
+		#end
 	}
 
 	function noteMiss(daNote:Note):Void { //You didn't hit the key and let it go offscreen, also used by Hurt Notes
