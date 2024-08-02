@@ -19,6 +19,7 @@ class MusicBeatState extends FlxUIState
 
 	#if android
 	public var _hitbox:FlxHitbox;
+	public var _virtualpad:FlxVirtualPad;
 
 	public function addHitbox(?keyCount:Int = 3) {
 		_hitbox = new FlxHitbox(keyCount);
@@ -29,6 +30,20 @@ class MusicBeatState extends FlxUIState
 
 		_hitbox.cameras = [camMobile];
 		add(_hitbox);
+	}
+
+	public function addVirtualPad(?dpad:FlxDPadMode, ?action:FlxActionMode) {
+		var _virtualpad = new FlxVirtualPad(dpad, action);
+		_virtualpad.scrollFactor.set();
+		add(_virtualpad);
+	}
+
+	public function addVPadCam() {
+		var camMobile = new FlxCamera();
+		camMobile.bgColor.alpha = 0;
+		FlxG.cameras.add(camMobile, false);
+
+		_virtualpad.cameras = [camMobile];
 	}
 	#end
 

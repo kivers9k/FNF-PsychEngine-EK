@@ -28,17 +28,21 @@ class FlashingState extends MusicBeatState
 		warnText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
 		warnText.screenCenter(Y);
 		add(warnText);
+
+        #if android
+		addVirtualPad(NONE, A_B);
+		#end
 	}
 
 	override function update(elapsed:Float)
 	{
 		if(!leftState) {
 			var back:Bool = controls.BACK;
-			if (controls.ACCEPT || back) {
+			if (controls.ACCEPT || back #if android || _virtualpad.buttonA.justPressed || _virtualpad.buttonB.justPressed #end) {
 				leftState = true;
 				FlxTransitionableState.skipNextTransIn = true;
 				FlxTransitionableState.skipNextTransOut = true;
-				if(!back) {
+				if(!back #if android || _virtualpad.buttonB.justPressed #end) {
 					ClientPrefs.data.flashing = false;
 					ClientPrefs.saveSettings();
 					FlxG.sound.play(Paths.sound('confirmMenu'));
