@@ -38,11 +38,11 @@ class FlashingState extends MusicBeatState
 	{
 		if(!leftState) {
 			var back:Bool = controls.BACK;
-			if (controls.ACCEPT || back #if android || _virtualpad.buttonA.justPressed || _virtualpad.buttonB.justPressed #end) {
+			if (controls.ACCEPT || back) {
 				leftState = true;
 				FlxTransitionableState.skipNextTransIn = true;
 				FlxTransitionableState.skipNextTransOut = true;
-				if(!back #if android || _virtualpad.buttonB.justPressed #end) {
+				if(!back) {
 					ClientPrefs.data.flashing = false;
 					ClientPrefs.saveSettings();
 					FlxG.sound.play(Paths.sound('confirmMenu'));

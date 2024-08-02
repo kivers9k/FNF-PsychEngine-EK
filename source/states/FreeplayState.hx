@@ -170,6 +170,10 @@ class FreeplayState extends MusicBeatState
 		
 		player = new MusicPlayer(this);
 		add(player);
+
+		#if android
+		addVirtualPad(FULL, A_B_C_X_Y_Z);
+		#end
 		
 		changeSelection();
 		updateTexts();

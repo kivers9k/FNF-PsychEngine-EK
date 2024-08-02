@@ -145,6 +145,11 @@ class CharacterEditorState extends MusicBeatState
 		frameAdvanceText.cameras = [camHUD];
 		add(frameAdvanceText);
 
+		#if android
+		addVirtualPad(FULL, FULL);
+		addVPadCam();
+		#end
+
 		addHelpScreen();
 		FlxG.mouse.visible = true;
 		FlxG.camera.zoom = 1;

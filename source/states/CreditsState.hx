@@ -128,6 +128,10 @@ class CreditsState extends MusicBeatState
 		descBox.sprTracker = descText;
 		add(descText);
 
+		#if android
+		addVirtualPad(UP_DOWN, A_B);
+	    #end
+
 		bg.color = CoolUtil.colorFromString(creditsStuff[curSelected][4]);
 		intendedColor = bg.color;
 		changeSelection();
