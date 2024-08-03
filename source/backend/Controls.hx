@@ -90,7 +90,7 @@ class Controls
 		var result:Bool = (FlxG.keys.anyJustPressed(keyboardBinds[key]) == true);
 		if(result) controllerMode = false;
 
-		return result || _myGamepadJustPressed(gamepadBinds[key]) == true;
+		return result || _myGamepadJustPressed(gamepadBinds[key]) == true #if android || virtualPadButton(key).justPressed == true #end;
 	}
 
 	public function pressed(key:String)
@@ -98,16 +98,31 @@ class Controls
 		var result:Bool = (FlxG.keys.anyPressed(keyboardBinds[key]) == true);
 		if(result) controllerMode = false;
 
-		return result || _myGamepadPressed(gamepadBinds[key]) == true;
+		return result || _myGamepadPressed(gamepadBinds[key]) == true #if android || virtualPadButton(key).pressed == true #end;
 	}
 
 	public function justReleased(key:String)
 	{
-		var result:Bool = (FlxG.keys.anyJustReleased(keyboardBinds[key]) == true);
+		var result:Bool = (FlxG.keys.anyJustReleased(keyboardBinds[key]) == true #if android || virtualPadButton(key).justReleased == true #end);
 		if(result) controllerMode = false;
 
 		return result || _myGamepadJustReleased(gamepadBinds[key]) == true;
 	}
+
+	#if android
+	public function virtualPadButton(B:String):Bool
+	{
+		switch (b) {
+			case 'ui_up': return FlxVirtualPad.buttonUp;
+			case 'ui_down': return FlxVirtualPad.buttonDown;
+			case 'ui_left': return FlxVirtualPad.buttonLeft;
+			case 'ui_right': return FlxVirtualPad.buttonRight;
+			case 'accept': return FlxVirtualPad.buttonA;
+			case 'back': return FlxVirtualPad.buttonB;
+			case 'reset': return FlxVirtualPad.buttonY;
+		}
+	}
+	#end
 
 	public var controllerMode:Bool = false;
 	private function _myGamepadJustPressed(keys:Array<FlxGamepadInputID>):Bool
