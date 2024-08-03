@@ -2770,19 +2770,23 @@ class PlayState extends MusicBeatState
 		#if android
 		for (hbox in _hitbox.array) {
 	        holdArray.push(hbox.pressed);
-			if(controls.controllerMode)
-			{
-			pressArray.push(hbox.justPressed);
-			releaseArray.push(hbox.justReleased);
-			}
+		pressArray.push(hbox.justPressed);
+		releaseArray.push(hbox.justReleased);
 		}
         #end
 
+		#if android
+		if (pressArray.contains(true))
+			for (i in 0...pressArray.length)
+				if(pressArray[i] && strumsBlocked[i] != true)
+					keyPressed(i);
+		#else
 		// TO DO: Find a better way to handle controller inputs, this should work for now
 		if(controls.controllerMode && pressArray.contains(true))
 			for (i in 0...pressArray.length)
 				if(pressArray[i] && strumsBlocked[i] != true)
 					keyPressed(i);
+		#end
  
 
 		if (startedCountdown && !inCutscene && !boyfriend.stunned && generatedMusic)
@@ -2812,11 +2816,18 @@ class PlayState extends MusicBeatState
 			#end
 		}
 
+		#if android
+		if((strumsBlocked.contains(true)) && releaseArray.contains(true))
+			for (i in 0...releaseArray.length)
+				if(releaseArray[i] || strumsBlocked[i] == true)
+					keyReleased(i);
+		#else
 		// TO DO: Find a better way to handle controller inputs, this should work for now
 		if((controls.controllerMode || strumsBlocked.contains(true)) && releaseArray.contains(true))
 			for (i in 0...releaseArray.length)
 				if(releaseArray[i] || strumsBlocked[i] == true)
 					keyReleased(i);
+		#end
 	    
 	}
 
