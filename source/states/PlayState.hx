@@ -2834,7 +2834,7 @@ class PlayState extends MusicBeatState
 				if(releaseArray[i] || strumsBlocked[i] == true)
 					keyReleased(i);
 		
-		#If android
+		#if android
 		for (i in 0...hitboxRelease.length)
 		    if (hitboxRelease[i] || strumsBlocked[i] == true)
 			    keyReleased(i);
