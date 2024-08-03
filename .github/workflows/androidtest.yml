@@ -1,7 +1,5 @@
 name: Android Build Test
 on: 
-  push:
-    branches: [extra-keys-0.7.3]
   pull_request:
     branches: [extra-keys-0.7.3]
   workflow_dispatch:
@@ -42,7 +40,7 @@ jobs:
           haxelib git hxvlc https://github.com/MAJigsaw77/hxvlc 70e7f5f3e76d526ac6fb8f0e6665efe7dfda589d --quiet --skip-dependencies
           haxelib git funkin.vis https://github.com/FunkinCrew/funkVis d5361037efa3a02c4ab20b5bd14ca11e7d00f519 --quiet --skip-dependencies
           haxelib git grig.audio https://gitlab.com/haxe-grig/grig.audio.git cbf91e2180fd2e374924fe74844086aab7891666 --quiet
-          haxelib git extension-androidtools https://github.com/MAJigsaw77/extension-androidtools --quiet --skip-dependencies
+          haxelib git extension-androidtools https://github.com/MobilePorting/extension-androidtools-Base SAF --quiet --skip-dependencies
 
       - name: Configure Android
         run: |
