@@ -2793,12 +2793,6 @@ class PlayState extends MusicBeatState
 						canHit = canHit && n.parent != null && n.parent.wasGoodHit;
 
 					if (canHit && n.isSustainNote) {
-						#if android
-						var hitboxReleased:Bool = !holdArray[n.noteData];
-
-						if (!hitboxReleased)
-						    goodNoteHit(n);
-						#end
 						
 						var released:Bool = !holdArray[n.noteData];
 
