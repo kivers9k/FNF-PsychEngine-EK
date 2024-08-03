@@ -2768,14 +2768,6 @@ class PlayState extends MusicBeatState
 		}
 
 		#if android
-		for (hbox in _hitbox.array) {
-	        holdArray.push(hbox.pressed);
-		    pressArray.push(hbox.justPressed);
-		    releaseArray.push(hbox.justReleased);
-		}
-        #end
-
-		#if android
 		for (i in 0..._hitbox.array.length) {
 			if (_hitbox.array[i].justPressed && strumsBlocked[i] != true)
 			{
