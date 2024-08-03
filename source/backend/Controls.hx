@@ -26,10 +26,10 @@ class Controls
 	public var NOTE_DOWN_P(get, never):Bool;
 	public var NOTE_LEFT_P(get, never):Bool;
 	public var NOTE_RIGHT_P(get, never):Bool;
-	private function get_UI_UP_P() return justPressed('ui_up');
-	private function get_UI_DOWN_P() return justPressed('ui_down');
-	private function get_UI_LEFT_P() return justPressed('ui_left');
-	private function get_UI_RIGHT_P() return justPressed('ui_right');
+	private function get_UI_UP_P() return (justPressed('ui_up') #if android || FlxVirtualPad.buttonUp.justPressed #end);
+	private function get_UI_DOWN_P() return (justPressed('ui_down') #if android || FlxVirtualPad.buttonDown.justPressed #end);
+	private function get_UI_LEFT_P() return (justPressed('ui_left') #if android || FlxVirtualPad.buttonLeft.justPressed #end);
+	private function get_UI_RIGHT_P() return (justPressed('ui_right') #if android || FlxVirtualPad.buttonRight.justPressed #end);
 	private function get_NOTE_UP_P() return justPressed('note_up');
 	private function get_NOTE_DOWN_P() return justPressed('note_down');
 	private function get_NOTE_LEFT_P() return justPressed('note_left');
@@ -44,10 +44,10 @@ class Controls
 	public var NOTE_DOWN(get, never):Bool;
 	public var NOTE_LEFT(get, never):Bool;
 	public var NOTE_RIGHT(get, never):Bool;
-	private function get_UI_UP() return pressed('ui_up');
-	private function get_UI_DOWN() return pressed('ui_down');
-	private function get_UI_LEFT() return pressed('ui_left');
-	private function get_UI_RIGHT() return pressed('ui_right');
+	private function get_UI_UP() return (pressed('ui_up') #if android || FlxVirtualPad.buttonUp.pressed #end);
+	private function get_UI_DOWN() return (pressed('ui_down') #if android || FlxVirtualPad.buttonDown.pressed #end);
+	private function get_UI_LEFT() return (pressed('ui_left') #if android || FlxVirtualPad.buttonLeft.pressed #end);
+	private function get_UI_RIGHT() return (pressed('ui_right') #if android || FlxVirtualPad.buttonRight.pressed #end);
 	private function get_NOTE_UP() return pressed('note_up');
 	private function get_NOTE_DOWN() return pressed('note_down');
 	private function get_NOTE_LEFT() return pressed('note_left');
@@ -62,10 +62,10 @@ class Controls
 	public var NOTE_DOWN_R(get, never):Bool;
 	public var NOTE_LEFT_R(get, never):Bool;
 	public var NOTE_RIGHT_R(get, never):Bool;
-	private function get_UI_UP_R() return justReleased('ui_up');
-	private function get_UI_DOWN_R() return justReleased('ui_down');
-	private function get_UI_LEFT_R() return justReleased('ui_left');
-	private function get_UI_RIGHT_R() return justReleased('ui_right');
+	private function get_UI_UP_R() return (justReleased('ui_up') #if android || FlxVirtualPad.buttonUp.justReleased #end);
+	private function get_UI_DOWN_R() return (justReleased('ui_down') #if android || FlxVirtualPad.buttonDown.justReleased #end);
+	private function get_UI_LEFT_R() return (justReleased('ui_left') #if android || FlxVirtualPad.buttonLeft.justReleased #end);
+	private function get_UI_RIGHT_R() return (justReleased('ui_right') #if android || FlxVirtualPad.buttonRight.jistReleased #end);
 	private function get_NOTE_UP_R() return justReleased('note_up');
 	private function get_NOTE_DOWN_R() return justReleased('note_down');
 	private function get_NOTE_LEFT_R() return justReleased('note_left');
@@ -77,8 +77,8 @@ class Controls
 	public var BACK(get, never):Bool;
 	public var PAUSE(get, never):Bool;
 	public var RESET(get, never):Bool;
-	private function get_ACCEPT() return justPressed('accept');
-	private function get_BACK() return justPressed('back');
+	private function get_ACCEPT() return (justPressed('accept') #if android || FlxVirtualPad.buttonA.justPressed #end);
+	private function get_BACK() return (justPressed('back') #if android || FlxVirtualPad.buttonB.justPressed #end);
 	private function get_PAUSE() return justPressed('pause');
 	private function get_RESET() return justPressed('reset');
 
