@@ -2776,10 +2776,12 @@ class PlayState extends MusicBeatState
         #end
 
 		#if android
-		if (pressArray.contains(true))
-			for (i in 0...pressArray.length)
-				if(pressArray[i] && strumsBlocked[i] != true)
-					keyPressed(i);
+		for (i in 0..._hitbox.array.length) {
+			if (_hitbox.array[i].justPressed && strumsBlocked[i] != true)
+			{
+				 keyPressed(i);
+			}
+		}
 		#end
 
 		// TO DO: Find a better way to handle controller inputs, this should work for now
@@ -2823,12 +2825,13 @@ class PlayState extends MusicBeatState
 		}
 
 		#if android
-		if((strumsBlocked.contains(true)) && releaseArray.contains(true))
-			for (i in 0...releaseArray.length)
-				if(releaseArray[i] || strumsBlocked[i] == true)
-					keyReleased(i);
+		for (i in 0..._hitbox.array.length) {
+			if (_hitbox.array[i].justReleased || strumsBlocked[i] == true)
+			{
+				keyReleased(i);
+			}
+		}
 		#end
-
 		// TO DO: Find a better way to handle controller inputs, this should work for now
 		if((controls.controllerMode || strumsBlocked.contains(true)) && releaseArray.contains(true))
 			for (i in 0...releaseArray.length)
