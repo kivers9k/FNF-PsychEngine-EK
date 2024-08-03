@@ -112,7 +112,7 @@ class Controls
 	#if android
 	public function virtualPadButton(B:String):Bool
 	{
-		switch (b) {
+		switch (B) {
 			case 'ui_up': return FlxVirtualPad.buttonUp;
 			case 'ui_down': return FlxVirtualPad.buttonDown;
 			case 'ui_left': return FlxVirtualPad.buttonLeft;
