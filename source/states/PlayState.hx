@@ -2769,7 +2769,7 @@ class PlayState extends MusicBeatState
 
 		#if android
 		for (i in 0..._hitbox.array.length) {
-			if (_hitbox.array[i].justPressed && strumsBlocked[i] != true)
+			if (_hitbox.array[i].justPressed)
 			{
 				 keyPressed(i);
 			}
@@ -2812,7 +2812,7 @@ class PlayState extends MusicBeatState
 
 		#if android
 		for (i in 0..._hitbox.array.length) {
-			if (_hitbox.array[i].justReleased || strumsBlocked[i] == true)
+			if (_hitbox.array[i].justReleased)
 			{
 				keyReleased(i);
 			}
