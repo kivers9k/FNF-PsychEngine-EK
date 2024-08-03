@@ -1999,7 +1999,7 @@ class ChartingState extends MusicBeatState
 
             var mouse = FlxG.mouse.getScreenPosition();
 
-			if (overlapsGridBg && FlxG.mouse.justMoved) {
+			if (overlapsGridBg && FlxG.mouse.justMoved && FlxG.mouse.pressed) {
 				FlxG.sound.music.pause();
 
 		        if (FlxG.mouse.justPressed) {
