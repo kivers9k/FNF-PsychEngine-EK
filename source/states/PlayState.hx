@@ -2757,6 +2757,13 @@ class PlayState extends MusicBeatState
 		var holdArray:Array<Bool> = [];
 		var pressArray:Array<Bool> = [];
 		var releaseArray:Array<Bool> = [];
+
+        #if android
+		var hitboxHold:Array<Bool> = [];
+		var hitboxPress:Array<Bool> = [];
+		var hitboxRelease:Array<Bool> = [];
+		#end
+
 		for (key in keysArray)
 		{
 			holdArray.push(controls.pressed(key));
@@ -2767,12 +2774,11 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		#if android
-		for (i in 0..._hitbox.array.length) {
-			if (_hitbox.array[i].justPressed && strumsBlocked[i] != true)
-			{
-				 keyPressed(i);
-			}
+        #if android
+		for (hitbox in _hitbox.array) {
+			hitboxHold.push(hitbox.pressed);
+			hitboxPress.push(hitbox.justPressed);
+			hitboxRelease.push(hitbox.justReleased);
 		}
 		#end
 
@@ -2781,6 +2787,12 @@ class PlayState extends MusicBeatState
 			for (i in 0...pressArray.length)
 				if(pressArray[i] && strumsBlocked[i] != true)
 					keyPressed(i);
+
+	    #if android
+		    for (i in 0...hitboxPress.length)
+				if (hitboxPress[i] && strumsBlocked[i] != true)
+			        keyPressed(i);
+		#end
 
 		if (startedCountdown && !inCutscene && !boyfriend.stunned && generatedMusic)
 		{
@@ -2793,16 +2805,22 @@ class PlayState extends MusicBeatState
 						canHit = canHit && n.parent != null && n.parent.wasGoodHit;
 
 					if (canHit && n.isSustainNote) {
-						
 						var released:Bool = !holdArray[n.noteData];
 
 						if (!released)
 							goodNoteHit(n);
+
+						#if android
+						var poop:Bool = !hitboxHold[n.noteData];
+
+						if (!poop)
+						    goodNoteHit(n);
+						#end
 					}
 				}
 			}
 
-			if (!holdArray.contains(true) || endingSong)
+			if ((!holdArray.contains(true) #if android || !hitboxHold.contains(true) #end) || endingSong)
 				playerDance();
 
 			#if ACHIEVEMENTS_ALLOWED
@@ -2810,19 +2828,17 @@ class PlayState extends MusicBeatState
 			#end
 		}
 
-		#if android
-		for (i in 0..._hitbox.array.length) {
-			if (_hitbox.array[i].justReleased || strumsBlocked[i] == true)
-			{
-				keyReleased(i);
-			}
-		}
-		#end
 		// TO DO: Find a better way to handle controller inputs, this should work for now
 		if((controls.controllerMode || strumsBlocked.contains(true)) && releaseArray.contains(true))
 			for (i in 0...releaseArray.length)
 				if(releaseArray[i] || strumsBlocked[i] == true)
-					keyReleased(i);	    
+					keyReleased(i);
+		
+		#If android
+		for (i in 0...hitboxRelease.length)
+		    if (hitboxRelease[i] || strumsBlocked[i] == true)
+			    keyReleased(i);
+		#end
 	}
 
 	function noteMiss(daNote:Note):Void { //You didn't hit the key and let it go offscreen, also used by Hurt Notes
