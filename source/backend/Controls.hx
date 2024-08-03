@@ -103,47 +103,53 @@ class Controls
 
 	public function justReleased(key:String)
 	{
-		var result:Bool = (FlxG.keys.anyJustReleased(keyboardBinds[key]) == true #if android || virtualPadButtonJustReleased(key) == true #end);
+		var result:Bool = (FlxG.keys.anyJustReleased(keyboardBinds[key]) == true);
 		if(result) controllerMode = false;
 
-		return result || _myGamepadJustReleased(gamepadBinds[key]) == true;
+		return result || _myGamepadJustReleased(gamepadBinds[key]) == true #if android || virtualPadButtonJustReleased(key) == true #end;
 	}
 
 	#if android
 	public function virtualPadButtonPressed(B:String):Bool {
+		var vpad:Bool = MusicBeatState._virtualpad;
 		switch (B) {
-			case 'ui_up': return FlxVirtualPad.buttonUp.pressed;
-			case 'ui_down': return FlxVirtualPad.buttonDown.pressed;
-			case 'ui_left': return FlxVirtualPad.buttonLeft.pressed;
-			case 'ui_right': return FlxVirtualPad.buttonRight.pressed;
-			case 'accept': return FlxVirtualPad.buttonA.pressed;
-			case 'back': return FlxVirtualPad.buttonB.pressed;
-			case 'reset': return FlxVirtualPad.buttonY.pressed;
+			case 'ui_up': return vpad.buttonUp.pressed;
+			case 'ui_down': return vpad.buttonDown.pressed;
+			case 'ui_left': return vpad.buttonLeft.pressed;
+			case 'ui_right': return vpad.buttonRight.pressed;
+			case 'accept': return vpad.buttonA.pressed;
+			case 'back': return vpad.buttonB.pressed;
+			case 'reset': return vpad.buttonY.pressed;
 		}
+		return false;
 	}
 
 	public function virtualPadButtonJustPressed(B:String):Bool {
+		var vpad:Bool = MusicBeatState._virtualpad;
 		switch (B) {
-			case 'ui_up': return FlxVirtualPad.buttonUp.justPressed;
-			case 'ui_down': return FlxVirtualPad.buttonDown.justPressed;
-			case 'ui_left': return FlxVirtualPad.buttonLeft.justPressed;
-			case 'ui_right': return FlxVirtualPad.buttonRight.justPressed;
-			case 'accept': return FlxVirtualPad.buttonA.justPressed;
-			case 'back': return FlxVirtualPad.buttonB.justPressed;
-			case 'reset': return FlxVirtualPad.buttonY.justPressed;
+			case 'ui_up': return vpad.buttonUp.justPressed;
+			case 'ui_down': return vpad.buttonDown.justPressed;
+			case 'ui_left': return vpad.buttonLeft.justPressed;
+			case 'ui_right': return vpad.buttonRight.justPressed;
+			case 'accept': return vpad.buttonA.justPressed;
+			case 'back': return vpad.buttonB.justPressed;
+			case 'reset': return vpad.buttonY.justPressed;
 		}
+		return false;
 	}
 
 	public function virtualPadButtonJustReleased(B:String):Bool {
+		var vpad:Bool = MusicBeatState._virtualpad;
 		switch (B) {
-			case 'ui_up': return FlxVirtualPad.buttonUp.justReleased;
-			case 'ui_down': return FlxVirtualPad.buttonDown.justReleased;
-			case 'ui_left': return FlxVirtualPad.buttonLeft.justReleased;
-			case 'ui_right': return FlxVirtualPad.buttonRight.justReleased;
-			case 'accept': return FlxVirtualPad.buttonA.justReleased;
-			case 'back': return FlxVirtualPad.buttonB.justReleased;
-			case 'reset': return FlxVirtualPad.buttonY.justReleased;
+			case 'ui_up': return vpad.buttonUp.justReleased;
+			case 'ui_down': return vpad.buttonDown.justReleased;
+			case 'ui_left': return vpad.buttonLeft.justReleased;
+			case 'ui_right': return vpad.buttonRight.justReleased;
+			case 'accept': return vpad.buttonA.justReleased;
+			case 'back': return vpad.buttonB.justReleased;
+			case 'reset': return vpad.buttonY.justReleased;
 		}
+		return false;
 	}
 	#end
 
