@@ -1,23 +1,42 @@
 package mobile.backend;
 
 import lime.system.System as LimeSystem;
+import haxe.io.Path;
+import haxe.Exception;
+#if android
+import android.Tools;
+import android.callback.CallBack;
+#end
 
 /**
  * A storage class for mobile.
- * @author Mihai Alexandru (M.A. Jigsaw) and Lily (mcagabe19)
+ * @author Mihai Alexandru (M.A. Jigsaw)
  */
 class SUtil
 {
 	#if sys
+	// root directory, used for handling the saved storage type and path
+	public static final rootDir:String = LimeSystem.applicationStorageDirectory;
+
+	#if android
+	// returns the selected directory from SAF directory picker for CUSTOM
+	public static var selectedDir(get, never):Null<String>;
+	#end
+
 	public static function getStorageDirectory(?force:Bool = false):String
 	{
 		var daPath:String = '';
 		#if android
-		if (!FileSystem.exists(LimeSystem.applicationStorageDirectory + 'storagetype.txt'))
-			File.saveContent(LimeSystem.applicationStorageDirectory + 'storagetype.txt', ClientPrefs.data.storageType);
-		var curStorageType:String = File.getContent(LimeSystem.applicationStorageDirectory + 'storagetype.txt');
+		if (!FileSystem.exists(rootDir + 'storagetype.txt'))
+			File.saveContent(rootDir + 'storagetype.txt', ClientPrefs.data.storageType);
+		var curStorageType:String = File.getContent(rootDir + 'storagetype.txt');
+		// if(curStorageType == "CUSTOM" && selectedDir == null)
+		// {
+		// 	initSAFCallback();
+		// 	Tools.openDirectoryPicker(5);
+		// }
 		daPath = force ? StorageType.fromStrForce(curStorageType) : StorageType.fromStr(curStorageType);
-		daPath = haxe.io.Path.addTrailingSlash(daPath);
+		daPath = Path.addTrailingSlash(daPath);
 		#elseif ios
 		daPath = LimeSystem.documentsDirectory;
 		#end
@@ -27,6 +46,13 @@ class SUtil
 
 	public static function mkDirs(directory:String):Void
 	{
+		try {
+			if (FileSystem.exists(directory) && FileSystem.isDirectory(directory))
+				return;
+		} catch (e:haxe.Exception) {
+			trace('Something went wrong while looking at folder. (${e.message})');
+		}
+
 		var total:String = '';
 		if (directory.substr(0, 1) == '/')
 			total = '/';
@@ -49,7 +75,7 @@ class SUtil
 					if (!FileSystem.exists(total))
 						FileSystem.createDirectory(total);
 				}
-				catch (e:haxe.Exception)
+				catch (e:Exception)
 					trace('Error while creating folder. (${e.message}');
 			}
 		}
@@ -66,7 +92,7 @@ class SUtil
 			File.saveContent('saves/' + fileName + fileExtension, fileData);
 			showPopUp(fileName + " file has been saved.", "Success!");
 		}
-		catch (e:haxe.Exception)
+		catch (e:Exception)
 			trace('File couldn\'t be saved. (${e.message})');
 	}
 
@@ -113,6 +139,42 @@ class SUtil
 		daPath = haxe.io.Path.addTrailingSlash(daPath.endsWith("\n") ? daPath.substr(0, daPath.length - 1) : daPath);
 		return daPath;
 	}
+	
+	// public static function initSAFCallback():Void
+	// {
+	// 	CallBack.init();
+	// 	CallBack.onActivityResult.add((data:Dynamic) -> {
+	// 		if(data == null) throw new Exception('Failed to retrive the activity data.');
+	// 		// default request code for SAF directory picker is 5
+	// 		if(data.requestCode == 5)
+	// 		{
+	// 			var uri:String = data.uri;
+
+	// 			if(uri == null) throw new Exception('Failed to retrive the activity Uri.');
+
+	// 			// allows access for the path
+	// 			Tools.registerUriAccess(uri);
+
+	// 			var path:String = Path.addTrailingSlash(Tools.getUriPath(uri));
+				
+	// 			// clear the prev
+	// 			var saveFilePath = rootDir + 'curCWD.txt';
+	// 			if(FileSystem.exists(saveFilePath))
+	// 				FileSystem.deleteFile(saveFilePath);
+
+	// 			// saves the selected directory
+	// 			File.saveContent(saveFilePath, path);
+	// 		}
+	// 	}, true); // true is to make this function execute only once
+	// }
+
+	@:noCompletion
+	public static function get_selectedDir():Null<String>
+	{
+		var saveFilePath = rootDir + 'curCWD.txt';
+		if(!FileSystem.exists(saveFilePath)) return null;
+		return File.getContent(saveFilePath);
+	}
 	#end
 	#end
 	public static function showPopUp(message:String, title:String):Void
@@ -132,11 +194,18 @@ class SUtil
 }
 
 #if android
+@:runtimeValue
 enum abstract StorageType(String) from String to String
 {
 	final forcedPath = '/storage/emulated/0/';
 	final packageNameLocal = 'com.shadowmario.psychengine';
 	final fileLocal = 'PsychEngine';
+
+	var EXTERNAL_DATA = "EXTERNAL_DATA";
+	var EXTERNAL_OBB = "EXTERNAL_OBB";
+	var EXTERNAL_MEDIA = "EXTERNAL_MEDIA";
+	var EXTERNAL = "EXTERNAL";
+	var CUSTOM = "CUSTOM";
 
 	public static function fromStr(str:String):StorageType
 	{
@@ -151,6 +220,7 @@ enum abstract StorageType(String) from String to String
 			case "EXTERNAL_OBB": EXTERNAL_OBB;
 			case "EXTERNAL_MEDIA": EXTERNAL_MEDIA;
 			case "EXTERNAL": EXTERNAL;
+			case "CUSTOM": SUtil.selectedDir;
 			default: SUtil.getExternalDirectory(str) + '.' + fileLocal;
 		}
 	}
@@ -168,6 +238,7 @@ enum abstract StorageType(String) from String to String
 			case "EXTERNAL_OBB": EXTERNAL_OBB;
 			case "EXTERNAL_MEDIA": EXTERNAL_MEDIA;
 			case "EXTERNAL": EXTERNAL;
+			case "CUSTOM": SUtil.selectedDir;
 			default: SUtil.getExternalDirectory(str) + '.' + fileLocal;
 		}
 	}
