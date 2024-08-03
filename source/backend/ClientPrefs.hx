@@ -11,6 +11,9 @@ import states.TitleState;
 @:structInit class SaveVariables {
 	public var screensaver:Bool = false;
 	public var wideScreen:Bool = false;
+	public var dynamicColors:Bool = true;
+	public var controlsAlpha:Float = #if mobile 0.6 #else 0.001 #end;
+	public var hideHitboxHints:Bool = false;
 	#if android
 	public var storageType:String = "EXTERNAL";
 	#end
