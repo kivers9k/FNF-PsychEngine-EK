@@ -209,13 +209,11 @@ class MainMenuState extends MusicBeatState
 					}
 				}
 			}
-			#if desktop
-			if (controls.justPressed('debug_1'))
+			if (controls.justPressed('debug_1') #if android || _virtualpad.buttonE.justPressed #end)
 			{
 				selectedSomethin = true;
 				MusicBeatState.switchState(new MasterEditorMenu());
 			}
-			#end
 		}
 
 		super.update(elapsed);
