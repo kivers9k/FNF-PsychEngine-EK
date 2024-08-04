@@ -18,11 +18,6 @@ class SUtil
 	// root directory, used for handling the saved storage type and path
 	public static final rootDir:String = LimeSystem.applicationStorageDirectory;
 
-	#if android
-	// returns the selected directory from SAF directory picker for CUSTOM
-	public static var selectedDir(get, never):Null<String>;
-	#end
-
 	public static function getStorageDirectory(?force:Bool = false):String
 	{
 		var daPath:String = '';
@@ -30,11 +25,6 @@ class SUtil
 		if (!FileSystem.exists(rootDir + 'storagetype.txt'))
 			File.saveContent(rootDir + 'storagetype.txt', ClientPrefs.data.storageType);
 		var curStorageType:String = File.getContent(rootDir + 'storagetype.txt');
-		// if(curStorageType == "CUSTOM" && selectedDir == null)
-		// {
-		// 	initSAFCallback();
-		// 	Tools.openDirectoryPicker(5);
-		// }
 		daPath = force ? StorageType.fromStrForce(curStorageType) : StorageType.fromStr(curStorageType);
 		daPath = Path.addTrailingSlash(daPath);
 		#elseif ios
@@ -139,34 +129,6 @@ class SUtil
 		daPath = haxe.io.Path.addTrailingSlash(daPath.endsWith("\n") ? daPath.substr(0, daPath.length - 1) : daPath);
 		return daPath;
 	}
-	
-	// public static function initSAFCallback():Void
-	// {
-	// 	CallBack.init();
-	// 	CallBack.onActivityResult.add((data:Dynamic) -> {
-	// 		if(data == null) throw new Exception('Failed to retrive the activity data.');
-	// 		// default request code for SAF directory picker is 5
-	// 		if(data.requestCode == 5)
-	// 		{
-	// 			var uri:String = data.uri;
-
-	// 			if(uri == null) throw new Exception('Failed to retrive the activity Uri.');
-
-	// 			// allows access for the path
-	// 			Tools.registerUriAccess(uri);
-
-	// 			var path:String = Path.addTrailingSlash(Tools.getUriPath(uri));
-				
-	// 			// clear the prev
-	// 			var saveFilePath = rootDir + 'curCWD.txt';
-	// 			if(FileSystem.exists(saveFilePath))
-	// 				FileSystem.deleteFile(saveFilePath);
-
-	// 			// saves the selected directory
-	// 			File.saveContent(saveFilePath, path);
-	// 		}
-	// 	}, true); // true is to make this function execute only once
-	// }
 
 	@:noCompletion
 	public static function get_selectedDir():Null<String>
@@ -179,14 +141,10 @@ class SUtil
 	#end
 	public static function showPopUp(message:String, title:String):Void
 	{
-		#if (!ios || !iphonesim)
-		try
-		{
-			trace('$title - $message');
-			lime.app.Application.current.window.alert(message, title);
-		}
-		catch (e:Dynamic)
-			trace('$title - $message');
+		#if android
+		AndroidTools.showAlertDialog(title, message, {name: "OK", func: null}, null);
+		#elseif (!ios || !iphonesim)
+		lime.app.Application.current.window.alert(message, title);
 		#else
 		trace('$title - $message');
 		#end
@@ -205,7 +163,6 @@ enum abstract StorageType(String) from String to String
 	var EXTERNAL_OBB = "EXTERNAL_OBB";
 	var EXTERNAL_MEDIA = "EXTERNAL_MEDIA";
 	var EXTERNAL = "EXTERNAL";
-	var CUSTOM = "CUSTOM";
 
 	public static function fromStr(str:String):StorageType
 	{
@@ -220,7 +177,6 @@ enum abstract StorageType(String) from String to String
 			case "EXTERNAL_OBB": EXTERNAL_OBB;
 			case "EXTERNAL_MEDIA": EXTERNAL_MEDIA;
 			case "EXTERNAL": EXTERNAL;
-			case "CUSTOM": SUtil.selectedDir;
 			default: SUtil.getExternalDirectory(str) + '.' + fileLocal;
 		}
 	}
@@ -238,7 +194,6 @@ enum abstract StorageType(String) from String to String
 			case "EXTERNAL_OBB": EXTERNAL_OBB;
 			case "EXTERNAL_MEDIA": EXTERNAL_MEDIA;
 			case "EXTERNAL": EXTERNAL;
-			case "CUSTOM": SUtil.selectedDir;
 			default: SUtil.getExternalDirectory(str) + '.' + fileLocal;
 		}
 	}
