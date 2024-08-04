@@ -111,38 +111,47 @@ class Controls
 
 	#if android
 	public var vpad:FlxVirtualPad;
-	public function virtualPadButtonPressed(B:String):Bool {		switch (B) {
-			case 'ui_up': return vpad.buttonUp.pressed;
-			case 'ui_down': return vpad.buttonDown.pressed;
-			case 'ui_left': return vpad.buttonLeft.pressed;
-			case 'ui_right': return vpad.buttonRight.pressed;
-			case 'accept': return vpad.buttonA.pressed;
-			case 'back': return vpad.buttonB.pressed;
-			case 'reset': return vpad.buttonY.pressed;
+	public function virtualPadButtonPressed(B:String):Bool {
+		if (vpad != null) {
+			switch (B) {
+				case 'ui_up': return vpad.buttonUp.pressed;
+				case 'ui_down': return vpad.buttonDown.pressed;
+				case 'ui_left': return vpad.buttonLeft.pressed;
+				case 'ui_right': return vpad.buttonRight.pressed;
+				case 'accept': return vpad.buttonA.pressed;
+				case 'back': return vpad.buttonB.pressed;
+				case 'reset': return vpad.buttonY.pressed;
+			}
 		}
 		return false;
 	}
 
-	public function virtualPadButtonJustPressed(B:String):Bool {		switch (B) {
-			case 'ui_up': return vpad.buttonUp.justPressed;
-			case 'ui_down': return vpad.buttonDown.justPressed;
-			case 'ui_left': return vpad.buttonLeft.justPressed;
-			case 'ui_right': return vpad.buttonRight.justPressed;
-			case 'accept': return vpad.buttonA.justPressed;
-			case 'back': return vpad.buttonB.justPressed;
-			case 'reset': return vpad.buttonY.justPressed;
+	public function virtualPadButtonJustPressed(B:String):Bool {
+		if (vpad != null) {
+			switch (B) {
+				case 'ui_up': return vpad.buttonUp.justPressed;
+				case 'ui_down': return vpad.buttonDown.justPressed;
+				case 'ui_left': return vpad.buttonLeft.justPressed;
+				case 'ui_right': return vpad.buttonRight.justPressed;
+				case 'accept': return vpad.buttonA.justPressed;
+				case 'back': return vpad.buttonB.justPressed;
+				case 'reset': return vpad.buttonY.justPressed;
+			}
 		}
 		return false;
 	}
 
-	public function virtualPadButtonJustReleased(B:String):Bool {		switch (B) {
-			case 'ui_up': return vpad.buttonUp.justReleased;
-			case 'ui_down': return vpad.buttonDown.justReleased;
-			case 'ui_left': return vpad.buttonLeft.justReleased;
-			case 'ui_right': return vpad.buttonRight.justReleased;
-			case 'accept': return vpad.buttonA.justReleased;
-			case 'back': return vpad.buttonB.justReleased;
-			case 'reset': return vpad.buttonY.justReleased;
+	public function virtualPadButtonJustReleased(B:String):Bool {
+		if (vpad != null) {
+			switch (B) {
+				case 'ui_up': return vpad.buttonUp.justReleased;
+				case 'ui_down': return vpad.buttonDown.justReleased;
+				case 'ui_left': return vpad.buttonLeft.justReleased;
+				case 'ui_right': return vpad.buttonRight.justReleased;
+				case 'accept': return vpad.buttonA.justReleased;
+				case 'back': return vpad.buttonB.justReleased;
+				case 'reset': return vpad.buttonY.justReleased;
+			}
 		}
 		return false;
 	}
