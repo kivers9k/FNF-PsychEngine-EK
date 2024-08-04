@@ -46,7 +46,7 @@ class MusicBeatState extends FlxUIState
 		_virtualpad.cameras = [camMobile];
 	}
 
-    overrid function destroy() {
+    override function destroy() {
 		remove(controls.vpad);
 		super.destroy
 	}
