@@ -110,9 +110,8 @@ class Controls
 	}
 
 	#if android
-	public function virtualPadButtonPressed(B:String):Bool {
-		var vpad:Bool = MusicBeatState._virtualpad;
-		switch (B) {
+	public var vpad:FlxVirtualPad;
+	public function virtualPadButtonPressed(B:String):Bool {		switch (B) {
 			case 'ui_up': return vpad.buttonUp.pressed;
 			case 'ui_down': return vpad.buttonDown.pressed;
 			case 'ui_left': return vpad.buttonLeft.pressed;
@@ -124,9 +123,7 @@ class Controls
 		return false;
 	}
 
-	public function virtualPadButtonJustPressed(B:String):Bool {
-		var vpad:Bool = MusicBeatState._virtualpad;
-		switch (B) {
+	public function virtualPadButtonJustPressed(B:String):Bool {		switch (B) {
 			case 'ui_up': return vpad.buttonUp.justPressed;
 			case 'ui_down': return vpad.buttonDown.justPressed;
 			case 'ui_left': return vpad.buttonLeft.justPressed;
@@ -138,9 +135,7 @@ class Controls
 		return false;
 	}
 
-	public function virtualPadButtonJustReleased(B:String):Bool {
-		var vpad:Bool = MusicBeatState._virtualpad;
-		switch (B) {
+	public function virtualPadButtonJustReleased(B:String):Bool {		switch (B) {
 			case 'ui_up': return vpad.buttonUp.justReleased;
 			case 'ui_down': return vpad.buttonDown.justReleased;
 			case 'ui_left': return vpad.buttonLeft.justReleased;
