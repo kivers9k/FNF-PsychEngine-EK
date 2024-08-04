@@ -48,7 +48,7 @@ class MusicBeatState extends FlxUIState
 
     override function destroy() {
 		remove(controls.vpad);
-		super.destroy
+		super.destroy();
 	}
 	#end
 
