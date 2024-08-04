@@ -223,7 +223,7 @@ class FreeplayState extends MusicBeatState
 		}
 
 		var shiftMult:Int = 1;
-		if(FlxG.keys.pressed.SHIFT) shiftMult = 3;
+		if(FlxG.keys.pressed.SHIFT #if android || _virtualpad.buttonZ.justPressed #end) shiftMult = 3;
 
 		if (!player.playingMusic)
 		{
@@ -313,6 +313,9 @@ class FreeplayState extends MusicBeatState
 		if((FlxG.keys.justPressed.CONTROL #if android || _virtualpad.buttonC.justPressed #end) && !player.playingMusic)
 		{
 			persistentUpdate = false;
+			#if android
+			removeVirtualPad();
+			#end
 			openSubState(new GameplayChangersSubstate());
 		}
 		else if(FlxG.keys.justPressed.SPACE #if android || _virtualpad.buttonX.justPressed #end)
@@ -408,9 +411,12 @@ class FreeplayState extends MusicBeatState
 			DiscordClient.loadModRPC();
 			#end
 		}
-		else if(controls.RESET && !player.playingMusic)
+		else if((controls.RESET #if android || _virtualpad.buttonY.justPressed #end) && !player.playingMusic)
 		{
 			persistentUpdate = false;
+			#if android
+			removeVirtualPad();
+			#end
 			openSubState(new ResetScoreSubState(songs[curSelected].songName, curDifficulty, songs[curSelected].songCharacter));
 			FlxG.sound.play(Paths.sound('scrollMenu'));
 		}

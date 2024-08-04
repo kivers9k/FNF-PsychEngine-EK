@@ -142,6 +142,10 @@ class PauseSubState extends MusicBeatSubstate
 		missingText.visible = false;
 		add(missingText);
 
+		#if android
+		addVirtualPad((PlayState.chartingMode ? FULL : UP_DOWN), A);
+		#end
+
 		regenMenu();
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 

@@ -38,6 +38,11 @@ class MusicBeatState extends FlxUIState
 		controls.vpad = _virtualpad;
 	}
 
+	public function removeVirtualPad() {
+		remove(_virtualpad);
+        controls.vpad = null;
+	}
+
 	public function addVPadCam() {
 		var camMobile = new FlxCamera();
 		camMobile.bgColor.alpha = 0;

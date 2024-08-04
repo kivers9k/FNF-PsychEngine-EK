@@ -22,6 +22,34 @@ class MusicBeatSubstate extends FlxSubState
 	private var curDecBeat:Float = 0;
 	private var controls(get, never):Controls;
 
+	#if android
+	public var _virtualpad:FlxVirtualPad;
+
+	public function addVirtualPad(?dpad:FlxDPadMode, ?action:FlxActionMode) {
+		_virtualpad = new FlxVirtualPad(dpad, action);
+		add(_virtualpad);
+		controls.vpad = _virtualpad;
+	}
+
+	public function removeVirtualPad() {
+		remove(_virtualpad);
+		controls.vpad = null;
+	}
+
+	public function addVPadCam() {
+		var camMobile = new FlxCamera();
+		camMobile.bgColor.alpha = 0;
+		FlxG.cameras.add(camMobile, false);
+		
+		_virtualpad.cameras = [camMobile];
+	}
+
+	override function destroy() {
+		controls.vpad = null;
+		super.destroy();
+	}
+	#end
+
 	inline function get_controls():Controls
 		return Controls.instance;
 
