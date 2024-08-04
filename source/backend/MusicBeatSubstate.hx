@@ -31,10 +31,12 @@ class MusicBeatSubstate extends FlxSubState
 		controls.vpad = _virtualpad;
 	}
 
+    /*
 	public function removeVirtualPad() {
-		remove(_virtualpad);
 		controls.vpad = null;
+		remove(_virtualpad);
 	}
+	*/
 
 	public function addVPadCam() {
 		var camMobile = new FlxCamera();
