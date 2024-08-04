@@ -59,6 +59,10 @@ class MasterEditorMenu extends MusicBeatState
 		directoryTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER);
 		directoryTxt.scrollFactor.set();
 		add(directoryTxt);
+
+		#if android
+		addVirtualPad(UP_DOWN, A_B);
+		#end
 		
 		for (folder in Mods.getModDirectories())
 		{
