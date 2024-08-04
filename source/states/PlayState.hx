@@ -946,6 +946,10 @@ class PlayState extends MusicBeatState
 
 	public function startCountdown()
 	{
+	    #if android
+		_hitbox.visible = true;
+		#end
+		
 		if(startedCountdown) {
 			callOnScripts('onStartCountdown');
 			return false;
@@ -1239,10 +1243,6 @@ class PlayState extends MusicBeatState
 		songLength = FlxG.sound.music.length;
 		FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 		FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
-
-		#if android
-		_hitbox.visible = true;
-		#end
 
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence (with Time Left)
