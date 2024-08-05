@@ -40,7 +40,7 @@
 			"version": null
 		},
 		{
-			"name": "json2Object",
+			"name": "json2object",
 			"type": "haxelib",
 			"version": null
 		},
