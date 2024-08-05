@@ -125,6 +125,11 @@ class Controls
 				case 'accept': return vpad.buttonA.pressed;
 				case 'back': return vpad.buttonB.pressed;
 			}
+			if (requested.vpad.anyPressed(keys) == true)
+			{
+				controllerMode = true; // !!DO NOT DISABLE THIS IF YOU DONT WANT TO KILL THE INPUT FOR MOBILE!!
+				return true;
+			}
 		}
 		return false;
 	}
@@ -139,6 +144,11 @@ class Controls
 				case 'accept': return vpad.buttonA.justPressed;
 				case 'back': return vpad.buttonB.justPressed;
 			}
+			if (requested.vpad.anyJustPressed(keys) == true)
+			{
+				controllerMode = true; // !!DO NOT DISABLE THIS IF YOU DONT WANT TO KILL THE INPUT FOR MOBILE!!
+				return true;
+			}
 		}
 		return false;
 	}
@@ -152,6 +162,11 @@ class Controls
 				case 'ui_right': return vpad.buttonRight.justReleased;
 				case 'accept': return vpad.buttonA.justReleased;
 				case 'back': return vpad.buttonB.justReleased;
+			}
+			if (requested.vpad.anyJustReleased(keys) == true)
+			{
+				controllerMode = true; // Do I repeat myself here
+				return true;
 			}
 		}
 		return false;
