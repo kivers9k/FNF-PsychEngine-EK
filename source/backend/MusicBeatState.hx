@@ -39,7 +39,6 @@ class MusicBeatState extends FlxUIState
 	}
 
 	public function removeVirtualPad() {
-		controls.vpad = null;
 		remove(_virtualpad);
 	}
 
