@@ -104,7 +104,7 @@
 			"url": "https://gitlab.com/haxe-grig/grig.audio.git"
 		},
 		{
-			"name": "extension-androidtools ",
+			"name": "extension-androidtools",
 			"type": "git",
 			"dir": null,
 			"ref": "6c8818a722499ffc93214e95110d560aa49f0e38",
