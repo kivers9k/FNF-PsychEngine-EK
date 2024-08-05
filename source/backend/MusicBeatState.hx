@@ -18,8 +18,8 @@ class MusicBeatState extends FlxUIState
 	public var controls(get, never):Controls;
 
 	#if android
-	var _hitbox:FlxHitbox;
-	var _virtualpad:FlxVirtualPad;
+	public var _hitbox:FlxHitbox;
+	public var _virtualpad:FlxVirtualPad;
 
 	public function addHitbox(?keyCount:Int = 3) {
 		_hitbox = new FlxHitbox(keyCount);
