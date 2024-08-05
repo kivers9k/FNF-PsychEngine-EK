@@ -23,7 +23,7 @@ class MusicBeatSubstate extends FlxSubState
 	private var controls(get, never):Controls;
 
 	#if android
-	private var _virtualpad:FlxVirtualPad;
+	var _virtualpad:FlxVirtualPad;
 
 	public function addVirtualPad(?dpad:FlxDPadMode, ?action:FlxActionMode) {
 		_virtualpad = new FlxVirtualPad(dpad, action);

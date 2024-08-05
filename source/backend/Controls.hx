@@ -111,7 +111,7 @@ class Controls
 
 	#if android
 	public var vpad:FlxVirtualPad;
-	public function virtualPadButtonPressed(key:String):Bool {
+	private function virtualPadButtonPressed(key:String):Bool {
 		if (vpad != null) {
 			switch (key) {
 				case 'ui_up': return vpad.buttonUp.pressed;
@@ -125,7 +125,7 @@ class Controls
 		return false;
 	}
 
-	public function virtualPadButtonJustPressed(key:String):Bool {
+	private function virtualPadButtonJustPressed(key:String):Bool {
 		if (vpad != null) {
 			switch (key) {
 				case 'ui_up': return vpad.buttonUp.justPressed;
@@ -139,7 +139,7 @@ class Controls
 		return false;
 	}
 
-	public function virtualPadButtonJustReleased(key:String):Bool {
+	private function virtualPadButtonJustReleased(key:String):Bool {
 		if (vpad != null) {
 			switch (key) {
 				case 'ui_up': return vpad.buttonUp.justReleased;
