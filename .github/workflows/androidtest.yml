@@ -25,24 +25,8 @@ jobs:
 
       - name: Install Libraries
         run: |
-          haxelib git hxcpp https://github.com/mcagabe19-stuff/hxcpp 8dd30d69399f616f4e85295ce3f828219b78af17 --quiet
-          haxelib git lime https://github.com/mcagabe19-stuff/lime --quiet
-          haxelib install openfl 9.3.3 --quiet
-          haxelib install flixel 5.6.1 --quiet
-          haxelib install flixel-addons 3.2.2 --quiet
-          haxelib install flixel-tools 1.5.1 --quiet
-          haxelib install flixel-ui 
-          haxelib install json2object
-          haxelib install hxCodec
-          haxelib git SScript https://github.com/MobilePorting/SScript c4e241b254595531396d5e52e8401c9adc3f344f --quiet
-          haxelib install tjson 1.4.0 --quiet
-          haxelib git flxanimate https://github.com/ShadowMario/flxanimate dev --quiet
-          haxelib git linc_luajit https://github.com/mcagabe19-stuff/linc_luajit-legacy 923a8262a7a8dcd166264dcf22cb7395a11fba65 --quiet
-          haxelib git hxdiscord_rpc https://github.com/MAJigsaw77/hxdiscord_rpc 3538a1c2bb07b04208cd014220207f8173acdb21 --quiet --skip-dependencies
-          haxelib git hxvlc https://github.com/MAJigsaw77/hxvlc 70e7f5f3e76d526ac6fb8f0e6665efe7dfda589d --quiet --skip-dependencies
-          haxelib git funkin.vis https://github.com/FunkinCrew/funkVis d5361037efa3a02c4ab20b5bd14ca11e7d00f519 --quiet --skip-dependencies
-          haxelib git grig.audio https://gitlab.com/haxe-grig/grig.audio.git cbf91e2180fd2e374924fe74844086aab7891666 --quiet
-          haxelib git extension-androidtools https://github.com/MAJigsaw77/extension-androidtools 6c8818a722499ffc93214e95110d560aa49f0e38 --quiet --skip-dependencies
+          haxelib install hmm -- quit
+          haxelib run hmm install --quit
 
       - name: Configure Android
         run: |
