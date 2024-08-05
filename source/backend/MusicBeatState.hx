@@ -35,7 +35,7 @@ class MusicBeatState extends FlxUIState
 	public function addVirtualPad(?dpad:FlxDPadMode, ?action:FlxActionMode) {
 		_virtualpad = new FlxVirtualPad(dpad, action);
 		add(_virtualpad);
-		controls.vpad = MusicBeatState._virtualpad;
+		controls.vpad = this._virtualpad;
 	}
 
 	public function removeVirtualPad() {

@@ -28,12 +28,12 @@ class MusicBeatSubstate extends FlxSubState
 	public function addVirtualPad(?dpad:FlxDPadMode, ?action:FlxActionMode) {
 		_virtualpad = new FlxVirtualPad(dpad, action);
 		add(_virtualpad);
-		controls.vpad = MusicBeatSubstate._virtualpad;
+		controls.vpad = this._virtualpad;
 	}
 
 	public function removeVirtualPad() {
 		controls.vpad = null;
-		remove(_virtualpadSubstate);
+		remove(_virtualpad);
 	}
 
 	public function addVPadCam() {
