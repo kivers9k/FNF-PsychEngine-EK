@@ -25,7 +25,7 @@ jobs:
 
       - name: Install Libraries
         run: |
-          haxelib install hmm -- quiet
+          haxelib install hmm --quiet
           haxelib run hmm install --quiet
 
       - name: Configure Android
