@@ -20,6 +20,7 @@ import lime.system.System as LimeSystem;
 import states.TitleState;
 import mobile.backend.MobileScaleMode;
 import mobile.states.CopyState;
+import mobile.backend.Data;
 
 #if linux
 import lime.graphics.Image;
@@ -159,6 +160,7 @@ class Main extends Sprite
 
 		LimeSystem.allowScreenTimeout = ClientPrefs.data.screensaver; 		
 		FlxG.scaleMode = new MobileScaleMode();
+		Data.setup();
 
 		// shader coords fix
 		FlxG.signals.gameResized.add(function (w, h) {
