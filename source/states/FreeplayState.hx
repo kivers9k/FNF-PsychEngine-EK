@@ -172,7 +172,7 @@ class FreeplayState extends MusicBeatState
 		add(player);
 
 		#if android
-		addVirtualPad(LEFT_FULL, A_B_C_X_Y_Z);
+		addVirtualPad(FULL, A_B_C_X_Y_Z);
 		#end
 		
 		changeSelection();
@@ -185,7 +185,7 @@ class FreeplayState extends MusicBeatState
 		persistentUpdate = true;
 		#if android
 		removeVirtualPad();
-		addVirtualPad(LEFT_FULL, A_B_C_X_Y_Z);
+		addVirtualPad(FULL, A_B_C_X_Y_Z);
 	    #end
 		super.closeSubState();
  	}
