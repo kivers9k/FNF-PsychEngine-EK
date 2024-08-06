@@ -171,7 +171,6 @@ class ClientPrefs {
 		while(gamepadBind != null && gamepadBind.contains(NONE)) gamepadBind.remove(NONE);
 		while(mobileBind != null && mobileBind.contains(NONE)) mobileBind.remove(NONE);
 	}
-	}
 
 	public static function loadDefaultKeys()
 	{
