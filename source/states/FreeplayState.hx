@@ -248,12 +248,12 @@ class FreeplayState extends MusicBeatState
 					changeSelection();
 					holdTime = 0;	
 				}
-				if (controls.UI_UP_P)
+				if (controls.UI_UP_P #if mobile || _virtualpad.buttonUp.justPressed #end)
 				{
 					changeSelection(-shiftMult);
 					holdTime = 0;
 				}
-				if (controls.UI_DOWN_P)
+				if (controls.UI_DOWN_P #if mobile || _virtualpad.buttonDown.justPressed #end)
 				{
 					changeSelection(shiftMult);
 					holdTime = 0;
@@ -276,19 +276,19 @@ class FreeplayState extends MusicBeatState
 				}
 			}
 
-			if (controls.UI_LEFT_P)
+			if (controls.UI_LEFT_P #if mobile || _virtualpad.buttonLeft.justPressed #end)
 			{
 				changeDiff(-1);
 				_updateSongLastDifficulty();
 			}
-			else if (controls.UI_RIGHT_P)
+			else if (controls.UI_RIGHT_P #if mobile || _virtualpad.buttonRight.justPressed #end)
 			{
 				changeDiff(1);
 				_updateSongLastDifficulty();
 			}
 		}
 
-		if (controls.BACK)
+		if (controls.BACK #if mobile || _virtualpad.buttonB.justPressed #end)
 		{
 			if (player.playingMusic)
 			{
@@ -363,7 +363,7 @@ class FreeplayState extends MusicBeatState
 				player.pauseOrResume(player.paused);
 			}
 		}
-		else if (controls.ACCEPT && !player.playingMusic)
+		else if (controls.ACCEPT && !player.playingMusic #if mobile || _virtualpad.buttonA.justPressed && !player.playingMusic #end)
 		{
 			persistentUpdate = false;
 			var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);

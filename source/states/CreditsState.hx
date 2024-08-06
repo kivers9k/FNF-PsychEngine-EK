@@ -184,10 +184,10 @@ class CreditsState extends MusicBeatState
 				}
 			}
 
-			if(controls.ACCEPT && (creditsStuff[curSelected][3] == null || creditsStuff[curSelected][3].length > 4)) {
+			if(controls.ACCEPT #if mobile || _virtualpad.buttonA.justPressed #end && (creditsStuff[curSelected][3] == null || creditsStuff[curSelected][3].length > 4)) {
 				CoolUtil.browserLoad(creditsStuff[curSelected][3]);
 			}
-			if (controls.BACK)
+			if (controls.BACK #if mobile || _virtualpad.buttonB.justPressed #end)
 			{
 				if(colorTween != null) {
 					colorTween.cancel();

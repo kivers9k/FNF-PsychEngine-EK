@@ -173,7 +173,7 @@ class StoryMenuState extends MusicBeatState
 		add(txtWeekTitle);
 
 		#if android
-	    addVirtualPad(FULL, A_B_X_Y);
+	    addVirtualPad(FULL, A_B_C_X_Y);
 		#end
 
 		changeWeek();
@@ -231,9 +231,9 @@ class StoryMenuState extends MusicBeatState
 			else
 				leftArrow.animation.play('idle');
 
-			if (controls.UI_RIGHT_P)
+			if (controls.UI_RIGHT_P #if mobile || _virtualpad.buttonRight.justPressed #end)
 				changeDifficulty(1);
-			else if (controls.UI_LEFT_P)
+			else if (controls.UI_LEFT_P #if mobile || _virtualpad.buttonLeft.justPressed #end)
 				changeDifficulty(-1);
 			else if (upP || downP)
 				changeDifficulty();
@@ -243,19 +243,19 @@ class StoryMenuState extends MusicBeatState
 				persistentUpdate = false;
 				openSubState(new GameplayChangersSubstate());
 			}
-			else if(controls.RESET)
+			else if(controls.RESET #if mobile || _virtualpad.buttonX.justPressed #end)
 			{
 				persistentUpdate = false;
 				openSubState(new ResetScoreSubState('', curDifficulty, '', curWeek));
 				//FlxG.sound.play(Paths.sound('scrollMenu'));
 			}
-			else if (controls.ACCEPT)
+			else if (controls.ACCEPT #if mobile || _virtualpad.buttonA.justPressed #end)
 			{
 				selectWeek();
 			}
 		}
 
-		if (controls.BACK && !movedBack && !selectedWeek)
+		if (controls.BACK #if mobile || _virtualpad.buttonB.justPressed #end && !movedBack && !selectedWeek)
 		{
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			movedBack = true;

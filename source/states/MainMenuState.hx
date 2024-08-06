@@ -135,20 +135,20 @@ class MainMenuState extends MusicBeatState
 
 		if (!selectedSomethin)
 		{
-			if (controls.UI_UP_P)
+			if (controls.UI_UP_P #if mobile || _virtualpad.buttonUp.justPressed #end)
 				changeItem(-1);
 
-			if (controls.UI_DOWN_P)
+			if (controls.UI_DOWN_P #if mobile || _virtualpad.buttonDown.justPressed #end)
 				changeItem(1);
 
-			if (controls.BACK)
+			if (controls.BACK #if mobile || _virtualpad.buttonB.justPressed #end)
 			{
 				selectedSomethin = true;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new TitleState());
 			}
 
-			if (controls.ACCEPT)
+			if (controls.ACCEPT #if mobile || _virtualpad.buttonA.justPressed #end)
 			{
 				FlxG.sound.play(Paths.sound('confirmMenu'));
 				if (optionShit[curSelected] == 'donate')
@@ -209,7 +209,7 @@ class MainMenuState extends MusicBeatState
 					}
 				}
 			}
-			if (controls.justPressed('debug_1') #if android || _virtualpad.buttonE.justPressed #end)
+			if (controls.justPressed('debug_1') #if mobile || _virtualpad.buttonE.justPressed #end)
 			{
 				selectedSomethin = true;
 				MusicBeatState.switchState(new MasterEditorMenu());
