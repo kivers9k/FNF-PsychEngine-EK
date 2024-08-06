@@ -35,7 +35,7 @@ class FlxHitbox extends FlxSpriteGroup {
 		var hitboxWidth:Int = Math.floor(FlxG.width / keyCount);
 		for (i in 0 ... keyCount) {
 			hitbox.add(add(array[i] = createhitbox(hitboxWidth * i, 0, hitboxWidth, FlxG.height, hitboxColor[keyCount][i])));
-			hint.add(add(hintArray[i] = addHint(hitboxWidth * i, 0, hitboxWidth, FlxG.height, hitboxColor[keyCount][i])));
+			hint.add(add(hintArray[i] = addHint(hitboxWidth * i, 0, hitboxWidth, FlxG.height, hitboxColoe[keyCount][i])));
 		}
 	}
 
