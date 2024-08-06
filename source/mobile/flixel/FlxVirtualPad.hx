@@ -109,17 +109,6 @@ class FlxVirtualPad extends FlxMobileInputManager
 				add(buttonLeft2 = createButton(0, 393, 132, 127, 'left', 0xFFC24B99));
 				add(buttonRight2 = createButton(1145, 393, 132, 127, 'right', 0xFFF9393F));
 				add(buttonDown2 = createButton(1015, 393, 132, 127, 'down', 0xFF00FFFF));
-			case CHART_EDITOR:
-				add(buttonZ = createButton(FlxG.width - 384, FlxG.height - 255, 132, 127, "z", 0xCCB98E));
-				add(buttonA = createButton(FlxG.width - 384, FlxG.height - 135, 132, 127, "a", 0xFF0000));
-				add(buttonC = createButton(FlxG.width - 510, FlxG.height - 255, 132, 127, "c", 0x44FF00));
-				add(buttonB = createButton(FlxG.width - 510, FlxG.height - 135, 132, 127, "b", 0xFFCB00));
-				add(buttonX = createButton(FlxG.width - 132, FlxG.height - 375, 132, 127, "x", 0x99062D));
-
-				add(buttonUp = createButton(FlxG.width - 258, FlxG.height - 255, 132, 127, "up", 0x00FF00));
-				add(buttonLeft = createButton(FlxG.width - 132, FlxG.height - 255, 132, 127, "left", 0xFF00FF));
-				add(buttonRight = createButton(FlxG.width - 127, FlxG.height - 135, 132, 127, "right", 0xFF0000));
-				add(buttonDown = createButton(FlxG.width - 258, FlxG.height - 135, 132, 127, "down", 0x00FFFF));
 			case NONE: // do nothing
 		}
 
@@ -170,6 +159,11 @@ class FlxVirtualPad extends FlxMobileInputManager
 				add(buttonB = createButton(FlxG.width - 258, FlxG.height - 135, 132, 127, 'b', 0xFFCB00));
 				add(buttonZ = createButton(FlxG.width - 132, FlxG.height - 255, 132, 127, 'z', 0xCCB98E));
 				add(buttonA = createButton(FlxG.width - 132, FlxG.height - 135, 132, 127, 'a', 0xFF0000));
+			case RIGHT_FULL:
+				add(buttonUp = createButton(FlxG.width - 258, FlxG.height - 408, 132, 127, 'up', 0xFF12FA05));
+				add(buttonLeft = createButton(FlxG.width - 384, FlxG.height - 309, 132, 127, 'left', 0xFFC24B99));
+				add(buttonRight = createButton(FlxG.width - 132, FlxG.height - 309, 132, 127, 'right', 0xFFF9393F));
+				add(buttonDown = createButton(FlxG.width - 258, FlxG.height - 201, 132, 127, 'down', 0xFF00FFFF));
 			// PSYCH RELATED BUTTONS
 			case CHARACTER_EDITOR:
 				add(buttonV = createButton(FlxG.width - 510, FlxG.height - 255, 132, 127, 'v', 0x49A9B2));
