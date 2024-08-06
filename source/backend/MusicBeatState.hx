@@ -7,7 +7,6 @@ import backend.PsychCamera;
 
 class MusicBeatState extends FlxUIState
 {
-	public static var instance:MusicBeatState;
 	private var curSection:Int = 0;
 	private var stepsToDo:Int = 0;
 
@@ -66,8 +65,6 @@ class MusicBeatState extends FlxUIState
 	var _psychCameraInitialized:Bool = false;
 
 	override function create() {
-		instance = this;
-
 		var skip:Bool = FlxTransitionableState.skipNextTransOut;
 		#if MODS_ALLOWED Mods.updatedOnState = false; #end
 
