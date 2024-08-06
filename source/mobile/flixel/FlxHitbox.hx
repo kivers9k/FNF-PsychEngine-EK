@@ -7,6 +7,7 @@ import flixel.ui.FlxButton;
 import flixel.FlxSprite;
 import flixel.FlxG;
 import openfl.display.BitmapData;
+import openfl.display.Shape;
 
 class FlxHitbox extends FlxSpriteGroup {
 	public var hitbox:FlxSpriteGroup;
@@ -28,7 +29,6 @@ class FlxHitbox extends FlxSpriteGroup {
 	public function new(?type:Int = 3) {
 		super();
 		hitbox = new FlxSpriteGroup();
-		hint = new FlxSpriteGroup();
 		
 		var keyCount:Int = type + 1;
 		var hitboxWidth:Int = Math.floor(FlxG.width / keyCount);
