@@ -85,6 +85,7 @@ class Controls
 	//Gamepad & Keyboard stuff
 	public var keyboardBinds:Map<String, Array<FlxKey>>;
 	public var gamepadBinds:Map<String, Array<FlxGamepadInputID>>;
+	public var mobileBinds:Map<String, Array<FlxMobileInputID>>;
 
 	//Stuff for mobile probably
 	public var isInSubstate:Bool = false; // don't worry about this it becomes true and false on it's own in MusicBeatSubstate
@@ -94,7 +95,8 @@ class Controls
 		var result:Bool = (FlxG.keys.anyJustPressed(keyboardBinds[key]) == true);
 		if(result) controllerMode = false;
 
-		return result || _myGamepadJustPressed(gamepadBinds[key]) == true #if android || virtualPadButtonJustPressed(key) == true #end;
+		return result || _myGamepadJustPressed(gamepadBinds[key]) == true
+			      || virtualPadButtonJustPressed(mobileBinds[key]) == true;
 	}
 
 	public function pressed(key:String)
@@ -102,7 +104,8 @@ class Controls
 		var result:Bool = (FlxG.keys.anyPressed(keyboardBinds[key]) == true);
 		if(result) controllerMode = false;
 
-		return result || _myGamepadPressed(gamepadBinds[key]) == true #if android || virtualPadButtonPressed(key) == true #end;
+		return result || _myGamepadPressed(gamepadBinds[key]) == true
+			      || virtualPadButtonPressed(mobileBinds[key]) == true;
 	}
 
 	public function justReleased(key:String)
@@ -110,7 +113,8 @@ class Controls
 		var result:Bool = (FlxG.keys.anyJustReleased(keyboardBinds[key]) == true);
 		if(result) controllerMode = false;
 
-		return result || _myGamepadJustReleased(gamepadBinds[key]) == true #if android || virtualPadButtonJustReleased(key) == true #end;
+		return result || _myGamepadJustReleased(gamepadBinds[key]) == true
+			      || virtualPadButtonJustReleased(mobileBinds[key]) == true;
 	}
 
 	#if android
