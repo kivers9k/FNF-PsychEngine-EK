@@ -49,7 +49,6 @@ class NotesSubState extends MusicBeatSubstate
 	var tipTxt:FlxText;
 
 	public function new() {
-		controls.isInSubstate = true;
 		super();
 
 		PlayState.SONG = {
@@ -201,7 +200,6 @@ class NotesSubState extends MusicBeatSubstate
 		if (controls.BACK) {
 			FlxG.mouse.visible = false;
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			controls.isInSubstate = false;
 			close();
 			return;
 		}

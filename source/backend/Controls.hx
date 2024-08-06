@@ -85,11 +85,6 @@ class Controls
 	//Gamepad & Keyboard stuff
 	public var keyboardBinds:Map<String, Array<FlxKey>>;
 	public var gamepadBinds:Map<String, Array<FlxGamepadInputID>>;
-
-	//Stuff for mobile probably
-	public var isInSubstate:Bool = false; // don't worry about this it becomes true and false on it's own in MusicBeatSubstate
-	public var requested(get, default):Dynamic; // is set to MusicBeatState or MusicBeatSubstate when the constructor is called
-	public var gameplayRequest(get, default):Dynamic; // for PlayState and EditorPlayState (hitbox and virtualPad)
 	public function justPressed(key:String)
 	{
 		var result:Bool = (FlxG.keys.anyJustPressed(keyboardBinds[key]) == true);
@@ -116,8 +111,8 @@ class Controls
 
 	#if android
 	public var vpad:FlxVirtualPad;
-	public function virtualPadButtonPressed(key:String):Bool {
-		if (vpad != null && requested.vpad != null) {
+	private function virtualPadButtonPressed(key:String):Bool {
+		if (vpad != null) {
 			switch (key) {
 				case 'ui_up': return vpad.buttonUp.pressed;
 				case 'ui_down': return vpad.buttonDown.pressed;
@@ -130,8 +125,8 @@ class Controls
 		return false;
 	}
 
-	public function virtualPadButtonJustPressed(key:String):Bool {
-		if (vpad != null && requested.vpad != null) {
+	private function virtualPadButtonJustPressed(key:String):Bool {
+		if (vpad != null) {
 			switch (key) {
 				case 'ui_up': return vpad.buttonUp.justPressed;
 				case 'ui_down': return vpad.buttonDown.justPressed;
@@ -144,8 +139,8 @@ class Controls
 		return false;
 	}
 
-	public function virtualPadButtonJustReleased(key:String):Bool {
-		if (vpad != null && requested.vpad != null) {
+	private function virtualPadButtonJustReleased(key:String):Bool {
+		if (vpad != null) {
 			switch (key) {
 				case 'ui_up': return vpad.buttonUp.justReleased;
 				case 'ui_down': return vpad.buttonDown.justReleased;
@@ -204,15 +199,6 @@ class Controls
 			}
 		}
 		return false;
-	}
-	
-	@:noCompletion
-	private function get_requested():Dynamic
-	{
-		if (isInSubstate)
-			return MusicBeatSubstate.instance;
-		else
-			return MusicBeatState.instance;
 	}
 
 	// IGNORE THESE
