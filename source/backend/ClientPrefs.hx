@@ -135,10 +135,10 @@ class ClientPrefs {
 	];
 	public static var mobileBinds:Map<String, Array<FlxMobileInputID>> = [
 
-		'ui_up'			=> [UP],
-		'ui_left'		=> [LEFT],
-		'ui_down'		=> [DOWN],
-		'ui_right'		=> [RIGHT],
+		'ui_up'			=> [UP, noteUP],
+		'ui_left'		=> [LEFT, noteLEFT],
+		'ui_down'		=> [DOWN, noteDOWN],
+		'ui_right'		=> [RIGHT, noteRIGHT],
 
 		'accept'		=> [A],
 		'back'			=> [B],
