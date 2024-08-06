@@ -90,7 +90,7 @@ class Controls
 		var result:Bool = (FlxG.keys.anyJustPressed(keyboardBinds[key]) == true);
 		if(result) controllerMode = false;
 
-		return result || _myGamepadJustPressed(gamepadBinds[key]) == true #if android || virtualPadButtonJustPressed(key) == true #end;
+		return result || _myGamepadJustPressed(gamepadBinds[key]) == true
 	}
 
 	public function pressed(key:String)
@@ -98,7 +98,7 @@ class Controls
 		var result:Bool = (FlxG.keys.anyPressed(keyboardBinds[key]) == true);
 		if(result) controllerMode = false;
 
-		return result || _myGamepadPressed(gamepadBinds[key]) == true #if android || virtualPadButtonPressed(key) == true #end;
+		return result || _myGamepadPressed(gamepadBinds[key]) == true
 	}
 
 	public function justReleased(key:String)
@@ -106,53 +106,8 @@ class Controls
 		var result:Bool = (FlxG.keys.anyJustReleased(keyboardBinds[key]) == true);
 		if(result) controllerMode = false;
 
-		return result || _myGamepadJustReleased(gamepadBinds[key]) == true #if android || virtualPadButtonJustReleased(key) == true #end;
+		return result || _myGamepadJustReleased(gamepadBinds[key]) == true
 	}
-
-	#if android
-	public var vpad:FlxVirtualPad;
-	private function virtualPadButtonPressed(key:String):Bool {
-		if (vpad != null) {
-			switch (key) {
-				case 'ui_up': return vpad.buttonUp.pressed;
-				case 'ui_down': return vpad.buttonDown.pressed;
-				case 'ui_left': return vpad.buttonLeft.pressed;
-				case 'ui_right': return vpad.buttonRight.pressed;
-				case 'accept': return vpad.buttonA.pressed;
-				case 'back': return vpad.buttonB.pressed;
-			}
-		}
-		return false;
-	}
-
-	private function virtualPadButtonJustPressed(key:String):Bool {
-		if (vpad != null) {
-			switch (key) {
-				case 'ui_up': return vpad.buttonUp.justPressed;
-				case 'ui_down': return vpad.buttonDown.justPressed;
-				case 'ui_left': return vpad.buttonLeft.justPressed;
-				case 'ui_right': return vpad.buttonRight.justPressed;
-				case 'accept': return vpad.buttonA.justPressed;
-				case 'back': return vpad.buttonB.justPressed;
-			}
-		}
-		return false;
-	}
-
-	private function virtualPadButtonJustReleased(key:String):Bool {
-		if (vpad != null) {
-			switch (key) {
-				case 'ui_up': return vpad.buttonUp.justReleased;
-				case 'ui_down': return vpad.buttonDown.justReleased;
-				case 'ui_left': return vpad.buttonLeft.justReleased;
-				case 'ui_right': return vpad.buttonRight.justReleased;
-				case 'accept': return vpad.buttonA.justReleased;
-				case 'back': return vpad.buttonB.justReleased;
-			}
-		}
-		return false;
-	}
-	#end
 
 	public var controllerMode:Bool = false;
 	private function _myGamepadJustPressed(keys:Array<FlxGamepadInputID>):Bool
