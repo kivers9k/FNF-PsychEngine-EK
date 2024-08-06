@@ -88,7 +88,7 @@ class ResetScoreSubState extends MusicBeatSubstate
 		}
 		if(week == -1) icon.alpha += elapsed * 2.5;
 
-		if(controls.UI_LEFT_P || controls.UI_RIGHT_P #if mobile _virtualpad.buttonLeft.justPressed || _virtualpad.buttonRight.justPressed #end) {
+		if(controls.UI_LEFT_P || controls.UI_RIGHT_P  #if mobile || _virtualpad.buttonLeft.justPressed || _virtualpad.buttonRight.justPressed #end) {
 			FlxG.sound.play(Paths.sound('scrollMenu'), 1);
 			onYes = !onYes;
 			updateOptions();
