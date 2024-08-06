@@ -2,13 +2,17 @@ package mobile.flixel;
 
 import flixel.util.FlxGradient;
 import flixel.group.FlxSpriteGroup;
+import flixel.util.FlxDestroyUtil;
 import flixel.ui.FlxButton;
 import flixel.FlxSprite;
 import flixel.FlxG;
 
 class FlxHitbox extends FlxSpriteGroup {
 	public var hitbox:FlxSpriteGroup;
+	public var hint:FlxSpriteGroup;
+
 	public var array:Array<FlxButton> = [];
+	public var hintArray:Array<FlxSprite> = [];
 
 	var hitboxColor:Map<Int, Array<Int>> = [
 		1 => [0xffFFFFFF],
@@ -25,11 +29,13 @@ class FlxHitbox extends FlxSpriteGroup {
 	public function new(?type:Int = 3) {
 		super();
 		hitbox = new FlxSpriteGroup();
+		hint = new FlxSpriteGroup();
 		
 		var keyCount:Int = type + 1;
 		var hitboxWidth:Int = Math.floor(FlxG.width / keyCount);
 		for (i in 0 ... keyCount) {
 			hitbox.add(add(array[i] = createhitbox(hitboxWidth * i, 0, hitboxWidth, FlxG.height, hitboxColor[keyCount][i])));
+			hint.add(add(hintArray[i] = addHint(hitboxWidth * i, 0, hitboxWidth, FlxG.height, hitboxColoe[keyCount][i])));
 		}
 	}
 
@@ -43,15 +49,30 @@ class FlxHitbox extends FlxSpriteGroup {
 
 		button.onOut.callback = function() button.alpha = 0;
 		button.onUp.callback = function() button.alpha = 0;
-		button.onDown.callback = function() button.alpha = 0.5;
+		button.onDown.callback = function() button.alpha = 0.7;
 		
 		return button;
 	}
 
+	public function addHint(x:Float, y:Float, w:Float, h:Float, color:Int) {
+		var hintSpr:FlxSprite = new FlxSprite(x, y, Paths.image('mobileControls/hint'));
+		hintSpr.setGraphicSize(w, h);
+		hintSpr.updateHitbox();
+		hintSpr.color = color;
+        hintSpr.alpha = 0.7;
+
+		return hint;
+	}
+
 	override public function destroy():Void {
 		super.destroy();
+        hitbox = null;
+		hint = null;
 		for (hbox in array) {
 			hbox = null;
+		}
+		for (hints in hintArray) {
+			hints = null;
 		}
 	}
 }
