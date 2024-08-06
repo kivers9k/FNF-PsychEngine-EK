@@ -196,17 +196,6 @@ class FlxVirtualPad extends FlxMobileInputManager
 				add(buttonA = createButton(FlxG.width - 132, FlxG.height - 135, 132, 127, 'a', 0xFF0000));
 				add(buttonC = createButton(FlxG.width - 132, 125, 132, 127, 'c', 0x44FF00));
 				add(buttonV = createButton(FlxG.width - 258, 125, 132, 127, 'v', 0x49A9B2));
-			case CHART_EDITOR:
-				add(buttonZ = createButton(FlxG.width - 384, FlxG.height - 255, 132, 127, "z", 0xCCB98E));
-				add(buttonA = createButton(FlxG.width - 384, FlxG.height - 135, 132, 127, "a", 0xFF0000));
-				add(buttonC = createButton(FlxG.width - 510, FlxG.height - 255, 132, 127, "c", 0x44FF00));
-				add(buttonB = createButton(FlxG.width - 510, FlxG.height - 135, 132, 127, "b", 0xFFCB00));
-				add(buttonX = createButton(FlxG.width - 132, FlxG.height - 375, 132, 127, "x", 0x99062D));
-
-				add(buttonUp = createButton(FlxG.width - 258, FlxG.height - 255, 132, 127, "up", 0x00FF00));
-				add(buttonLeft = createButton(FlxG.width - 132, FlxG.height - 255, 132, 127, "left", 0xFF00FF));
-				add(buttonRight = createButton(FlxG.width - 127, FlxG.height - 135, 132, 127, "right", 0xFF0000));
-				add(buttonDown = createButton(FlxG.width - 258, FlxG.height - 135, 132, 127, "down", 0x00FFFF));
 			case P:
 				add(buttonP = createButton(FlxG.width - 132, 0, 132, 127, 'x', 0x99062D));
 			case B_C:
