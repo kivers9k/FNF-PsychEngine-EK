@@ -32,11 +32,11 @@ class OutdatedState extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		if(!leftState) {
-			if (controls.ACCEPT) {
+			if (controls.ACCEPT #if mobile || _virtualpad.buttonA.justPressed #end) {
 				leftState = true;
 				CoolUtil.browserLoad("https://gamebanana.com/mods/333373/");
 			}
-			else if(controls.BACK) {
+			else if(controls.BACK #if mobile || _virtualpad.buttonB.justPressed #end) {
 				leftState = true;
 			}
 

@@ -41,10 +41,6 @@ class MusicBeatSubstate extends FlxSubState
 		
 		_virtualpad.cameras = [camMobile];
 	}
-
-	override function destroy() {
-		super.destroy();
-	}
 	#end
 
 	inline function get_controls():Controls

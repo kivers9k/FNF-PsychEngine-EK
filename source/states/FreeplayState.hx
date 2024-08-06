@@ -171,7 +171,7 @@ class FreeplayState extends MusicBeatState
 		player = new MusicPlayer(this);
 		add(player);
 
-		#if android
+		#if mobile
 		addVirtualPad(FULL, A_B_C_X_Y_Z);
 		#end
 		
@@ -183,7 +183,7 @@ class FreeplayState extends MusicBeatState
 	override function closeSubState() {
 		changeSelection(0, false);
 		persistentUpdate = true;
-		#if android
+		#if mobile
 		removeVirtualPad();
 		addVirtualPad(FULL, A_B_C_X_Y_Z);
 	    #end
@@ -227,7 +227,7 @@ class FreeplayState extends MusicBeatState
 		}
 
 		var shiftMult:Int = 1;
-		if(FlxG.keys.pressed.SHIFT #if android || _virtualpad.buttonZ.justPressed #end) shiftMult = 3;
+		if(FlxG.keys.pressed.SHIFT #if mobile || _virtualpad.buttonZ.justPressed #end) shiftMult = 3;
 
 		if (!player.playingMusic)
 		{
@@ -259,14 +259,14 @@ class FreeplayState extends MusicBeatState
 					holdTime = 0;
 				}
 
-				if(controls.UI_DOWN || controls.UI_UP)
+				if(controls.UI_DOWN || controls.UI_UP #if mobile || _virtualpad.buttonDown.pressed || _virtualpad.buttonUp.pressed #end)
 				{
 					var checkLastHold:Int = Math.floor((holdTime - 0.5) * 10);
 					holdTime += elapsed;
 					var checkNewHold:Int = Math.floor((holdTime - 0.5) * 10);
 
 					if(holdTime > 0.5 && checkNewHold - checkLastHold > 0)
-						changeSelection((checkNewHold - checkLastHold) * (controls.UI_UP ? -shiftMult : shiftMult));
+						changeSelection((checkNewHold - checkLastHold) * ((controls.UI_UP #if mobile || _virtualpad.buttonUp.pressed #end) ? -shiftMult : shiftMult));
 				}
 
 				if(FlxG.mouse.wheel != 0)
@@ -363,7 +363,7 @@ class FreeplayState extends MusicBeatState
 				player.pauseOrResume(player.paused);
 			}
 		}
-		else if (controls.ACCEPT && !player.playingMusic #if mobile || _virtualpad.buttonA.justPressed && !player.playingMusic #end)
+		else if ((controls.ACCEPT #if mobile || _virtualpad.buttonA.justPressed #end) && !player.playingMusic)
 		{
 			persistentUpdate = false;
 			var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);
@@ -415,10 +415,10 @@ class FreeplayState extends MusicBeatState
 			DiscordClient.loadModRPC();
 			#end
 		}
-		else if((controls.RESET #if android || _virtualpad.buttonX.justPressed #end) && !player.playingMusic)
+		else if((controls.RESET #if mobile || _virtualpad.buttonX.justPressed #end) && !player.playingMusic)
 		{
 			persistentUpdate = false;
-			#if android
+			#if mobile
 			removeVirtualPad();
 			#end
 			openSubState(new ResetScoreSubState(songs[curSelected].songName, curDifficulty, songs[curSelected].songCharacter));

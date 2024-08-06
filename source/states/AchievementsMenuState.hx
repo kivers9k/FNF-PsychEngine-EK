@@ -119,6 +119,10 @@ class AchievementsMenuState extends MusicBeatState
 		add(progressTxt);
 		add(descText);
 		add(nameText);
+
+		#if android
+		addVirtualPad(FULL, A_B);
+		#end
 		
 		_changeSelection();
 		super.create();
@@ -151,8 +155,8 @@ class AchievementsMenuState extends MusicBeatState
 		if(!goingBack && options.length > 1)
 		{
 			var add:Int = 0;
-			if (controls.UI_LEFT_P) add = -1;
-			else if (controls.UI_RIGHT_P) add = 1;
+			if (controls.UI_LEFT_P #if mobile || _virtualpad.buttonLeft.justPressed #end) add = -1;
+			else if (controls.UI_RIGHT_P #if mobile || _virtualpad.buttonRight.justPressed #end) add = 1;
 
 			if(add != 0)
 			{
@@ -174,8 +178,8 @@ class AchievementsMenuState extends MusicBeatState
 			if(options.length > MAX_PER_ROW)
 			{
 				var add:Int = 0;
-				if (controls.UI_UP_P) add = -1;
-				else if (controls.UI_DOWN_P) add = 1;
+				if (controls.UI_UP_P #if mobile || _virtualpad.buttonUp.justPressed #end) add = -1;
+				else if (controls.UI_DOWN_P #if mobile || _virtualpad.buttonDown.justPressed #end) add = 1;
 
 				if(add != 0)
 				{
@@ -198,13 +202,13 @@ class AchievementsMenuState extends MusicBeatState
 				}
 			}
 			
-			if(controls.RESET && (options[curSelected].unlocked || options[curSelected].curProgress > 0))
+			if((controls.RESET #if mobile || _virtualpad.buttonA.justPressed #end) && (options[curSelected].unlocked || options[curSelected].curProgress > 0))
 			{
 				openSubState(new ResetAchievementSubstate());
 			}
 		}
 
-		if (controls.BACK) {
+		if (controls.BACK #if mobile || _virtualpad.buttonB.justPressed #end) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			MusicBeatState.switchState(new MainMenuState());
 			goingBack = true;

@@ -353,7 +353,7 @@ class ModsMenuState extends MusicBeatState
 			_lastControllerMode = controls.controllerMode;
 		}
 
-		if(controls.UI_DOWN_R || controls.UI_UP_R) holdTime = 0;
+		if(controls.UI_DOWN_R || controls.UI_UP_R #if mobile || _virtualpad.buttonDown.justReleased || _virtualpad.buttonUp.justReleased #end) holdTime = 0;
 
 		if(modsList.all.length > 0)
 		{
@@ -393,9 +393,9 @@ class ModsMenuState extends MusicBeatState
 				if(hoveringOnMods)
 				{
 					var shiftMult:Int = (FlxG.keys.pressed.SHIFT || FlxG.gamepads.anyPressed(LEFT_SHOULDER) || FlxG.gamepads.anyPressed(RIGHT_SHOULDER)) ? 4 : 1;
-					if(controls.UI_DOWN_P)
+					if(controls.UI_DOWN_P #if mobile || _virtualpad.buttonDown.justPressed #end)
 						changeSelectedMod(shiftMult);
-					else if(controls.UI_UP_P)
+					else if(controls.UI_UP_P #if mobile || _virtualpad.buttonUp.justPressed #end)
 						changeSelectedMod(-shiftMult);
 					else if(FlxG.mouse.wheel != 0)
 						changeSelectedMod(-FlxG.mouse.wheel * shiftMult, true);
@@ -406,7 +406,7 @@ class ModsMenuState extends MusicBeatState
 						else curSelectedMod = 0;
 						changeSelectedMod();
 					}
-					else if(controls.UI_UP || controls.UI_DOWN)
+					else if(controls.UI_UP || controls.UI_DOWN #if mobile || _virtualpad.buttonUp.pressed || _virtualpad.buttonDown.pressed #end)
 					{
 						var lastHoldTime:Float = holdTime;
 						holdTime += elapsed;
@@ -473,7 +473,7 @@ class ModsMenuState extends MusicBeatState
 			{
 				if(hoveringOnMods)
 				{
-					if(controls.UI_RIGHT_P)
+					if(controls.UI_RIGHT_P #if mobile || _virtualpad.buttonRight.justPressed #END)
 					{
 						hoveringOnMods = false;
 						var button = getButton();
@@ -484,7 +484,7 @@ class ModsMenuState extends MusicBeatState
 				}
 				else 
 				{
-					if(controls.BACK)
+					if(controls.BACK #if mobile || virtualpad.buttonB.justPressed #end)
 					{
 						hoveringOnMods = true;
 						var button = getButton();
@@ -498,7 +498,7 @@ class ModsMenuState extends MusicBeatState
 					}
 					else if(curSelectedButton < 0)
 					{
-						if(controls.UI_UP_P)
+						if(controls.UI_UP_P #if mobile || _virtualpad.buttonUp.justPressed #end)
 						{
 							switch(curSelectedButton)
 							{
@@ -512,7 +512,7 @@ class ModsMenuState extends MusicBeatState
 									changeSelectedButton(-1);
 							}
 						}
-						else if(controls.UI_DOWN_P)
+						else if(controls.UI_DOWN_P #if mobile || _virtualpad.buttonDown.justPressed #end)
 						{
 							switch(curSelectedButton)
 							{
@@ -526,7 +526,7 @@ class ModsMenuState extends MusicBeatState
 									changeSelectedMod();
 							}
 						}
-						else if(controls.UI_RIGHT_P)
+						else if(controls.UI_RIGHT_P #if mobile || _virtualpad.buttonRight.justPressed #end)
 						{
 							var button = getButton();
 							button.ignoreCheck = button.onFocus = false;
@@ -534,9 +534,9 @@ class ModsMenuState extends MusicBeatState
 							changeSelectedButton();
 						}
 					}
-					else if(controls.UI_LEFT_P)
+					else if(controls.UI_LEFT_P #if mobile || _virtualpad.buttonLeft.justPressed #end)
 						changeSelectedButton(-1);
-					else if(controls.UI_RIGHT_P)
+					else if(controls.UI_RIGHT_P #if mobile || _virtualpad.buttonRight.justPressed #end)
 						changeSelectedButton(1);
 				}
 			}
