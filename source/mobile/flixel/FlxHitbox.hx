@@ -39,16 +39,58 @@ class FlxHitbox extends FlxSpriteGroup {
 
 	public function createhitbox(x:Float = 0, y:Float = 0, width:Int, height:Int, color:Int) {
 
+		var hintTween:FlxTween = null;
 		var button:FlxButton = new FlxButton(x, y);
 		button.loadGraphic(createHintGraphic(width, height));
 		button.color = color;
 		button.updateHitbox();
 		button.alpha = 0;
 
-		button.onOut.callback = function() button.alpha = 0;
-		button.onUp.callback = function() button.alpha = 0;
-		button.onDown.callback = function() button.alpha = 0.7;
-		
+		if (!ClientPrefs.data.hideHitboxHints)
+		{
+			button.onDown.callback = function()
+			{
+				if (hintTween != null)
+					hintTween.cancel();
+
+				hintTween = FlxTween.tween(hint, {alpha: ClientPrefs.data.controlsAlpha}, ClientPrefs.data.controlsAlpha / 100, {
+					ease: FlxEase.circInOut,
+					onComplete: function(twn:FlxTween)
+					{
+						hintTween = null;
+					}
+				});
+			}
+			button.onUp.callback = function()
+			{
+				if (hintTween != null)
+					hintTween.cancel();
+
+				hintTween = FlxTween.tween(hint, {alpha: 0.00001}, ClientPrefs.data.controlsAlpha / 10, {
+					ease: FlxEase.circInOut,
+					onComplete: function(twn:FlxTween)
+					{
+						hintTween = null;
+					}
+				});
+			}
+			button.onOut.callback = function()
+			{
+				if (hintTween != null)
+					hintTween.cancel();
+
+				hintTween = FlxTween.tween(hint, {alpha: 0.00001}, ClientPrefs.data.controlsAlpha / 10, {
+					ease: FlxEase.circInOut,
+					onComplete: function(twn:FlxTween)
+					{
+						hintTween = null;
+					}
+				});
+			}
+		}
+		#if FLX_DEBUG
+		hint.ignoreDrawDebug = true;
+		#end
 		return button;
 	}
 
