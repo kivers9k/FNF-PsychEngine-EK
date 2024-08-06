@@ -6,6 +6,7 @@ class MusicBeatSubstate extends FlxSubState
 {
 	public function new()
 	{
+		controls.isInSubstate = true;
 		super();
 	}
 
@@ -23,7 +24,7 @@ class MusicBeatSubstate extends FlxSubState
 	private var controls(get, never):Controls;
 
 	#if android
-	var _virtualpad:FlxVirtualPad;
+	public var _virtualpad:FlxVirtualPad;
 
 	public function addVirtualPad(?dpad:FlxDPadMode, ?action:FlxActionMode) {
 		_virtualpad = new FlxVirtualPad(dpad, action);
@@ -45,7 +46,7 @@ class MusicBeatSubstate extends FlxSubState
 	}
 
 	override function destroy() {
-		controls.vpad = null;
+		controls.isInSubstate = false;
 		super.destroy();
 	}
 	#end
