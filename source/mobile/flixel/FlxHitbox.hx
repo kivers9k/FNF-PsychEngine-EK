@@ -6,6 +6,7 @@ import flixel.util.FlxDestroyUtil;
 import flixel.ui.FlxButton;
 import flixel.FlxSprite;
 import flixel.FlxG;
+import openfl.display.BitmapData;
 
 class FlxHitbox extends FlxSpriteGroup {
 	public var hitbox:FlxSpriteGroup;
