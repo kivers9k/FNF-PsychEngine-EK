@@ -146,7 +146,7 @@ class CharacterEditorState extends MusicBeatState
 		add(frameAdvanceText);
 
 		#if android
-		addVirtualPad(FULL, FULL);
+		addVirtualPad(LEFT_FULL, RIGHT_FULL);
 		addVPadCam();
 		#end
 

@@ -61,7 +61,7 @@ class MasterEditorMenu extends MusicBeatState
 		add(directoryTxt);
 
 		#if android
-		addVirtualPad(FULL, A_B);
+		addVirtualPad(LEFT_FULL, A_B);
 		#end
 		
 		for (folder in Mods.getModDirectories())
