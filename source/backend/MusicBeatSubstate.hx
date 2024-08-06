@@ -28,15 +28,14 @@ class MusicBeatSubstate extends FlxSubState
 	#if android
 	public var _virtualpad:FlxVirtualPad;
 
-	public function addVirtualPad(?dpad:FlxDPadMode, ?action:FlxActionMode) {
-		_virtualpad = new FlxVirtualPad(dpad, action);
+	public function addVirtualPad(DPad:FlxDPadMode, Action:FlxActionMode) {
+		_virtualpad = new FlxVirtualPad(DPad, Action);
 		add(_virtualpad);
-		controls.vpad = _virtualpad;
 	}
 
 	public function removeVirtualPad() {
-		controls.vpad = null;
-		remove(_virtualpad);
+		if (_virtualpad != null)
+			remove(_virtualpad);
 	}
 
 	public function addVPadCam() {
@@ -49,6 +48,11 @@ class MusicBeatSubstate extends FlxSubState
 
 	override function destroy() {
 		controls.isInSubstate = false;
+		if (_virtualpad != null)
+		{
+			_virtualpad = FlxDestroyUtil.destroy(_virtualpad);
+			_virtualpad = null;
+		}
 		super.destroy();
 	}
 	#end
