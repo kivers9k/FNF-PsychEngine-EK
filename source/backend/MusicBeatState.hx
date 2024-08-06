@@ -33,14 +33,15 @@ class MusicBeatState extends FlxUIState
 		add(_hitbox);
 	}
 
-	public function addVirtualPad(DPad:FlxDPadMode, Action:FlxActionMode) {
-		_virtualpad = new FlxVirtualPad(DPad, Action);
+	public function addVirtualPad(?dpad:FlxDPadMode, ?action:FlxActionMode) {
+		_virtualpad = new FlxVirtualPad(dpad, action);
 		add(_virtualpad);
+		controls.vpad = _virtualpad;
 	}
 
 	public function removeVirtualPad() {
-		if (_virtualpad != null)
-			remove(_virtualpad);
+		controls.vpad = null;
+		remove(_virtualpad);
 	}
 
 	public function addVPadCam() {
@@ -52,13 +53,8 @@ class MusicBeatState extends FlxUIState
 	}
 
     override function destroy() {
+	    controls.vpad = null;
 		super.destroy();
-	        if (_virtualpad != null)
-		{
-			_virtualpad = FlxDestroyUtil.destroy(_virtualpad);
-			_virtualpad = null;
-		}
-
 	}
 	#end
 
