@@ -133,6 +133,23 @@ class ClientPrefs {
 		'pause'			=> [START],
 		'reset'			=> [BACK]
 	];
+	public static var mobileBinds:Map<String, Array<FlxMobileInputID>> = [
+		'note_up'		=> [noteUP, UP2],
+		'note_left'		=> [noteLEFT, LEFT2],
+		'note_down'		=> [noteDOWN, DOWN2],
+		'note_right'	=> [noteRIGHT, RIGHT2],
+
+		'ui_up'			=> [UP, noteUP],
+		'ui_left'		=> [LEFT, noteLEFT],
+		'ui_down'		=> [DOWN, noteDOWN],
+		'ui_right'		=> [RIGHT, noteRIGHT],
+
+		'accept'		=> [A],
+		'back'			=> [B],
+		'pause'			=> [#if android NONE #else P #end],
+		'reset'			=> [NONE]
+	];
+	public static var defaultMobileBinds:Map<String, Array<FlxMobileInputID>> = null;
 	public static var defaultKeys:Map<String, Array<FlxKey>> = null;
 	public static var defaultButtons:Map<String, Array<FlxGamepadInputID>> = null;
 
