@@ -9,10 +9,8 @@ import flixel.FlxG;
 
 class FlxHitbox extends FlxSpriteGroup {
 	public var hitbox:FlxSpriteGroup;
-	public var hint:FlxSpriteGroup;
 
 	public var array:Array<FlxButton> = [];
-	public var hintArray:Array<FlxSprite> = [];
 
 	var hitboxColor:Map<Int, Array<Int>> = [
 		1 => [0xffFFFFFF],
@@ -35,15 +33,14 @@ class FlxHitbox extends FlxSpriteGroup {
 		var hitboxWidth:Int = Math.floor(FlxG.width / keyCount);
 		for (i in 0 ... keyCount) {
 			hitbox.add(add(array[i] = createhitbox(hitboxWidth * i, 0, hitboxWidth, FlxG.height, hitboxColor[keyCount][i])));
-			hint.add(add(hintArray[i] = addHint(hitboxWidth * i, 0, hitboxWidth, FlxG.height, hitboxColor[keyCount][i])));
 		}
 	}
 
 	public function createhitbox(x:Float = 0, y:Float = 0, width:Int, height:Int, color:Int) {
-		var hitboxSpr:FlxSprite = FlxGradient.createGradientFlxSprite(width, height, [0x0, color]);
 
 		var button:FlxButton = new FlxButton(x, y);
-		button.loadGraphic(hitboxSpr.pixels);
+		button.loadGraphic(createHintGraphic(Width, Height));
+		button.color = color;
 		button.updateHitbox();
 		button.alpha = 0;
 
@@ -54,25 +51,30 @@ class FlxHitbox extends FlxSpriteGroup {
 		return button;
 	}
 
-	public function addHint(x:Float, y:Float, w:Int, h:Int, color:Int) {
-		var hintSpr:FlxSprite = new FlxSprite(x, y, Paths.image('mobileControls/hint'));
-		hintSpr.setGraphicSize(w, h);
-		hintSpr.updateHitbox();
-		hintSpr.color = color;
-                hintSpr.alpha = 0.7;
-
-		return hint;
-	}
 
 	override public function destroy():Void {
 		super.destroy();
-                hitbox = null;
-		hint = null;
 		for (hbox in array) {
 			hbox = null;
 		}
-		for (hints in hintArray) {
-			hints = null;
-		}
+	}
+	function createHintGraphic(Width:Int, Height:Int):BitmapData
+	{
+		var guh = ClientPrefs.data.controlsAlpha;
+		if (guh >= 0.9)
+			guh = ClientPrefs.data.controlsAlpha - 0.07;
+		var shape:Shape = new Shape();
+		shape.graphics.beginFill(0xFFFFFF);
+		shape.graphics.lineStyle(3, 0xFFFFFF, 1);
+		shape.graphics.drawRect(0, 0, Width, Height);
+		shape.graphics.lineStyle(0, 0, 0);
+		shape.graphics.drawRect(3, 3, Width - 6, Height - 6);
+		shape.graphics.endFill();
+		shape.graphics.beginGradientFill(RADIAL, [0xFFFFFF, FlxColor.TRANSPARENT], [guh, 0], [0, 255], null, null, null, 0.5);
+		shape.graphics.drawRect(3, 3, Width - 6, Height - 6);
+		shape.graphics.endFill();
+		var bitmap:BitmapData = new BitmapData(Width, Height, true, 0);
+		bitmap.draw(shape);
+		return bitmap;
 	}
 }
