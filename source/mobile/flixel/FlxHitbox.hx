@@ -54,7 +54,7 @@ class FlxHitbox extends FlxSpriteGroup {
 		return button;
 	}
 
-	public function addHint(x:Float, y:Float, w:Float, h:Float, color:Int) {
+	public function addHint(x:Float, y:Float, w:Int, h:Int, color:Int) {
 		var hintSpr:FlxSprite = new FlxSprite(x, y, Paths.image('mobileControls/hint'));
 		hintSpr.setGraphicSize(w, h);
 		hintSpr.updateHitbox();
