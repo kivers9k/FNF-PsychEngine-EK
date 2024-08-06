@@ -125,7 +125,7 @@ class Controls
 				case 'accept': return vpad.buttonA.pressed;
 				case 'back': return vpad.buttonB.pressed;
 			}
-			if (requested.vpad.anyPressed(key) == true)
+			if (requested.vpad.anyPressed(keys) == true)
 			{
 				controllerMode = true; // !!DO NOT DISABLE THIS IF YOU DONT WANT TO KILL THE INPUT FOR MOBILE!!
 				return true;
@@ -144,7 +144,7 @@ class Controls
 				case 'accept': return vpad.buttonA.justPressed;
 				case 'back': return vpad.buttonB.justPressed;
 			}
-			if (requested.vpad.anyJustPressed(key) == true)
+			if (requested.vpad.anyJustPressed(keys) == true)
 			{
 				controllerMode = true; // !!DO NOT DISABLE THIS IF YOU DONT WANT TO KILL THE INPUT FOR MOBILE!!
 				return true;
@@ -163,7 +163,7 @@ class Controls
 				case 'accept': return vpad.buttonA.justReleased;
 				case 'back': return vpad.buttonB.justReleased;
 			}
-			if (requested.vpad.anyJustReleased(key) == true)
+			if (requested.vpad.anyJustReleased(keys) == true)
 			{
 				controllerMode = true; // Do I repeat myself here
 				return true;
