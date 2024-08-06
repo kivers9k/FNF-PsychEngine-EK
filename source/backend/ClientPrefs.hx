@@ -135,10 +135,10 @@ class ClientPrefs {
 	];
 	public static var mobileBinds:Map<String, Array<FlxMobileInputID>> = [
 
-		'ui_up'			=> [UP],
-		'ui_left'		=> [LEFT],
-		'ui_down'		=> [DOWN],
-		'ui_right'		=> [RIGHT],
+		'ui_up'			=> [UP, UP2],
+		'ui_left'		=> [LEFT, LEFT2],
+		'ui_down'		=> [DOWN, DOWN2],
+		'ui_right'		=> [RIGHT, RIGHT2],
 
 		'accept'		=> [A],
 		'back'			=> [B],
@@ -166,6 +166,7 @@ class ClientPrefs {
 	{
 		var keyBind:Array<FlxKey> = keyBinds.get(key);
 		var gamepadBind:Array<FlxGamepadInputID> = gamepadBinds.get(key);
+		var mobileBind:Array<FlxMobileInputID> = mobileBinds.get(key);
 		while(keyBind != null && keyBind.contains(NONE)) keyBind.remove(NONE);
 		while(gamepadBind != null && gamepadBind.contains(NONE)) gamepadBind.remove(NONE);
 	}
@@ -187,6 +188,7 @@ class ClientPrefs {
 		}
 
 		defaultButtons = gamepadBinds.copy();
+		defaultMobileBinds = mobileBinds.copy();
 	}
 
 	public static function saveSettings() {
@@ -207,6 +209,7 @@ class ClientPrefs {
 		var save:FlxSave = new FlxSave();
 		save.bind('controls_v3', CoolUtil.getSavePath());
 		save.data.keyboard = keyBinds;
+		
 
 		// this was NOT that easy
 		var saveDataKeybinds:Array<Array<Array<Int>>> = [
@@ -241,6 +244,7 @@ class ClientPrefs {
 		#end
 
 		save.data.gamepad = gamepadBinds;
+		save.data.mobile = mobileBinds;
 		save.flush();
 		FlxG.log.add("Settings saved!");
 	}
@@ -401,6 +405,11 @@ class ClientPrefs {
 				var loadedControls:Map<String, Array<FlxGamepadInputID>> = save.data.gamepad;
 				for (control => keys in loadedControls)
 					if(gamepadBinds.exists(control)) gamepadBinds.set(control, keys);
+			}
+			if(save.data.mobile != null) {
+					var loadedControls:Map<String, Array<FlxMobileInputID>> = save.data.mobile;
+					for (control => keys in loadedControls)
+						if(mobileBinds.exists(control)) mobileBinds.set(control, keys);
 			}
 			reloadVolumeKeys();
 		}
