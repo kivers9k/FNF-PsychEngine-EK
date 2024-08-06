@@ -6,7 +6,6 @@ class Data
 {
 	public static var dpadMode:StringMap<FlxDPadMode> = new StringMap<FlxDPadMode>();
 	public static var actionMode:StringMap<FlxActionMode> = new StringMap<FlxActionMode>();
-	public static var extraActions:StringMap<ExtraActions> = new StringMap<ExtraActions>();
 
 	public static function setup()
 	{
@@ -16,8 +15,6 @@ class Data
 		for (data in FlxActionMode.createAll())
 			actionMode.set(data.getName(), data);
 
-		for (data in ExtraActions.createAll())
-			extraActions.set(data.getName(), data);
 	}
 }
 
