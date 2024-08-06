@@ -35,7 +35,7 @@ class FlxHitbox extends FlxSpriteGroup {
 		var hitboxWidth:Int = Math.floor(FlxG.width / keyCount);
 		for (i in 0 ... keyCount) {
 			hitbox.add(add(array[i] = createhitbox(hitboxWidth * i, 0, hitboxWidth, FlxG.height, hitboxColor[keyCount][i])));
-			hint.add(add(hintArray[i] = addHint(hitboxWidth * i, 0, hitboxWidth, FlxG.height, hitboxColoe[keyCount][i])));
+			hint.add(add(hintArray[i] = addHint(hitboxWidth * i, 0, hitboxWidth, FlxG.height, hitboxColor[keyCount][i])));
 		}
 	}
 
@@ -54,19 +54,19 @@ class FlxHitbox extends FlxSpriteGroup {
 		return button;
 	}
 
-	public function addHint(x:Float, y:Float, w:Float, h:Float, color:Int) {
+	public function addHint(x:Float, y:Float, w:Int, h:Int, color:Int) {
 		var hintSpr:FlxSprite = new FlxSprite(x, y, Paths.image('mobileControls/hint'));
 		hintSpr.setGraphicSize(w, h);
 		hintSpr.updateHitbox();
 		hintSpr.color = color;
-        hintSpr.alpha = 0.7;
+                hintSpr.alpha = 0.7;
 
 		return hint;
 	}
 
 	override public function destroy():Void {
 		super.destroy();
-        hitbox = null;
+                hitbox = null;
 		hint = null;
 		for (hbox in array) {
 			hbox = null;
