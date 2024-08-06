@@ -14,14 +14,14 @@ import flixel.math.FlxPoint;
  */
 class FlxVirtualPad extends FlxMobileInputManager
 {
-	public var buttonLeft:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.LEFT]);
-	public var buttonUp:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.UP]);
-	public var buttonRight:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.RIGHT]);
-	public var buttonDown:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.DOWN]);
-	public var buttonLeft2:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.LEFT2]);
-	public var buttonUp2:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.UP2]);
-	public var buttonRight2:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.RIGHT2]);
-	public var buttonDown2:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.DOWN2]);
+	public var buttonLeft:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.LEFT, FlxMobileInputID.noteLEFT]);
+	public var buttonUp:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.UP, FlxMobileInputID.noteUP]);
+	public var buttonRight:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.RIGHT, FlxMobileInputID.noteRIGHT]);
+	public var buttonDown:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.DOWN, FlxMobileInputID.noteDOWN]);
+	public var buttonLeft2:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.LEFT2, FlxMobileInputID.noteLEFT]);
+	public var buttonUp2:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.UP2, FlxMobileInputID.noteUP]);
+	public var buttonRight2:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.RIGHT2, FlxMobileInputID.noteRIGHT]);
+	public var buttonDown2:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.DOWN2, FlxMobileInputID.noteDOWN]);
 	public var buttonA:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.A]);
 	public var buttonB:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.B]);
 	public var buttonC:FlxButton = new FlxButton(0, 0, [FlxMobileInputID.C]);
@@ -109,17 +109,6 @@ class FlxVirtualPad extends FlxMobileInputManager
 				add(buttonLeft2 = createButton(0, 393, 132, 127, 'left', 0xFFC24B99));
 				add(buttonRight2 = createButton(1145, 393, 132, 127, 'right', 0xFFF9393F));
 				add(buttonDown2 = createButton(1015, 393, 132, 127, 'down', 0xFF00FFFF));
-			case CHART_EDITOR:
-				add(buttonZ = createButton(FlxG.width - 384, FlxG.height - 255, 132, 127, "z", 0xCCB98E));
-				add(buttonA = createButton(FlxG.width - 384, FlxG.height - 135, 132, 127, "a", 0xFF0000));
-				add(buttonC = createButton(FlxG.width - 510, FlxG.height - 255, 132, 127, "c", 0x44FF00));
-				add(buttonB = createButton(FlxG.width - 510, FlxG.height - 135, 132, 127, "b", 0xFFCB00));
-				add(buttonX = createButton(FlxG.width - 132, FlxG.height - 375, 132, 127, "x", 0x99062D));
-
-				add(buttonUp = createButton(FlxG.width - 258, FlxG.height - 255, 132, 127, "up", 0x00FF00));
-				add(buttonLeft = createButton(FlxG.width - 132, FlxG.height - 255, 132, 127, "left", 0xFF00FF));
-				add(buttonRight = createButton(FlxG.width - 127, FlxG.height - 135, 132, 127, "right", 0xFF0000));
-				add(buttonDown = createButton(FlxG.width - 258, FlxG.height - 135, 132, 127, "down", 0x00FFFF));
 			case NONE: // do nothing
 		}
 
