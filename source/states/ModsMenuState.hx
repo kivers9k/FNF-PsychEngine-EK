@@ -484,7 +484,7 @@ class ModsMenuState extends MusicBeatState
 				}
 				else 
 				{
-					if(controls.BACK #if mobile || virtualpad.buttonB.justPressed #end)
+					if(controls.BACK #if mobile || _virtualpad.buttonB.justPressed #end)
 					{
 						hoveringOnMods = true;
 						var button = getButton();
