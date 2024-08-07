@@ -376,7 +376,7 @@ class NoteOffsetState extends MusicBeatState
 			if(controls.UI_LEFT || controls.UI_RIGHT #if mobile || _virtualpad.buttonLeft.pressed || _virtualpad.buttonRight.pressed #end)
 			{
 				holdTime += elapsed;
-				if(controls.UI_LEFT #if mobile _virtualpad.buttonLeft.pressed #end) mult = -1;
+				if(controls.UI_LEFT #if mobile || _virtualpad.buttonLeft.pressed #end) mult = -1;
 			}
 
 			if(controls.UI_LEFT_R || controls.UI_RIGHT_R #if mobile || _virtualpad.buttonLeft.justReleased || _virtualpad.buttonRight.justReleased #end) holdTime = 0;
