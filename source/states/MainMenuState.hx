@@ -102,7 +102,7 @@ class MainMenuState extends MusicBeatState
 		add(fnfVer);
 		changeItem();
 
-		#if android
+		#if mobile
 		addVirtualPad(UP_DOWN, A_B_E);
 		#end
 

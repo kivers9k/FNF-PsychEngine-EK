@@ -292,7 +292,7 @@ class ModsMenuState extends MusicBeatState
 		add(bgList);
 		add(modsGroup);
 
-		#if android
+		#if mobile
 		addVirtualPad(UP_DOWN, B);
 		#end
 		
@@ -312,7 +312,7 @@ class ModsMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		if(controls.BACK && hoveringOnMods)
+		if((controls.BACK #if mobile || _virtualpad.buttonB.justPressed #end) && hoveringOnMods)
 		{
 			if(colorTween != null) {
 				colorTween.cancel();
@@ -484,7 +484,7 @@ class ModsMenuState extends MusicBeatState
 				}
 				else 
 				{
-					if(controls.BACK #if mobile || _virtualpad.buttonB.justPressed #end)
+					if(controls.BACK)
 					{
 						hoveringOnMods = true;
 						var button = getButton();

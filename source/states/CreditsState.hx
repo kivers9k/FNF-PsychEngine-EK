@@ -131,7 +131,7 @@ class CreditsState extends MusicBeatState
 		descBox.sprTracker = descText;
 		add(descText);
 
-		#if android
+		#if mobile
 		addVirtualPad(UP_DOWN, A_B_C);
 	    #end
 

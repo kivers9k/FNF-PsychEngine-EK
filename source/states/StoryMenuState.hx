@@ -172,7 +172,7 @@ class StoryMenuState extends MusicBeatState
 		add(scoreText);
 		add(txtWeekTitle);
 
-		#if android
+		#if mobile
 	    addVirtualPad(FULL, A_B_C_X);
 		#end
 

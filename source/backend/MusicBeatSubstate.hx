@@ -41,6 +41,11 @@ class MusicBeatSubstate extends FlxSubState
 		
 		_virtualpad.cameras = [camMobile];
 	}
+    
+	public function closeSs() {
+		FlxTransitionableState.skipNextTransOut = true;
+		FlxG.resetState();
+	}
 	#end
 
 	inline function get_controls():Controls
