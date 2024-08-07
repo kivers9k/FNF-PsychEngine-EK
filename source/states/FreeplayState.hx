@@ -184,6 +184,8 @@ class FreeplayState extends MusicBeatState
 		changeSelection(0, false);
 		persistentUpdate = true;
 		super.closeSubState();
+		removeVirtualPad();
+		addVirtualPad(FULL, A_B_C_X_Y_Z);
  	}
 
 	public function addSong(songName:String, weekNum:Int, songCharacter:String, color:Int)
