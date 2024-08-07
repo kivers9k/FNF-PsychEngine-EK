@@ -109,7 +109,11 @@ class ResetScoreSubState extends MusicBeatSubstate
 				}
 			}
 			FlxG.sound.play(Paths.sound('cancelMenu'), 1);
+                        #if mobile
+			closeSs();
+                        #else
 			close();
+                        #end
 		}
 		if (_virtualpad == null){ //sometimes it doesnt add the vpad, hopefully this fixes it
 		addVirtualPad(LEFT_RIGHT, A_B);
