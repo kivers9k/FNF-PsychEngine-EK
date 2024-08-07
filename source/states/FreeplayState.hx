@@ -418,10 +418,10 @@ class FreeplayState extends MusicBeatState
 		else if((controls.RESET #if mobile || _virtualpad.buttonX.justPressed #end) && !player.playingMusic)
 		{
 			persistentUpdate = false;
+			openSubState(new ResetScoreSubState(songs[curSelected].songName, curDifficulty, songs[curSelected].songCharacter));
 			#if mobile
 			removeVirtualPad();
 			#end
-			openSubState(new ResetScoreSubState(songs[curSelected].songName, curDifficulty, songs[curSelected].songCharacter));
 			FlxG.sound.play(Paths.sound('scrollMenu'));
 		}
 

@@ -5,6 +5,7 @@ import backend.Highscore;
 
 import flixel.FlxSubState;
 import objects.HealthIcon;
+import flixel.addons.transition.FlxTransitionableState;
 
 class ResetScoreSubState extends MusicBeatSubstate
 {
@@ -70,9 +71,7 @@ class ResetScoreSubState extends MusicBeatSubstate
 		noText.x += 200;
 		add(noText);
 
-		#if android
 		addVirtualPad(LEFT_RIGHT, A_B);
-		#end
 
 		updateOptions();
 	}
@@ -108,6 +107,9 @@ class ResetScoreSubState extends MusicBeatSubstate
 			FlxG.sound.play(Paths.sound('cancelMenu'), 1);
 			close();
 		}
+		if (_virtualpad == null){ //sometimes it doesnt add the vpad, hopefully this fixes it
+		addVirtualPad(LEFT_RIGHT, A_B);
+		}
 		super.update(elapsed);
 	}
 
@@ -121,5 +123,14 @@ class ResetScoreSubState extends MusicBeatSubstate
 		noText.alpha = alphas[1 - confirmInt];
 		noText.scale.set(scales[1 - confirmInt], scales[1 - confirmInt]);
 		if(week == -1) icon.animation.curAnim.curFrame = confirmInt;
+	}
+	override function destroy(){
+		bg = FlxDestroyUtil.destroy(bg);
+		alphabetArray = FlxDestroyUtil.destroyArray(alphabetArray);
+		icon = FlxDestroyUtil.destroy(icon);
+                yesText = FlxDestroyUtil.destroy(yesText);
+		noText = FlxDestroyUtil.destroy(noText);
+
+		super.destroy();
 	}
 }
