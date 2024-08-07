@@ -187,7 +187,7 @@ class StoryMenuState extends MusicBeatState
 		changeWeek();
 		super.closeSubState();
 		removeVirtualPad();
-		addVirtualPad(LEFT_FULL, A_B_C_X);
+		addVirtualPad(FULL, A_B_C_X);
 	}
 
 	override function update(elapsed:Float)
