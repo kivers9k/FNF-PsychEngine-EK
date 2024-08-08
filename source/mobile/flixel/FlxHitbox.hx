@@ -44,7 +44,7 @@ class FlxHitbox extends FlxSpriteGroup {
 		button.loadGraphic(createHintGraphic(width, height));
 		button.color = color;
 		button.updateHitbox();
-		button.alpha = 0;
+		button.alpha = 0.00001;
 
 		if (!ClientPrefs.data.hideHitboxHints)
 		{
