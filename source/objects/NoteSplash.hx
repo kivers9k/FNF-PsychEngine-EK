@@ -50,11 +50,13 @@ class NoteSplash extends FlxSprite
 
 	var maxAnims:Int = 2;
 	public function setupNoteSplash(x:Float, y:Float, direction:Int = 0, ?note:Note = null) {
-		setPosition(x - Note.swagWidth * 0.95, y - Note.swagWidth);
+		var scale = 1/(ExtraKeysHandler.instance.data.scales[PlayState.SONG.mania] + 0.3);
+		//setPosition(x - Note.swagWidth * 0.95, y - Note.swagWidth);
+		setPosition(
+			x - (Note.swagWidth * scale) * 0.95, 
+			y - (Note.swagWidth * scale)
+		);
 		aliveTime = 0;
-
-		setGraphicSize(width * ExtraKeysHandler.instance.data.scales[PlayState.SONG.mania] + 0.3);
-		updateHitbox();
 
 		var texture:String = null;
 		if(note != null && note.noteSplashData.texture != null) texture = note.noteSplashData.texture;
@@ -139,6 +141,10 @@ class NoteSplash extends FlxSprite
 				frames = Paths.getSparrowAtlas(skin);
 			}
 		}
+
+		setGraphicSize(width * (ExtraKeysHandler.instance.data.scales[PlayState.SONG.mania] + 0.3));
+		updateHitbox();
+
 		config = precacheConfig(skin);
 		_configLoaded = skin;
 

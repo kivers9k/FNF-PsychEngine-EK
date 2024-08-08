@@ -77,48 +77,42 @@ class StrumNote extends FlxSprite
 		if(PlayState.isPixelStage)
 		{
 			loadGraphic(Paths.image('pixelUI/' + texture));
-			width = width / 4;
+			width = width / 6;
 			height = height / 5;
 			loadGraphic(Paths.image('pixelUI/' + texture), true, Math.floor(width), Math.floor(height));
 
 			antialiasing = false;
 
 			initialWidth = width;
-			trace(initialWidth);
+			//trace(initialWidth);
 
 			setGraphicSize(Std.int(width * PlayState.daPixelZoom));
 
-			animation.add('green', [6]);
-			animation.add('red', [7]);
-			animation.add('blue', [5]);
-			animation.add('purple', [4]);
-			switch (Math.abs(noteData) % 4)
-			{
-				case 0:
-					animation.add('static', [0]);
-					animation.add('pressed', [4, 8], 12, false);
-					animation.add('confirm', [12, 16], 24, false);
-				case 1:
-					animation.add('static', [1]);
-					animation.add('pressed', [5, 9], 12, false);
-					animation.add('confirm', [13, 17], 24, false);
-				case 2:
-					animation.add('static', [2]);
-					animation.add('pressed', [6, 10], 12, false);
-					animation.add('confirm', [14, 18], 12, false);
-				case 3:
-					animation.add('static', [3]);
-					animation.add('pressed', [7, 11], 12, false);
-					animation.add('confirm', [15, 19], 24, false);
-			}
+			var mania = 3;
+			if (PlayState.SONG != null) mania = PlayState.SONG.mania;
+
+			var noteAnimInt = getAnimSet(getIndex(mania, noteData)).pixel;
+
+			animation.add('circle', [11]);
+			animation.add('rombus', [10]);
+			animation.add('red', [9]);
+			animation.add('green', [8]);
+			animation.add('blue', [7]);
+			animation.add('purple', [6]);
+
+			animation.add('static', [noteAnimInt]);
+			animation.add('pressed', [noteAnimInt + 6, noteAnimInt + 12], 12, false);
+			animation.add('confirm', [noteAnimInt + 18, noteAnimInt + 24], 24, false);
 		}
 		else
 		{
 			frames = Paths.getSparrowAtlas(texture);
-			// animation.addByPrefix('green', 'arrowUP');
-			// animation.addByPrefix('blue', 'arrowDOWN');
-			// animation.addByPrefix('purple', 'arrowLEFT');
-			// animation.addByPrefix('red', 'arrowRIGHT');
+			animation.addByPrefix('green', 'arrowUP');
+			animation.addByPrefix('blue', 'arrowDOWN');
+			animation.addByPrefix('purple', 'arrowLEFT');
+			animation.addByPrefix('red', 'arrowRIGHT');
+			animation.addByPrefix('rombus', 'arrowROMBUS');
+			animation.addByPrefix('circle', 'arrowCIRCLE');
 			initialWidth = width;
 
 			antialiasing = ClientPrefs.data.antialiasing;
@@ -151,10 +145,11 @@ class StrumNote extends FlxSprite
 		playAnim('static');
 		var padding:Float = 0;
 		var minPaddingStartThresh:Int = 4;
-		if (PlayState.isPixelStage) minPaddingStartThresh = 6;
+		//if (PlayState.isPixelStage) minPaddingStartThresh = 3;
 		if (PlayState.SONG.mania > minPaddingStartThresh) {
-			padding = (PlayState.isPixelStage ? 0.5 : 4) * (PlayState.SONG.mania - minPaddingStartThresh);
+			padding = (PlayState.isPixelStage ? 0.001 : 4) * (PlayState.SONG.mania - minPaddingStartThresh);
 		}
+		//trace(padding);
 
 		// x = StrumBoundaries.getMiddlePoint().x;
 		// x += ((Note.swagWidthUnscaled * trackedScale) - padding) * (-((PlayState.SONG.mania + 1) / 2) + noteData);
@@ -162,19 +157,25 @@ class StrumNote extends FlxSprite
 		// x += ((FlxG.width / 2) * player);
 		ID = noteData;
 
-		centerStrum(padding);
+		centerStrum(minPaddingStartThresh, padding);
 	}
 
-	public function centerStrum(padding:Float) {
+	/**
+	 * Please refrain from asking me what happens here
+	 * @param maniaThresh I don't know
+	 * @param padding I don't know
+	 */
+	public function centerStrum(maniaThresh:Int, padding:Float) {
+		var sWidth = (PlayState.isPixelStage && PlayState.SONG.mania > maniaThresh) ? (180 + ((10 + (5 * (PlayState.SONG.mania - maniaThresh))) * (PlayState.SONG.mania - maniaThresh))) : Note.swagWidthUnscaled;
 		if (!ClientPrefs.data.middleScroll) {
 			x = player == 0 ? 320 : 960;
-			x += ((Note.swagWidthUnscaled * trackedScale) - padding) * (-((PlayState.SONG.mania+1) / 2) + noteData);
+			x += ((sWidth * trackedScale) - padding) * (-((PlayState.SONG.mania+1) / 2) + noteData);
 		} else {
 			x = player == 0 ? 320 : 640;
 			if (player == 0) {
 				if (noteData > Math.floor((PlayState.SONG.mania / 2))) x = 960;
 			}
-			x += ((Note.swagWidthUnscaled * trackedScale) - padding) * (-((PlayState.SONG.mania+1) / 2) + noteData);
+			x += ((sWidth * trackedScale) - padding) * (-((PlayState.SONG.mania+1) / 2) + noteData);
 		}
 	}
 
@@ -256,9 +257,7 @@ class KeybindShowcase extends FlxTypedGroup<FlxBasic> {
 				if (keyCodes.length > 1) {
 					keyText.text = InputFormatter.getKeyName(keyCodes[1]);
 				} else {
-					var size = 14 - (mania - 3);
-					keyText.size = size;
-					keyText.text = 'Unbound';
+					keyText.text = '---';
 				}
 
 				FlxTween.tween(keyText, {alpha: 1}, 0.5);
