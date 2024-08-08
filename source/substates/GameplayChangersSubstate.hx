@@ -263,7 +263,7 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 					if(curOption.type != 'string') {
 						holdTime += elapsed;
 					}
-				} else if(controls.UI_LEFT_R || controls.UI_RIGHT_R #if mobile || _virtualpad.buttonLeft.justReleased || _virtualpad.buttonRight.justReleased #endw) {
+				} else if(controls.UI_LEFT_R || controls.UI_RIGHT_R #if mobile || _virtualpad.buttonLeft.justReleased || _virtualpad.buttonRight.justReleased #end) {
 					clearHold();
 				}
 			}
