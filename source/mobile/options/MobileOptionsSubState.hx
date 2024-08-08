@@ -36,9 +36,6 @@ class MobileOptionsSubState extends BaseOptionsMenu
 		var option:Option = new Option('Hide Hitbox Hints', 'If checked, makes the hitbox invisible.', 'hideHitboxHints', 'bool');
 		addOption(option);
 
-		var option:Option = new Option('Dynamic Controls Color', 'If checked, the mobile controls color will be set to the notes color in your settings.\n(have effect during gameplay only)', 'dynamicColors', 'bool');
-		addOption(option);
-
 		#if android
 		 var option:Option = new Option('Storage Type', 'Which folder Psych Engine should use?\n(CHANGING THIS MAKES DELETE YOUR OLD FOLDER!!)', 'storageType', 'string',
 			storageTypes);
