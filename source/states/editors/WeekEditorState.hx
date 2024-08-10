@@ -435,7 +435,7 @@ class WeekEditorState extends MusicBeatState
 
 		if(!blockInput) {
 			ClientPrefs.toggleVolumeKeys(true);
-			if(FlxG.keys.justPressed.ESCAPE #if mobile || _virtualpad.buttonB.justPressed #end) {
+			if(FlxG.keys.justPressed.ESCAPE #if mobile || _virtualpad.buttonB.justPressed || FlxG.android.justReleased.BACK #end) {
 				MusicBeatState.switchState(new MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 			}
