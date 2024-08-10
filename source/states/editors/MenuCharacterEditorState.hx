@@ -265,7 +265,7 @@ class MenuCharacterEditorState extends MusicBeatState
 
 		if(!blockInput) {
 			ClientPrefs.toggleVolumeKeys(true);
-			if(FlxG.keys.justPressed.ESCAPE #if mobile || _virtualpad.buttonBack.justPressed || FlxG.android.justReleased.BACK #end) {
+			if(FlxG.keys.justPressed.ESCAPE #if mobile || _virtualpad.buttonB.justPressed || FlxG.android.justReleased.BACK #end) {
 				MusicBeatState.switchState(new states.editors.MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 			}
