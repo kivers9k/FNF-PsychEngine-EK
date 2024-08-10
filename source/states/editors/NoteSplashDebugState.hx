@@ -203,8 +203,8 @@ class NoteSplashDebugState extends MusicBeatState
 
 		if(!notTyping) return;
 		
-		if (FlxG.keys.justPressed.A #if mobile || virtualPad.buttonUp.justPressed #end) changeSelection(-1);
-		else if (FlxG.keys.justPressed.D#if mobile || virtualPad.buttonDown.justPressed #end) changeSelection(1);
+		if (FlxG.keys.justPressed.A #if mobile || _virtualpad.buttonUp.justPressed #end) changeSelection(-1);
+		else if (FlxG.keys.justPressed.D#if mobile || _virtualpad.buttonDown.justPressed #end) changeSelection(1);
 
 		if(maxAnims < 1) return;
 
@@ -212,13 +212,13 @@ class NoteSplashDebugState extends MusicBeatState
 		{
 			var movex = 0;
 			var movey = 0;
-			if(FlxG.keys.justPressed.LEFT #if mobile || virtualPad.buttonLeft2.justPressed #end) movex = -1;
-			else if(FlxG.keys.justPressed.RIGHT #if mobile || virtualPad.buttonRight2.justPressed #end) movex = 1;
+			if(FlxG.keys.justPressed.LEFT #if mobile || _virtualpad.buttonLeft2.justPressed #end) movex = -1;
+			else if(FlxG.keys.justPressed.RIGHT #if mobile || _virtualpad.buttonRight2.justPressed #end) movex = 1;
 
-			if(FlxG.keys.justPressed.UP #if mobile || virtualPad.buttonUp2.justPressed #end) movey = 1;
-			else if(FlxG.keys.justPressed.DOWN #if mobile || virtualPad.buttonDown2.justPressed #end) movey = -1;
+			if(FlxG.keys.justPressed.UP #if mobile || _virtualpad.buttonUp2.justPressed #end) movey = 1;
+			else if(FlxG.keys.justPressed.DOWN #if mobile || _virtualpad.buttonDown2.justPressed #end) movey = -1;
 			
-			if(FlxG.keys.pressed.SHIFT #if mobile || virtualPad.buttonZ.justPressed #end)
+			if(FlxG.keys.pressed.SHIFT #if mobile || _virtualpad.buttonZ.justPressed #end)
 			{
 				movex *= 10;
 				movey *= 10;
@@ -236,14 +236,14 @@ class NoteSplashDebugState extends MusicBeatState
 		// Copy & Paste
 		if(FlxG.keys.pressed.CONTROL)
 		{
-			if(FlxG.keys.justPressed.C #if mobile || virtualPad.buttonC.justPressed #end)
+			if(FlxG.keys.justPressed.C #if mobile || _virtualpad.buttonC.justPressed #end)
 			{
 				var arr:Array<Float> = selectedArray();
 				if(copiedArray == null) copiedArray = [0, 0];
 				copiedArray[0] = arr[0];
 				copiedArray[1] = arr[1];
 			}
-			else if(FlxG.keys.justPressed.V #if mobile || virtualPad.buttonV.justPressed #end && copiedArray != null)
+			else if(FlxG.keys.justPressed.V #if mobile || _virtualpad.buttonV.justPressed #end && copiedArray != null)
 			{
 				var offs:Array<Float> = selectedArray();
 				offs[0] = copiedArray[0];
@@ -262,7 +262,7 @@ class NoteSplashDebugState extends MusicBeatState
 				savedText.visible = false;
 		}
 
-		if(FlxG.keys.justPressed.ENTER #if mobile || virtualPad.buttonA.justPressed #end)
+		if(FlxG.keys.justPressed.ENTER #if mobile || _virtualpad.buttonA.justPressed #end)
 		{
 			savedText.text = 'Press ENTER again to save.';
 			if(pressEnterToSave > 0) //save
@@ -281,15 +281,15 @@ class NoteSplashDebugState extends MusicBeatState
 		}
 
 		// Reset anim & change anim
-		if (FlxG.keys.justPressed.SPACE #if mobile || virtualPad.buttonY.justPressed #end)
+		if (FlxG.keys.justPressed.SPACE #if mobile || _virtualpad.buttonY.justPressed #end)
 			changeAnim();
-		else if (FlxG.keys.justPressed.S #if mobile || virtualPad.buttonLeft.justPressed #end) changeAnim(-1);
-		else if (FlxG.keys.justPressed.W #if mobile || virtualPad.buttonRight.justPressed #end) changeAnim(1);
+		else if (FlxG.keys.justPressed.S #if mobile || _virtualpad.buttonLeft.justPressed #end) changeAnim(-1);
+		else if (FlxG.keys.justPressed.W #if mobile || _virtualpad.buttonRight.justPressed #end) changeAnim(1);
 
 		// Force frame
 		var updatedFrame:Bool = false;
-		if(updatedFrame = FlxG.keys.justPressed.Q #if mobile || virtualPad.buttonX.justPressed #end) forceFrame--;
-		else if(updatedFrame = FlxG.keys.justPressed.E #if mobile || virtualPad.buttonE.justPressed #end) forceFrame++;
+		if(updatedFrame = FlxG.keys.justPressed.Q #if mobile || _virtualpad.buttonX.justPressed #end) forceFrame--;
+		else if(updatedFrame = FlxG.keys.justPressed.E #if mobile || _virtualpad.buttonE.justPressed #end) forceFrame++;
 
 		if(updatedFrame)
 		{
