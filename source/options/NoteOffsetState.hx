@@ -166,6 +166,7 @@ class NoteOffsetState extends MusicBeatState
 
 		#if mobile
 		addVirtualPad(LEFT_RIGHT, A_B_C);
+		addVPadCam();
 		#end
 		
 		updateMode();
