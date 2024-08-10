@@ -25,6 +25,11 @@ class FlxVirtualPad extends FlxSpriteGroup {
 	public var buttonUp:FlxButton;
 	public var buttonRight:FlxButton;
 	public var buttonDown:FlxButton;
+	//I just realised we are gonna need more than one set for this one
+	public var buttonLeft2:FlxButton;
+	public var buttonUp2:FlxButton;
+	public var buttonRight2:FlxButton;
+	public var buttonDown2:FlxButton;
 
 	public var dPad:FlxSpriteGroup;
 	public var actions:FlxSpriteGroup;
@@ -52,6 +57,10 @@ class FlxVirtualPad extends FlxSpriteGroup {
 		buttonUp = new FlxButton(0, 0);
 		buttonRight = new FlxButton(0, 0);
 		buttonDown = new FlxButton(0, 0);
+		buttonLeft2 = new FlxButton(0, 0);
+		buttonUp2 = new FlxButton(0, 0);
+		buttonRight2 = new FlxButton(0, 0);
+		buttonDown2 = new FlxButton(0, 0);
 
 		switch (DPad) {
 			case UP_DOWN:
@@ -69,6 +78,15 @@ class FlxVirtualPad extends FlxSpriteGroup {
 				dPad.add(add(buttonLeft = createButton(0, FlxG.height - 243, 132, 127, "left", 0xFF00FF)));
 				dPad.add(add(buttonRight = createButton(207, FlxG.height - 243, 132, 127, "right", 0xFF0000)));
 				dPad.add(add(buttonDown = createButton(105, FlxG.height - 135, 132, 127, "down", 0x00FFFF)));
+			case NOTE_SPLASH_DEBUG:
+				dPad.add(add(buttonUp = createButton(0, FlxG.height - 125, 132, 127, "up", 0x00FF00)));
+				dPad.add(add(buttonLeft = createButton(0, FlxG.height - 0, 132, 127, "left", 0xFF00FF)));
+				dPad.add(add(buttonRight = createButton(127, FlxG.height - 0, 132, 127, "right", 0xFF0000)));
+				dPad.add(add(buttonDown = createButton(127, FlxG.height - 125, 132, 127, "down", 0x00FFFF)));
+				dPad.add(add(buttonUp2 = createButton(127, FlxG.height - 393, 132, 127, "up", 0x00FF00)));
+				dPad.add(add(buttonLeft2 = createButton(0, FlxG.height - 393, 132, 127, "left", 0xFF00FF)));
+				dPad.add(add(buttonRight2 = createButton(1145, FlxG.height - 393, 132, 127, "right", 0xFF0000)));
+				dPad.add(add(buttonDown2 = createButton(1015, FlxG.height - 393, 132, 127, "down", 0x00FFFF)));
 			case NONE:
 				// do nothing
 		}
@@ -134,6 +152,15 @@ class FlxVirtualPad extends FlxSpriteGroup {
 				dPad.add(add(buttonLeft = createButton(FlxG.width - 132, FlxG.height - 255, 132, 127, "left", 0xFF00FF)));
 				dPad.add(add(buttonRight = createButton(FlxG.width - 127, FlxG.height - 135, 132, 127, "right", 0xFF0000)));
 				dPad.add(add(buttonDown = createButton(FlxG.width - 258, FlxG.height - 135, 132, 127, "down", 0x00FFFF)));
+			case NOTE_SPLASH_DEBUG:
+				dPad.add(add(buttonB = createButton(FlxG.width - 258, FlxG.height - 135, 132, 127, 'b', 0xFFCB00)));
+				dPad.add(add(buttonE = createButton(FlxG.width - 132, FlxG.height - 0, 132, 127, 'e', 0xFF7D00)));
+				dPad.add(add(buttonX = createButton(FlxG.width - 258, FlxG.height - 0, 132, 127, 'x', 0x99062D)));
+				dPad.add(add(buttonY = createButton(FlxG.width - 132, FlxG.height - 250, 132, 127, 'y', 0x4A35B9)));
+				dPad.add(add(buttonZ = createButton(FlxG.width - 258, FlxG.height - 250, 132, 127, 'z', 0xCCB98E)));
+				dPad.add(add(buttonA = createButton(FlxG.width - 132, FlxG.height - 135, 132, 127, 'a', 0xFF0000)));
+				dPad.add(add(buttonC = createButton(FlxG.width - 132, FlxG.height - 125, 132, 127, 'c', 0x44FF00)));
+				dPad.add(add(buttonV = createButton(FlxG.width - 258, FlxG.height - 125, 132, 127, 'v', 0x49A9B2)));
 			case NONE:
 				// do nothing
 		}
@@ -181,6 +208,10 @@ class FlxVirtualPad extends FlxSpriteGroup {
 		buttonUp = null;
 		buttonDown = null;
 		buttonRight = null;
+		buttonLeft2 = null;
+		buttonUp2 = null;
+		buttonDown2 = null;
+		buttonRight2 = null;
 	}
 }
 
@@ -189,6 +220,7 @@ enum FlxDPadMode {
 	LEFT_RIGHT;
 	UP_LEFT_RIGHT;
 	FULL;
+	NOTE_SPLASH_DEBUG;
 	NONE;
 }
 
@@ -205,5 +237,6 @@ enum FlxActionMode {
 	A_B_C_X_Y_Z;
 	FULL;
 	CHART_EDITOR;
+	NOTE_SPLASH_DEBUG;
 	NONE;
 }
