@@ -89,6 +89,7 @@ class DialogueEditorState extends MusicBeatState
 		changeText();
 		#if mobile
 		addVirtualPad(FULL, A_B_X_Y);
+		#end
 		
 		super.create();
 	}
