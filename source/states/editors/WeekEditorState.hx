@@ -105,6 +105,10 @@ class WeekEditorState extends MusicBeatState
 
 		FlxG.mouse.visible = true;
 
+		#if mobile
+		addVirtualPad(UP_DOWN, B);
+                #end
+
 		super.create();
 	}
 
@@ -431,7 +435,7 @@ class WeekEditorState extends MusicBeatState
 
 		if(!blockInput) {
 			ClientPrefs.toggleVolumeKeys(true);
-			if(FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end) {
+			if(FlxG.keys.justPressed.ESCAPE #if mobile || _virtualpad.buttonB.justPressed #end) {
 				MusicBeatState.switchState(new MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 			}
@@ -615,7 +619,7 @@ class WeekEditorFreeplayState extends MusicBeatState
 		}
 
 		#if android
-		addVirtualPad(UP_DOWN, NONE);
+		addVirtualPad(UP_DOWN, B);
 		#end
 
 		addEditorBox();
@@ -798,13 +802,13 @@ class WeekEditorFreeplayState extends MusicBeatState
 			}
 		} else {
 			ClientPrefs.toggleVolumeKeys(true);
-			if(FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end) {
+			if(FlxG.keys.justPressed.ESCAPE #if mobile || _virtualpad.buttonB.justPressed #end) {
 				MusicBeatState.switchState(new MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 			}
 
-			if(controls.UI_UP_P #if android || _virtualpad.buttonUp.justPressed #end) changeSelection(-1);
-			if(controls.UI_DOWN_P #if android || _virtualpad.buttonDown.justPressed #end) changeSelection(1);
+			if(controls.UI_UP_P #if mobile || _virtualpad.buttonUp.justPressed #end) changeSelection(-1);
+			if(controls.UI_DOWN_P #if mobile || _virtualpad.buttonDown.justPressed #end) changeSelection(1);
 		}
 		super.update(elapsed);
 	}
