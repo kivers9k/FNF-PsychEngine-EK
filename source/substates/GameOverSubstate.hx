@@ -67,6 +67,7 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		#if android
 		addVirtualPad(NONE, A_B);
+		addVPadCam();
 		#end
 		
 		PlayState.instance.setOnScripts('inGameOver', true);
