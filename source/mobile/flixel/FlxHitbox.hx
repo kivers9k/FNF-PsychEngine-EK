@@ -8,6 +8,7 @@ import flixel.FlxSprite;
 import flixel.FlxG;
 import openfl.display.BitmapData;
 import openfl.display.Shape;
+import backends.ExtraKeysHandler;
 
 class FlxHitbox extends FlxSpriteGroup {
 	public var hitbox:FlxSpriteGroup;
