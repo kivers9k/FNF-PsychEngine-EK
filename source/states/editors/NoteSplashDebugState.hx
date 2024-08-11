@@ -193,7 +193,7 @@ class NoteSplashDebugState extends MusicBeatState
 		cast(stepperMinFps.text_field, FlxInputText).hasFocus = cast(stepperMaxFps.text_field, FlxInputText).hasFocus = false;
 
 		var notTyping:Bool = !nameInputText.hasFocus && !imageInputText.hasFocus;
-		if(controls.BACK && notTyping)
+		if(controls.BACK #if mobile || _virtualpad.buttonB.justPressed || FlxG.android.justReleased.BACK #end && notTyping)
 		{
 			MusicBeatState.switchState(new MasterEditorMenu());
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));
