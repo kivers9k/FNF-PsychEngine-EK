@@ -1,5 +1,7 @@
 name: Android Build Test
-on: 
+on:
+  push:
+    branches: [extra-keys-0.7.3]
   pull_request:
     branches: [extra-keys-0.7.3]
   workflow_dispatch:
