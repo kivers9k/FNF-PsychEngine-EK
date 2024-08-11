@@ -205,6 +205,7 @@ class NotesSubState extends MusicBeatSubstate
 		if (controls.BACK #if mobile || _virtualpad.buttonB.justPressed || FlxG.android.justReleased.BACK #end) {
 			FlxG.mouse.visible = false;
 			FlxG.sound.play(Paths.sound('cancelMenu'));
+		        ClientPrefs.saveSettings();
 			#if mobile
 			closeSs();
 			#else
