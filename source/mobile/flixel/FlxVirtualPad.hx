@@ -79,23 +79,23 @@ class FlxVirtualPad extends FlxSpriteGroup {
 				dPad.add(add(buttonRight = createButton(207, FlxG.height - 243, 132, 127, "right", 0xFF0000)));
 				dPad.add(add(buttonDown = createButton(105, FlxG.height - 135, 132, 127, "down", 0x00FFFF)));
 			case NOTE_SPLASH_DEBUG:
-				dPad.add(add(buttonUp = createButton(0, FlxG.height - 125, 132, 127, "up", 0x00FF00)));
-				dPad.add(add(buttonLeft = createButton(0, FlxG.height - 0, 132, 127, "left", 0xFF00FF)));
-				dPad.add(add(buttonRight = createButton(127, FlxG.height - 0, 132, 127, "right", 0xFF0000)));
-				dPad.add(add(buttonDown = createButton(127, FlxG.height - 125, 132, 127, "down", 0x00FFFF)));
-				dPad.add(add(buttonUp2 = createButton(127, FlxG.height - 393, 132, 127, "up", 0x00FF00)));
-				dPad.add(add(buttonLeft2 = createButton(0, FlxG.height - 393, 132, 127, "left", 0xFF00FF)));
-				dPad.add(add(buttonRight2 = createButton(1145, FlxG.height - 393, 132, 127, "right", 0xFF0000)));
-				dPad.add(add(buttonDown2 = createButton(1015, FlxG.height - 393, 132, 127, "down", 0x00FFFF)));
+				dPad.add(add(buttonUp = createButton(0, 125, 132, 127, "up", 0x00FF00)));
+				dPad.add(add(buttonLeft = createButton(0, 0, 132, 127, "left", 0xFF00FF)));
+				dPad.add(add(buttonRight = createButton(127, 0, 132, 127, "right", 0xFF0000)));
+				dPad.add(add(buttonDown = createButton(127, 125, 132, 127, "down", 0x00FFFF)));
+				dPad.add(add(buttonUp2 = createButton(127, 393, 132, 127, "up", 0x00FF00)));
+				dPad.add(add(buttonLeft2 = createButton(0, 393, 132, 127, "left", 0xFF00FF)));
+				dPad.add(add(buttonRight2 = createButton(1145, 393, 132, 127, "right", 0xFF0000)));
+				dPad.add(add(buttonDown2 = createButton(1015, 393, 132, 127, "down", 0x00FFFF)));
 			case DIALOGUE_PORTRAIT:
 				dPad.add(add(buttonUp = createButton(105, FlxG.height - 345, 132, 127, "up", 0x00FF00)));
 				dPad.add(add(buttonLeft = createButton(0, FlxG.height - 243, 132, 127, "left", 0xFF00FF)));
 				dPad.add(add(buttonRight = createButton(207, FlxG.height - 243, 132, 127, "right", 0xFF0000)));
 				dPad.add(add(buttonDown = createButton(105, FlxG.height - 135, 132, 127, "down", 0x00FFFF)));
-				dPad.add(add(buttonUp2 = createButton(105, FlxG.height - 0, 132, 127, "up", 0x00FF00)));
-				dPad.add(add(buttonLeft2 = createButton(0, FlxG.height - 82, 132, 127, "left", 0xFF00FF)));
-				dPad.add(add(buttonRight2 = createButton(207, FlxG.height - 82, 132, 127, "right", 0xFF0000)));
-				dPad.add(add(buttonDown2 = createButton(105, FlxG.height - 190, 132, 127, "down", 0x00FFFF)));
+				dPad.add(add(buttonUp2 = createButton(105, 0, 132, 127, "up", 0x00FF00)));
+				dPad.add(add(buttonLeft2 = createButton(0, 82, 132, 127, "left", 0xFF00FF)));
+				dPad.add(add(buttonRight2 = createButton(207, 82, 132, 127, "right", 0xFF0000)));
+				dPad.add(add(buttonDown2 = createButton(105, 190, 132, 127, "down", 0x00FFFF)));
 			case NONE:
 				// do nothing
 		}
@@ -163,20 +163,20 @@ class FlxVirtualPad extends FlxSpriteGroup {
 				dPad.add(add(buttonDown = createButton(FlxG.width - 258, FlxG.height - 135, 132, 127, "down", 0x00FFFF)));
 			case NOTE_SPLASH_DEBUG:
 				dPad.add(add(buttonB = createButton(FlxG.width - 258, FlxG.height - 135, 132, 127, 'b', 0xFFCB00)));
-				dPad.add(add(buttonE = createButton(FlxG.width - 132, FlxG.height - 0, 132, 127, 'e', 0xFF7D00)));
-				dPad.add(add(buttonX = createButton(FlxG.width - 258, FlxG.height - 0, 132, 127, 'x', 0x99062D)));
-				dPad.add(add(buttonY = createButton(FlxG.width - 132, FlxG.height - 250, 132, 127, 'y', 0x4A35B9)));
-				dPad.add(add(buttonZ = createButton(FlxG.width - 258, FlxG.height - 250, 132, 127, 'z', 0xCCB98E)));
+				dPad.add(add(buttonE = createButton(FlxG.width - 132, 0, 132, 127, 'e', 0xFF7D00)));
+				dPad.add(add(buttonX = createButton(FlxG.width - 258, 0, 132, 127, 'x', 0x99062D)));
+				dPad.add(add(buttonY = createButton(FlxG.width - 132, 250, 132, 127, 'y', 0x4A35B9)));
+				dPad.add(add(buttonZ = createButton(FlxG.width - 258, 250, 132, 127, 'z', 0xCCB98E)));
 				dPad.add(add(buttonA = createButton(FlxG.width - 132, FlxG.height - 135, 132, 127, 'a', 0xFF0000)));
-				dPad.add(add(buttonC = createButton(FlxG.width - 132, FlxG.height - 125, 132, 127, 'c', 0x44FF00)));
-				dPad.add(add(buttonV = createButton(FlxG.width - 258, FlxG.height - 125, 132, 127, 'v', 0x49A9B2)));
+				dPad.add(add(buttonC = createButton(FlxG.width - 132, 125, 132, 127, 'c', 0x44FF00)));
+				dPad.add(add(buttonV = createButton(FlxG.width - 258, 125, 132, 127, 'v', 0x49A9B2)));
 			case DIALOGUE_PORTRAIT:
-				dPad.add(add(buttonX = createButton(FlxG.width - 384, FlxG.height - 0, 132, 127, "x", 0x99062D)));
-				dPad.add(add(buttonC = createButton(FlxG.width - 384, FlxG.height - 125, 132, 127, "c", 0x44FF00)));
-				dPad.add(add(buttonY = createButton(FlxG.width - 258, FlxG.height - 0, 132, 127, "y", 0x4A35B9)));
-				dPad.add(add(buttonB = createButton(FlxG.width - 258, FlxG.height - 125, 132, 127, "b", 0xFFCB00)));
-				dPad.add(add(buttonZ = createButton(FlxG.width - 132, FlxG.height - 0, 132, 127, "z", 0xCCB98E)));
-				dPad.add(add(buttonA = createButton(FlxG.width - 132, FlxG.height - 125, 132, 127, "a", 0xFF0000)));
+				dPad.add(add(buttonX = createButton(FlxG.width - 384, 0, 132, 127, "x", 0x99062D)));
+				dPad.add(add(buttonC = createButton(FlxG.width - 384, 125, 132, 127, "c", 0x44FF00)));
+				dPad.add(add(buttonY = createButton(FlxG.width - 258, 0, 132, 127, "y", 0x4A35B9)));
+				dPad.add(add(buttonB = createButton(FlxG.width - 258, 125, 132, 127, "b", 0xFFCB00)));
+				dPad.add(add(buttonZ = createButton(FlxG.width - 132, 0, 132, 127, "z", 0xCCB98E)));
+				dPad.add(add(buttonA = createButton(FlxG.width - 132, 125, 132, 127, "a", 0xFF0000)));
 			case NONE:
 				// do nothing
 		}
