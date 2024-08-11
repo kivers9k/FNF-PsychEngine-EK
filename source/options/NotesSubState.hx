@@ -183,9 +183,9 @@ class NotesSubState extends MusicBeatSubstate
 		_lastControllerMode = controls.controllerMode;
 
 		addVirtualPad(NONE, B_X);
-        virtualPad.buttonB.x = FlxG.width - 132;
-		virtualPad.buttonX.x = 0;
-		virtualPad.buttonX.y = FlxG.height - 135;
+                _virtualPad.buttonB.x = FlxG.width - 132;
+		_virtualPad.buttonX.x = 0;
+		_virtualPad.buttonX.y = FlxG.height - 135;
 	}
 
 	function updateTip()
