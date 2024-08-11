@@ -501,7 +501,7 @@ class NotesSubState extends MusicBeatSubstate
 				}
 			} 
 		}
-		else if(controls.RESET #if mobile || virtualpad.buttonX.justPressed #end  && hexTypeNum < 0)
+		else if(controls.RESET #if mobile || _virtualpad.buttonX.justPressed #end  && hexTypeNum < 0)
 		{
 			if(FlxG.keys.pressed.SHIFT || FlxG.gamepads.anyJustPressed(LEFT_SHOULDER))
 			{
