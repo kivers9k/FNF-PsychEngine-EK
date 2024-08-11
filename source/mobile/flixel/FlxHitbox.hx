@@ -20,7 +20,7 @@ class FlxHitbox extends FlxSpriteGroup {
 		
 		var keyCount:Int = type + 1;
 		var hitboxWidth:Int = Math.floor(FlxG.width / keyCount);
-		var hitboxColor:ExtraKeysHandler = ExtraKeysHandler.instance.data.hitboxColor[type];
+		var hitboxColor = ExtraKeysHandler.instance.data.hitboxColor[type];
 		for (i in 0 ... keyCount) {
 			hitbox.add(add(array[i] = createhitbox(hitboxWidth * i, 0, hitboxWidth, FlxG.height, hitboxColor[i])));
 		}
