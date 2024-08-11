@@ -165,7 +165,7 @@ class NoteOffsetState extends MusicBeatState
 		add(controllerPointer);
 
 		#if mobile
-		addVirtualPad(LEFT_RIGHT, A_B_C);
+		addVirtualPad(LEFT_RIGHT, A_B_X);
 		addVPadCam();
 		#end
 		
@@ -351,7 +351,7 @@ class NoteOffsetState extends MusicBeatState
 				}
 			}
 
-			if(controls.RESET #if mobile || _virtualpad.buttonC.justPressed #end)
+			if(controls.RESET #if mobile || _virtualpad.buttonX.justPressed #end)
 			{
 				for (i in 0...ClientPrefs.data.comboOffset.length)
 				{
@@ -389,7 +389,7 @@ class NoteOffsetState extends MusicBeatState
 				updateNoteDelay();
 			}
 
-			if(controls.RESET #if mobile || _virtualpad.buttonC.justPressed #end)
+			if(controls.RESET #if mobile || _virtualpad.buttonX.justPressed #end)
 			{
 				holdTime = 0;
 				barPercent = 0;

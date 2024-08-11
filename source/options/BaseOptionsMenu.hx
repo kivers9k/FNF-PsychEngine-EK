@@ -102,7 +102,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		}
 
 		#if android
-		addVirtualPad(FULL, A_B_C);
+		addVirtualPad(FULL, A_B_X);
 		#end
 
 		changeSelection();
@@ -268,7 +268,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 				}
 			}
 
-			if(controls.RESET #if android || _virtualpad.buttonC.justPressed #end)
+			if(controls.RESET #if android || _virtualpad.buttonX.justPressed #end)
 			{
 				var leOption:Option = optionsArray[curSelected];
 				if(leOption.type != 'keybind')
