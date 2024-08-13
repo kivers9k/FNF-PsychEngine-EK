@@ -6,6 +6,7 @@ import flixel.util.FlxDestroyUtil;
 import flixel.ui.FlxButton;
 import flixel.FlxSprite;
 import flixel.FlxG;
+import flixel.util.FlxColor;
 import openfl.display.BitmapData;
 import openfl.display.Shape;
 import backend.ExtraKeysHandler;
@@ -30,7 +31,7 @@ class FlxHitbox extends FlxSpriteGroup {
 		var hintTween:FlxTween = null;
 		var button:FlxButton = new FlxButton(x, y);
 		button.loadGraphic(createHintGraphic(width, height));
-		button.color.fromString(color);
+		button.color = FlxColor.fromString(color);
 		button.updateHitbox();
 		button.alpha = 0.00001;
 
