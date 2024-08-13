@@ -25,12 +25,12 @@ class FlxHitbox extends FlxSpriteGroup {
 		}
 	}
 
-	public function createhitbox(x:Float = 0, y:Float = 0, width:Int, height:Int, color:Int) {
+	public function createhitbox(x:Float = 0, y:Float = 0, width:Int, height:Int, color:String) {
 
 		var hintTween:FlxTween = null;
 		var button:FlxButton = new FlxButton(x, y);
 		button.loadGraphic(createHintGraphic(width, height));
-		button.color = color;
+		button.color.fromString(color);
 		button.updateHitbox();
 		button.alpha = 0.00001;
 
