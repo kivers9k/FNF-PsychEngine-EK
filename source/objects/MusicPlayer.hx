@@ -94,9 +94,9 @@ class MusicPlayer extends FlxGroup
 		else
 			songTxt.text = 'PLAYING: ' + instance.songs[FreeplayState.curSelected].songName;
 
-		positionSong();
+		positionSong(); 
 
-		if (instance.controls.UI_LEFT_P)
+		if (instance.controls.UI_LEFT_P #if mobile || instance._virtualpad.buttonLeft.justPressed #end)
 		{
 			if (playing)
 				wasPlaying = true;
@@ -113,7 +113,7 @@ class MusicPlayer extends FlxGroup
 			if (FreeplayState.vocals != null)
 				FreeplayState.vocals.time = curTime;
 		}
-		if (instance.controls.UI_RIGHT_P)
+		if (instance.controls.UI_RIGHT_P #if mobile || instance._virtualpad.buttonRight.justPressed #end)
 		{
 			if (playing)
 				wasPlaying = true;
@@ -133,12 +133,12 @@ class MusicPlayer extends FlxGroup
 	
 		updateTimeTxt();
 
-		if(instance.controls.UI_LEFT || instance.controls.UI_RIGHT)
+		if(instance.controls.UI_LEFT || instance.controls.UI_RIGHT #if mobile || instance._virtualpad.buttonLeft.pressed || instance._virtualpad.buttonRight.pressed #end)
 		{
 			instance.holdTime += elapsed;
 			if(instance.holdTime > 0.5)
 			{
-				curTime += 40000 * elapsed * (instance.controls.UI_LEFT ? -1 : 1);
+				curTime += 40000 * elapsed * ((instance.controls.UI_LEFT #if mobile || instance._virtualpad.buttonLeft.pressed #end) ? -1 : 1);
 			}
 
 			var difference:Float = Math.abs(curTime - FlxG.sound.music.time);
@@ -152,7 +152,7 @@ class MusicPlayer extends FlxGroup
 			updateTimeTxt();
 		}
 
-		if(instance.controls.UI_LEFT_R || instance.controls.UI_RIGHT_R)
+		if(instance.controls.UI_LEFT_R || instance.controls.UI_RIGHT_R #if mobile || instance._virtualpad.buttonLeft.justReleased || instance._virtualpad.buttonRight.justReleased #end)
 		{
 			FlxG.sound.music.time = curTime;
 			if (FreeplayState.vocals != null)
@@ -166,24 +166,24 @@ class MusicPlayer extends FlxGroup
 
 			updateTimeTxt();
 		}
-		if (instance.controls.UI_UP_P)
+		if (instance.controls.UI_UP_P #if mobile || instance._virtualpad.buttonUp.justPressed #end)
 		{
 			holdPitchTime = 0;
 			playbackRate += 0.05;
 			setPlaybackRate();
 		}
-		else if (instance.controls.UI_DOWN_P)
+		else if (instance.controls.UI_DOWN_P #if mobile || instance._virtualpad.buttonDown.justPressed #end)
 		{
 			holdPitchTime = 0;
 			playbackRate -= 0.05;
 			setPlaybackRate();
 		}
-		if (instance.controls.UI_DOWN || instance.controls.UI_UP)
+		if (instance.controls.UI_DOWN || instance.controls.UI_UP #if mobile || instance._virtualpad.buttonDown.pressed || instance._virtualpad.buttonUp.pressed #end)
 		{
 			holdPitchTime += elapsed;
 			if (holdPitchTime > 0.6)
 			{
-				playbackRate += 0.05 * (instance.controls.UI_UP ? 1 : -1);
+				playbackRate += 0.05 * ((instance.controls.UI_UP #if mobile || instance._virtualpad.buttonUp.pressed #end) ? 1 : -1);
 				setPlaybackRate();
 			}
 		}
@@ -199,7 +199,7 @@ class MusicPlayer extends FlxGroup
 		}
 		updatePlaybackTxt();
 	
-		if (instance.controls.RESET)
+		if (instance.controls.RESET #if mobile || instance._virtualpad.buttonX.justPressed #end)
 		{
 			playbackRate = 1;
 			setPlaybackRate();
