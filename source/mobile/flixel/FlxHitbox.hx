@@ -33,7 +33,7 @@ class FlxHitbox extends FlxSpriteGroup {
 		button.loadGraphic(createHintGraphic(width, height));
 		button.updateHitbox();
 		button.alpha = 0;
-		if (!color.startWiths('0x')) button.color = FlxColor.fromString('0x' + color);
+		if (!color.startsWith('0x')) button.color = FlxColor.fromString('0x' + color);
 
 		button.onDown.callback = function() button.alpha = ClientPrefs.data.controlsAlpha;
 		button.onUp.callback = function() button.alpha = 0;
