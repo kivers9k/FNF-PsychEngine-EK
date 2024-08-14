@@ -188,6 +188,17 @@ class CoolUtil
 		parser.fromJson(content);
 		result = parser.value;
 
+		// automatically (?) sets colors of notes that have no colors
+		for (i in 0...ExtraKeysHandler.instance.data.maxKeys+1) {
+			// colors dont exist
+			
+			// cannot take the previous approach since 
+			// this is indexed and not per mania
+			if (result.colors[i] == null) {
+				result.colors[i] = defaultArrowRGB[i];
+			}
+		}
+
 		return result;
 	}
 
@@ -214,6 +225,14 @@ class CoolUtil
 		var parser = new json2object.JsonParser<EKKeybindSavedData>();
 		parser.fromJson(content);
 		result = parser.value;
+
+		// automatically (?) sets keybinds of #keys that have no keybinds
+		for (i in 0...ExtraKeysHandler.instance.data.maxKeys+1) {
+			// keybinds dont exist, keybinds are not enough
+			if (result.keybinds[i] == null || result.keybinds[i].length != (i + 1)) {
+				result.keybinds[i] = defaultKeybinds[i];
+			}
+		}
 
 		return result;
 	}
