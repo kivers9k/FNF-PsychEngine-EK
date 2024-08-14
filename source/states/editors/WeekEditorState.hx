@@ -106,8 +106,8 @@ class WeekEditorState extends MusicBeatState
 		FlxG.mouse.visible = true;
 
 		#if mobile
-		addVirtualPad(UP_DOWN, B);
-                #end
+		addVirtualPad(NONE, B);
+        #end
 
 		super.create();
 	}
@@ -192,6 +192,10 @@ class WeekEditorState extends MusicBeatState
 
 		weekFileInputText = new FlxUIInputText(10, weekNameInputText.y + 40, 100, '', 8);
 		blockPressWhileTypingOn.push(weekFileInputText);
+
+		for (textInput in blockPressWhileTypingOn)
+		    textInput.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
+		
 		reloadWeekThing();
 
 		hideCheckbox = new FlxUICheckBox(10, weekFileInputText.y + 40, null, null, "Hide Week from Story Mode?", 100);
@@ -250,6 +254,9 @@ class WeekEditorState extends MusicBeatState
 		difficultiesInputText = new FlxUIInputText(10, weekBeforeInputText.y + 60, 200, '', 8);
 		blockPressWhileTypingOn.push(difficultiesInputText);
 		
+		for (textInput in blockPressWhileTypingOn)
+		    textInput.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
+
 		tab_group.add(new FlxText(weekBeforeInputText.x, weekBeforeInputText.y - 28, 0, 'Week File name of the Week you have\nto finish for Unlocking:'));
 		tab_group.add(new FlxText(difficultiesInputText.x, difficultiesInputText.y - 20, 0, 'Difficulties:'));
 		tab_group.add(new FlxText(difficultiesInputText.x, difficultiesInputText.y + 20, 0, 'Default difficulties are "Easy, Normal, Hard"\nwithout quotes.'));
@@ -718,6 +725,7 @@ class WeekEditorFreeplayState extends MusicBeatState
 		});
 
 		iconInputText = new FlxUIInputText(10, bgColorStepperR.y + 70, 100, '', 8);
+		iconInputText.focusGained = () -> FlxG.stage.window.textInputEnabled = true;
 
 		var hideFreeplayCheckbox:FlxUICheckBox = new FlxUICheckBox(10, iconInputText.y + 30, null, null, "Hide Week from Freeplay?", 100);
 		hideFreeplayCheckbox.checked = weekFile.hideFreeplay;

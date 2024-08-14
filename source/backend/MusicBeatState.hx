@@ -29,11 +29,13 @@ class MusicBeatState extends FlxUIState
 		FlxG.cameras.add(camMobile, false);
 
 		_hitbox.cameras = [camMobile];
+		_hitbox.alpha = ClientPrefs.data.controlsAlpha;
 		add(_hitbox);
 	}
 
 	public function addVirtualPad(?dpad:FlxDPadMode, ?action:FlxActionMode) {
 		_virtualpad = new FlxVirtualPad(dpad, action);
+		_virtualpad.alpha = ClientPrefs.data.controlsAlpha;
 		add(_virtualpad);
 	}
 

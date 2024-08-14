@@ -27,6 +27,7 @@ class MobileOptionsSubState extends BaseOptionsMenu
 		option.maxValue = 1;
 		option.changeValue = 0.05;
 		option.decimals = 1;
+		option.onChange = () -> _virtualpad.alpha = ClientPrefs.data.controlsAlpha;
 		addOption(option);
 
 		#if mobile
@@ -34,10 +35,7 @@ class MobileOptionsSubState extends BaseOptionsMenu
 		    'If checked, the phone will sleep after going inactive for few seconds.',
 		    'screensaver', 
 		    'bool');
-		option.onChange = () ->
-		{
-			lime.system.System.allowScreenTimeout = curOption.getValue();
-		};
+		option.onChange = () -> lime.system.System.allowScreenTimeout = curOption.getValue(); 
 		addOption(option);
 
 		var option:Option = new Option('Wide Screen Mode',
