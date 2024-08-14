@@ -848,7 +848,7 @@ class EditorPlayState extends MusicBeatSubstate
 
 		#if android
 		    for (i in 0...hitboxPress.length)
-				if (hitboxPress[i] && strumsBlocked[i] != true)
+			if (hitboxPress[i])
 			        keyPressed(i);
 		#end
 
