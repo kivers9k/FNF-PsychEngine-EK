@@ -24,7 +24,19 @@ class MusicBeatSubstate extends FlxSubState
 	private var controls(get, never):Controls;
 
 	#if android
+	var _hitbox:FlxHitbox;
 	var _virtualpad:FlxVirtualPad;
+
+	public function addHitbox(?keyCount:Int = 3) {
+		_hitbox = new FlxHitbox(keyCount);
+
+		var camMobile = new FlxCamera();
+	    camMobile.bgColor.alpha = 0;
+		FlxG.cameras.add(camMobile, false);
+
+		_hitbox.cameras = [camMobile];
+		add(_hitbox);
+	}
 
 	public function addVirtualPad(?dpad:FlxDPadMode, ?action:FlxActionMode) {
 		_virtualpad = new FlxVirtualPad(dpad, action);
