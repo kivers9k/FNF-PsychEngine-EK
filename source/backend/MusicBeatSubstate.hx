@@ -35,8 +35,7 @@ class MusicBeatSubstate extends FlxSubState
 		FlxG.cameras.add(camMobile, false);
 
 		_hitbox.cameras = [camMobile];
-		_hitbox.alpha = ClientPrefs.data.controlsAlpha;
-		add(_hitbox);
+ 		add(_hitbox);
 	}
 
 	public function addVirtualPad(?dpad:FlxDPadMode, ?action:FlxActionMode) {

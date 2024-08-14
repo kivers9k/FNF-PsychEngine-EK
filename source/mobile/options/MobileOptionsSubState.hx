@@ -20,7 +20,7 @@ class MobileOptionsSubState extends BaseOptionsMenu
 
 		var option:Option = new Option('Controls alpha',
 		    'how much visible you want',
-		    'ControlsAlpha',
+		    'controlsAlpha',
 		    'float');
         option.scrollSpeed = 1.6;
 		option.minValue = 0.45;
