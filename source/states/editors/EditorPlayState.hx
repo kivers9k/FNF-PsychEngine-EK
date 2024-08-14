@@ -149,6 +149,7 @@ class EditorPlayState extends MusicBeatSubstate
 
         #if mobile
 		addHitbox(PlayState.SONG.mania);
+		_hitbox.visible = true;
 		#end
 		
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
@@ -814,6 +815,13 @@ class EditorPlayState extends MusicBeatSubstate
 		var holdArray:Array<Bool> = [];
 		var pressArray:Array<Bool> = [];
 		var releaseArray:Array<Bool> = [];
+
+		#if android
+		var hitboxHold:Array<Bool> = [];
+		var hitboxPress:Array<Bool> = [];
+		var hitboxRelease:Array<Bool> = [];
+		#end
+			
 		for (key in keysArray)
 		{
 			holdArray.push(controls.pressed(key));
@@ -824,11 +832,25 @@ class EditorPlayState extends MusicBeatSubstate
 			}
 		}
 
+		#if android
+		for (hitbox in _hitbox.array) {
+			hitboxHold.push(hitbox.pressed);
+			hitboxPress.push(hitbox.justPressed);
+			hitboxRelease.push(hitbox.justReleased);
+		}
+		#end
+
 		// TO DO: Find a better way to handle controller inputs, this should work for now
 		if(controls.controllerMode && pressArray.contains(true))
 			for (i in 0...pressArray.length)
 				if(pressArray[i])
 					keyPressed(i);
+
+		#if android
+		    for (i in 0...hitboxPress.length)
+				if (hitboxPress[i] && strumsBlocked[i] != true)
+			        keyPressed(i);
+		#end
 
 		// rewritten inputs???
 		if (notes.length > 0) {
@@ -844,6 +866,12 @@ class EditorPlayState extends MusicBeatSubstate
 					
 					if (!released)
 						goodNoteHit(n);
+					#if android
+						var poop:Bool = !hitboxHold[n.noteData];
+
+						if (!poop)
+						    goodNoteHit(n);
+					#end
 				}
 			}
 		}
@@ -853,6 +881,12 @@ class EditorPlayState extends MusicBeatSubstate
 			for (i in 0...releaseArray.length)
 				if(releaseArray[i])
 					keyReleased(i);
+
+		#if android
+		for (i in 0...hitboxRelease.length)
+		    if (hitboxRelease[i])
+			    keyReleased(i);
+		#end
 	}
 
 	
