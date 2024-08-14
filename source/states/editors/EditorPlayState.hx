@@ -147,7 +147,7 @@ class EditorPlayState extends MusicBeatSubstate
 		
 		generateSong(PlayState.SONG.song);
 
-		addHitbox(SONG.mania);
+		addHitbox(Playstate.SONG.mania);
 		_hitbox.visible = false;
 		
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
