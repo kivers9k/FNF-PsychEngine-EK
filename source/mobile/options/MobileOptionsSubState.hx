@@ -27,7 +27,10 @@ class MobileOptionsSubState extends BaseOptionsMenu
 		option.maxValue = 1;
 		option.changeValue = 0.1;
 		option.decimals = 1;
-		option.onChange = () -> _virtualpad.alpha = ClientPrefs.data.controlsAlpha;
+		option.onChange = () ->
+		{
+			_virtualpad.alpha = curOption.getValue();
+		};
 		addOption(option);
 
 		#if mobile
