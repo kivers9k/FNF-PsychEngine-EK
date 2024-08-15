@@ -19,13 +19,13 @@ class MobileOptionsSubState extends BaseOptionsMenu
 		rpcTitle = 'Mobile Options Menu'; // for Discord Rich Presence, fuck it
 
 		var option:Option = new Option('Controls alpha',
-		    'how much visible you want',
+		    'How visible you want the virtual pad to be',
 		    'controlsAlpha',
 		    'float');
-        option.scrollSpeed = 1.6;
-		option.minValue = 0.45;
+        option.scrollSpeed = 1;
+		option.minValue = 0.001;
 		option.maxValue = 1;
-		option.changeValue = 0.05;
+		option.changeValue = 0.1;
 		option.decimals = 1;
 		option.onChange = () -> _virtualpad.alpha = ClientPrefs.data.controlsAlpha;
 		addOption(option);
@@ -53,7 +53,7 @@ class MobileOptionsSubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Dynamic Color',
-		    'If checked, hitbox will use note color',
+		    'If checked, the hitbox will use the color of the notes, else it will use the default color in extrakeys.json',
 		    'dynamicColors',
 		    'bool');
 		addOption(option);
