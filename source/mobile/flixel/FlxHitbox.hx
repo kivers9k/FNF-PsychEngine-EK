@@ -28,7 +28,7 @@ class FlxHitbox extends FlxSpriteGroup {
 		var hitboxWidth:Int = Math.floor(FlxG.width / keyCount);
 		for (i in 0 ... keyCount) {
 			var hitboxColor:String = (ClientPrefs.data.dynamicColors ? getDynamicColor(type, i) :  ExtraKeysHandler.instance.data.hitboxColors[type][i]);
-			hitbox.add(add(array[i] = createhitbox(hitboxWidth * i, 0, hitboxWidth, FlxG.height, hitboxColor)));
+			hitbox.add(add(array[i] = createHitbox(hitboxWidth * i, 0, hitboxWidth, FlxG.height, hitboxColor)));
 			if (!ClientPrefs.data.hideHitboxHints)
 			    hints.add(add(createHints(hitboxWidth * i, 0, hitboxWidth, FlxG.height, hitboxColor)));
 		}
@@ -51,9 +51,9 @@ class FlxHitbox extends FlxSpriteGroup {
 		var shape:Shape = new Shape();
 		shape.graphics.beginFill(0xFFFFFF);
 		shape.graphics.lineStyle(3, 0xFFFFFF, 1);
-		shape.graphics.drawRect(0, 0, width, Height);
+		shape.graphics.drawRect(0, 0, width, height);
 		shape.graphics.lineStyle(0, 0, 0);
-		shape.graphics.drawRect(3, 3, width - 6, Height - 6);
+		shape.graphics.drawRect(3, 3, width - 6, height - 6);
 		shape.graphics.endFill();
 		
 		var bitmap:BitmapData = new BitmapData(width, height, true, 0);
