@@ -192,9 +192,9 @@ class BaseOptionsMenu extends MusicBeatSubstate
 						FlxG.sound.play(Paths.sound('scrollMenu'));
 					}
 				}
-				else if(controls.UI_LEFT || controls.UI_RIGHT #if mobile || _virtualpad.buttonLeft.pressed || _virtualpad.buttonRight.pressed #end)
+				else if(controls.UI_LEFT #if mobile || _virtualpad.buttonLeft.pressed #end || controls.UI_RIGHT #if mobile || _virtualpad.buttonRight.pressed #end)
 				{
-					var pressed = (controls.UI_LEFT_P || controls.UI_RIGHT_P #if mobile || _virtualpad.buttonLeft.justPressed || _virtualpad.buttonRight.justPressed #end);
+					var pressed = (controls.UI_LEFT_P #if mobile || _virtualpad.buttonLeft.justPressed #end || controls.UI_RIGHT_P #if mobile || _virtualpad.buttonRight.justPressed #end);
 					if(holdTime > 0.5 || pressed)
 					{
 						if(pressed)
@@ -261,7 +261,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 					if(curOption.type != 'string')
 						holdTime += elapsed;
 				}
-				else if(controls.UI_LEFT_R || controls.UI_RIGHT_R #if mobile || _virtualpad.buttonLeft.justReleased || _virtualpad.buttonRight.justReleased #end)
+				else if(controls.UI_LEFT_R #if mobile || _virtualpad.buttonLeft.justReleased #end || controls.UI_RIGHT_R #if mobile || _virtualpad.buttonRight.justReleased #end)
 				{
 					if(holdTime > 0.5) FlxG.sound.play(Paths.sound('scrollMenu'));
 					holdTime = 0;
