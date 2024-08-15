@@ -35,7 +35,8 @@ class FlxHitbox extends FlxSpriteGroup {
 	}
 
 	public function createHitbox(x:Float = 0, y:Float = 0, width:Int, height:Int, color:String) {
-		var button:FlxButton = new FlxButton(x, y, createHitboxGraphic(width, height));
+		var button:FlxButton = new FlxButton(x, y);
+		button.loadGraphic(createHitboxGraphic(width, height));
 		button.updateHitbox();
 		button.alpha = 0;
 		if (!color.startsWith('0x')) button.color = FlxColor.fromString('0x' + color);
