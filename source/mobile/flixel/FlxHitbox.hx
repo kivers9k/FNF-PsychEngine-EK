@@ -15,23 +15,27 @@ using StringTools;
 
 class FlxHitbox extends FlxSpriteGroup {
 	public var hitbox:FlxSpriteGroup;
+	public var hints:FlxSpriteGroup;
+
 	public var array:Array<FlxButton> = [];
 
 	public function new(?type:Int = 3) {
 		super();
 		hitbox = new FlxSpriteGroup();
+		hints = new FlxSpriteGroup();
 		
 		var keyCount:Int = type + 1;
 		var hitboxWidth:Int = Math.floor(FlxG.width / keyCount);
 		for (i in 0 ... keyCount) {
 			var hitboxColor:String = (ClientPrefs.data.dynamicColors ? getDynamicColor(type, i) :  ExtraKeysHandler.instance.data.hitboxColors[type][i]);
 			hitbox.add(add(array[i] = createhitbox(hitboxWidth * i, 0, hitboxWidth, FlxG.height, hitboxColor)));
+			if (!ClientPrefs.data.hideHitboxHints)
+			    hints.add(add(createHints(hitboxWidth * i, 0, hitboxWidth, FlxG.height, hitboxColor)));
 		}
 	}
 
-	public function createhitbox(x:Float = 0, y:Float = 0, width:Int, height:Int, color:String) {
-		var button:FlxButton = new FlxButton(x, y);
-		button.loadGraphic(createHintGraphic(width, height));
+	public function createHitbox(x:Float = 0, y:Float = 0, width:Int, height:Int, color:String) {
+		var button:FlxButton = new FlxButton(x, y, createHitboxGraphic(width, height));
 		button.updateHitbox();
 		button.alpha = 0;
 		if (!color.startsWith('0x')) button.color = FlxColor.fromString('0x' + color);
@@ -43,7 +47,26 @@ class FlxHitbox extends FlxSpriteGroup {
 		return button;
 	}
 
-	function createHintGraphic(Width:Int, Height:Int):BitmapData
+	public function createHints(x:Float = 0, y:Float = 0, width:Int, height:Int, color:String) {
+		var shape:Shape = new Shape();
+		shape.graphics.beginFill(0xFFFFFF);
+		shape.graphics.lineStyle(3, 0xFFFFFF, 1);
+		shape.graphics.drawRect(0, 0, width, Height);
+		shape.graphics.lineStyle(0, 0, 0);
+		shape.graphics.drawRect(3, 3, width - 6, Height - 6);
+		shape.graphics.endFill();
+		
+		var bitmap:BitmapData = new BitmapData(width, height, true, 0);
+		bitmap.draw(shape);
+ 
+        var hintSpr:FlxSprite = new FlxSprite(x, y, bitmap);
+		hintSpr.updateHitbox();
+		if (!color.startsWith('0x')) hintSpr.color = FlxColor.fromString('0x' + color);
+
+		return hintSpr;
+	}
+
+	function createHitboxGraphic(Width:Int, Height:Int):BitmapData
 	{
 		var guh = ClientPrefs.data.controlsAlpha;
 		if (guh >= 0.9)
@@ -53,15 +76,12 @@ class FlxHitbox extends FlxSpriteGroup {
 		shape.graphics.beginGradientFill(RADIAL, [0xFFFFFF, FlxColor.TRANSPARENT], [guh, 0], [0, 255], null, null, null, 0.5);
 		shape.graphics.drawRect(3, 3, Width - 6, Height - 6);
 		shape.graphics.endFill();
-
-		if (!ClientPrefs.data.hideHitboxHints) {
-			shape.graphics.beginFill(0xFFFFFF);
-			shape.graphics.lineStyle(3, 0xFFFFFF, 1);
-			shape.graphics.drawRect(0, 0, Width, Height);
-			shape.graphics.lineStyle(0, 0, 0);
-			shape.graphics.drawRect(3, 3, Width - 6, Height - 6);
-			shape.graphics.endFill();
-		}
+		shape.graphics.beginFill(0xFFFFFF);
+		shape.graphics.lineStyle(3, 0xFFFFFF, 1);
+		shape.graphics.drawRect(0, 0, Width, Height);
+		shape.graphics.lineStyle(0, 0, 0);
+		shape.graphics.drawRect(3, 3, Width - 6, Height - 6);
+		shape.graphics.endFill();
 
 		var bitmap:BitmapData = new BitmapData(Width, Height, true, 0);
 		bitmap.draw(shape);
@@ -77,7 +97,10 @@ class FlxHitbox extends FlxSpriteGroup {
 
 	override public function destroy():Void {
 		super.destroy();
+
 		hitbox = FlxDestroyUtil.destroy(hitbox);
+		hints = FlxDestroyUtil.destroy(hints);
+
 		for (hbox in array) {
 			hbox = null;
 		}

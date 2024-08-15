@@ -201,7 +201,11 @@ class BaseOptionsMenu extends MusicBeatSubstate
 						{
 							var add:Dynamic = null;
 							if(curOption.type != 'string')
+<<<<<<< HEAD
+								add = (controls.UI_LEFT #if mobile || _virtualpad.buttonLeft.pressed #end) ? -curOption.changeValue : curOption.changeValue;
+=======
 								add = controls.UI_LEFT #if mobile || _virtualpad.buttonLeft.pressed #end ? -curOption.changeValue : curOption.changeValue;
+>>>>>>> c85b12eb58797fde26c8f3bde14bb19a94327dcc
 
 							switch(curOption.type)
 							{
@@ -223,7 +227,11 @@ class BaseOptionsMenu extends MusicBeatSubstate
 
 								case 'string':
 									var num:Int = curOption.curOption; //lol
+<<<<<<< HEAD
+									if(controls.UI_LEFT_P #if mobile || _virtualpad.buttonLeft.justPressed #end) --num;
+=======
 									if(controls.UI_LEFT_P#if mobile || _virtualpad.buttonLeft.justPressed #end) --num;
+>>>>>>> c85b12eb58797fde26c8f3bde14bb19a94327dcc
 									else num++;
 
 									if(num < 0)
@@ -241,7 +249,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 						}
 						else if(curOption.type != 'string')
 						{
-							holdValue += curOption.scrollSpeed * elapsed * (controls.UI_LEFT ? -1 : 1);
+							holdValue += curOption.scrollSpeed * elapsed * ((controls.UI_LEFT #if mobile || _virtualpad.buttonLeft.pressed #end) ? -1 : 1);
 							if(holdValue < curOption.minValue) holdValue = curOption.minValue;
 							else if (holdValue > curOption.maxValue) holdValue = curOption.maxValue;
 
@@ -261,7 +269,11 @@ class BaseOptionsMenu extends MusicBeatSubstate
 					if(curOption.type != 'string')
 						holdTime += elapsed;
 				}
+<<<<<<< HEAD
+				else if(controls.UI_LEFT_R || controls.UI_RIGHT_R #if mobile || _virtualpad.buttonLeft.justPressed || _virtualpad.buttonRight.justReleased #end)
+=======
 				else if(controls.UI_LEFT_R || controls.UI_RIGHT_R #if mobile || _virtualpad.buttonLeft.justReleased || _virtualpad.buttonRight.justReleased #end)
+>>>>>>> c85b12eb58797fde26c8f3bde14bb19a94327dcc
 				{
 					if(holdTime > 0.5) FlxG.sound.play(Paths.sound('scrollMenu'));
 					holdTime = 0;
