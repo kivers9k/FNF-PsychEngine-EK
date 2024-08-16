@@ -90,7 +90,7 @@ class FlxHitbox extends FlxSpriteGroup {
 	//get color from note function
 	function getDynamicColor(type:Int, int:Int):String {
 	    var notes:Int = ExtraKeysHandler.instance.data.keys[type].notes[int];
-	    return CoolUtil.getArrowRGB('arrowRGB.json').colors[notes].inner;
+	    return CoolUtil.getArrowRGB('arrowRGB.json', ExtraKeysHandler.instance.data.colors).colors[notes].inner;
  	}
 
 	override public function destroy():Void {
