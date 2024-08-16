@@ -10,8 +10,6 @@ import openfl.display.BitmapData;
 import openfl.display.Shape;
 import backend.ExtraKeysHandler;
 
-using StringTools;
-
 class FlxHitbox extends FlxSpriteGroup {
 	public var hitbox:FlxSpriteGroup;
 	public var hints:FlxSpriteGroup;
