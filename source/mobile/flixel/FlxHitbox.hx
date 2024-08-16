@@ -27,17 +27,14 @@ class FlxHitbox extends FlxSpriteGroup {
 		var keyCount:Int = type + 1;
 		var hitboxWidth:Int = Math.floor(FlxG.width / keyCount);
 		for (i in 0 ... keyCount) {
-			if (ClientPrefs.data.dynamicColors)
-				var hitboxColor = getDynamicColor(type, i);
-			else
-				var hitboxColor:String = ExtraKeysHandler.instance.data.hitboxColors[type][i];
+			var hitboxColor:String = (ClientPrefs.data.dynamicColors ? getDynamicColor(type, i) :  ExtraKeysHandler.instance.data.hitboxColors[type][i]);
 			hitbox.add(add(array[i] = createHitbox(hitboxWidth * i, 0, hitboxWidth, FlxG.height, hitboxColor)));
 			if (!ClientPrefs.data.hideHitboxHints)
 			    hints.add(add(createHints(hitboxWidth * i, 0, hitboxWidth, FlxG.height, hitboxColor)));
 		}
 	}
 
-	public function createHitbox(x:Float = 0, y:Float = 0, width:Int, height:Int, color) {
+	public function createHitbox(x:Float = 0, y:Float = 0, width:Int, height:Int, color:String) {
 		var button:FlxButton = new FlxButton(x, y);
 		button.loadGraphic(createHitboxGraphic(width, height));
 		button.updateHitbox();
@@ -94,8 +91,9 @@ class FlxHitbox extends FlxSpriteGroup {
 	}
 	
 	//get color from note function
-	function getDynamicColor(type:Int, int:Int):FlxColor {
-	    return ClientPrefs.data.arrowRGB[ExtraKeysHandler.instance.data.keys[type].notes[int]][0];
+	function getDynamicColor(type:Int, int:Int):String {
+	    var notes:Int = ExtraKeysHandler.instance.data.keys[type].notes[int];
+	    return ExtraKeysHandler.instance.data.colors[notes].inner;
 	}
 
 	override public function destroy():Void {
