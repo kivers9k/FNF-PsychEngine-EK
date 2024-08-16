@@ -6,7 +6,6 @@ import flixel.util.FlxDestroyUtil;
 import flixel.ui.FlxButton;
 import flixel.FlxSprite;
 import flixel.FlxG;
-import flixel.util.FlxColor;
 import openfl.display.BitmapData;
 import openfl.display.Shape;
 import backend.ExtraKeysHandler;
@@ -39,7 +38,7 @@ class FlxHitbox extends FlxSpriteGroup {
 		button.loadGraphic(createHitboxGraphic(width, height));
 		button.updateHitbox();
 		button.alpha = 0;
-		if (!color.startsWith('0x')) button.color = FlxColor.fromString('0x' + color);
+		button.color = CoolUtil.colorFromString(color);
 
 		button.onDown.callback = function() button.alpha = ClientPrefs.data.controlsAlpha;
 		button.onUp.callback = function() button.alpha = 0;
@@ -62,7 +61,7 @@ class FlxHitbox extends FlxSpriteGroup {
  
         var hintSpr:FlxSprite = new FlxSprite(x, y, bitmap);
 		hintSpr.updateHitbox();
-		if (!color.startsWith('0x')) hintSpr.color = FlxColor.fromString('0x' + color);
+		hintSpr.color = CoolUtil.colorFromString(color);
 
 		return hintSpr;
 	}
@@ -93,8 +92,8 @@ class FlxHitbox extends FlxSpriteGroup {
 	//get color from note function
 	function getDynamicColor(type:Int, int:Int):String {
 	    var notes:Int = ExtraKeysHandler.instance.data.keys[type].notes[int];
-	    return ExtraKeysHandler.instance.data.colors[notes].inner;
-	}
+	    return CoolUtil.getArrowRGB().colors[notes].inner;
+ 	}
 
 	override public function destroy():Void {
 		super.destroy();
