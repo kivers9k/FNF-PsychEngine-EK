@@ -66,6 +66,12 @@ class Main extends Sprite
 
 	public function new()
 	{
+		#if mobile
+		#if android
+		SUtil.doPermissionsShit();
+		#end
+		Sys.setCwd(SUtil.getStorageDirectory());
+		#end
 		super();
 
 		// Credits to MAJigsaw77 (he's the og author for this code)
@@ -75,12 +81,6 @@ class Main extends Sprite
 		//#elseif ios
 		//Sys.setCwd(lime.system.System.applicationStorageDirectory);
 		//#end
-		#if mobile
-		#if android
-		SUtil.doPermissionsShit();
-		#end
-		Sys.setCwd(SUtil.getStorageDirectory());
-		#end
 		mobile.backend.CrashHandler.init();
 
 		if (stage != null)
