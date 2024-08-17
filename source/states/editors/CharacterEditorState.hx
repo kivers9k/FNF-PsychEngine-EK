@@ -1051,10 +1051,10 @@ class CharacterEditorState extends MusicBeatState
 		frameAdvanceText.color = clr;
 
 		// OTHER CONTROLS
-		if(FlxG.keys.justPressed.F12 #if mobile || _virtualpad.buttonS.justPressed)
+		if(FlxG.keys.justPressed.F12 #if mobile || _virtualpad.buttonS.justPressed #end)
 			silhouettes.visible = !silhouettes.visible;
 
-		if(FlxG.keys.justPressed.F1 #if mobile || _virtualpad.buttonF.justPressed || (helpBg.visible && FlxG.keys.justPressed.ESCAPE))
+		if(FlxG.keys.justPressed.F1 #if mobile || _virtualpad.buttonF.justPressed #end || (helpBg.visible && FlxG.keys.justPressed.ESCAPE))
 		{
 			helpBg.visible = !helpBg.visible;
 			helpTexts.visible = helpBg.visible;
