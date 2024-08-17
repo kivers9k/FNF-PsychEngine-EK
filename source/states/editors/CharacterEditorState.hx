@@ -863,7 +863,7 @@ class CharacterEditorState extends MusicBeatState
 		var shiftMult:Float = 1;
 		var ctrlMult:Float = 1;
 		var shiftMultBig:Float = 1;
-		if(FlxG.keys.pressed.SHIFT #if mobile || _virtualpad.buttonC.justPressed)
+		if(FlxG.keys.pressed.SHIFT #if mobile || _virtualpad.buttonC.justPressed #end)
 		{
 			shiftMult = 4;
 			shiftMultBig = 10;
@@ -904,8 +904,8 @@ class CharacterEditorState extends MusicBeatState
 		var changedAnim:Bool = false;
 		if(anims.length > 1)
 		{
-			if(FlxG.keys.justPressed.W #if mobile || _virtualpad.buttonV.justPressed && (changedAnim = true)) curAnim--;
-			else if(FlxG.keys.justPressed.S #if mobile || _virtualpad.buttonD.justPressed && (changedAnim = true)) curAnim++;
+			if(FlxG.keys.justPressed.W #if mobile || _virtualpad.buttonV.justPressed #end && (changedAnim = true)) curAnim--;
+			else if(FlxG.keys.justPressed.S #if mobile || _virtualpad.buttonD.justPressed #end && (changedAnim = true)) curAnim++;
 
 			if(changedAnim)
 			{
