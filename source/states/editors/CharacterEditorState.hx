@@ -883,7 +883,7 @@ class CharacterEditorState extends MusicBeatState
 		if (FlxG.keys.pressed.L) FlxG.camera.scroll.x += elapsed * 500 * shiftMult * ctrlMult;
 		if (FlxG.keys.pressed.I) FlxG.camera.scroll.y -= elapsed * 500 * shiftMult * ctrlMult;
 
-		#if android
+		#if mobile
 		var mouse = FlxG.mouse.getScreenPosition();
 		if (FlxG.mouse.justPressed) {
             camPos[0] = FlxG.camera.scroll.x + mouse.x;
@@ -926,14 +926,18 @@ class CharacterEditorState extends MusicBeatState
 		var changedOffset = false;
 		var moveKeysP = [FlxG.keys.justPressed.LEFT, FlxG.keys.justPressed.RIGHT, FlxG.keys.justPressed.UP, FlxG.keys.justPressed.DOWN];
 		var moveKeys = [FlxG.keys.pressed.LEFT, FlxG.keys.pressed.RIGHT, FlxG.keys.pressed.UP, FlxG.keys.pressed.DOWN];
-		if(moveKeysP.contains(true))
+		#if mobile
+		var buttonsP = [_virtualpad.buttonLeft.justPressed, _virtualpad.buttonRight.justPressed, _virtualpad.buttonUp.justPressed, _virtualpad.buttonDown.justPressed];
+		var buttons = [_virtualpad.buttonLeft.pressed, _virtualpad.buttonRight.pressed, _virtualpad.buttonUp.pressed, _virtualpad.buttonDown.pressed];
+		#end
+		if(moveKeysP.contains(true) #if mobile || buttonsP.contains(true) #end)
 		{
-			character.offset.x += ((moveKeysP[0] ? 1 : 0) - (moveKeysP[1] ? 1 : 0)) * shiftMultBig;
-			character.offset.y += ((moveKeysP[2] ? 1 : 0) - (moveKeysP[3] ? 1 : 0)) * shiftMultBig;
+			character.offset.x += (((moveKeysP[0] #if mobile || buttonsP[0] #end) ? 1 : 0) - ((moveKeysP[1] #if mobile || buttonsP[1] #end) ? 1 : 0)) * shiftMultBig;
+			character.offset.y += (((moveKeysP[2] #if mobile || buttonsP[2] #end) ? 1 : 0) - ((moveKeysP[3] #if mobile || buttonsP[3] #end) ? 1 : 0)) * shiftMultBig;
 			changedOffset = true;
 		}
 
-		if(moveKeys.contains(true))
+		if(moveKeys.contains(true) #if mobile || buttons.contains(true) #end) 
 		{
 			holdingArrowsTime += elapsed;
 			if(holdingArrowsTime > 0.6)
@@ -941,8 +945,8 @@ class CharacterEditorState extends MusicBeatState
 				holdingArrowsElapsed += elapsed;
 				while(holdingArrowsElapsed > (1/60))
 				{
-					character.offset.x += ((moveKeys[0] ? 1 : 0) - (moveKeys[1] ? 1 : 0)) * shiftMultBig;
-					character.offset.y += ((moveKeys[2] ? 1 : 0) - (moveKeys[3] ? 1 : 0)) * shiftMultBig;
+					character.offset.x += (((moveKeys[0] #if mobile || buttons[0] #end) ? 1 : 0) - ((moveKeys[1] #if mobile || buttons[1] #end) ? 1 : 0)) * shiftMultBig;
+					character.offset.y += (((moveKeys[2] #if mobile || buttons[2] #end) ? 1 : 0) - ((moveKeys[3] #if mobile || buttons[3] #end) ? 1 : 0)) * shiftMultBig;
 					holdingArrowsElapsed -= (1/60);
 					changedOffset = true;
 				}
@@ -1008,7 +1012,7 @@ class CharacterEditorState extends MusicBeatState
 			}
 			else holdingFrameTime = 0;
 
-			if(FlxG.keys.justPressed.SPACE)
+			if(FlxG.keys.justPressed.SPACE #if mobile || _virtualpad.buttonC.justPressed #end)
 				character.playAnim(character.getAnimationName(), true);
 
 			var frames:Int = 0;
@@ -1055,7 +1059,7 @@ class CharacterEditorState extends MusicBeatState
 			helpBg.visible = !helpBg.visible;
 			helpTexts.visible = helpBg.visible;
 		}
-		else if(FlxG.keys.justPressed.ESCAPE)
+		else if(FlxG.keys.justPressed.ESCAPE #if android || FlxG.android.justReleased.BACK #end)
 		{
 			FlxG.mouse.visible = false;
 			if(!_goToPlayState)
