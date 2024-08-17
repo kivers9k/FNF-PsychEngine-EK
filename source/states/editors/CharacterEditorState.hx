@@ -895,12 +895,12 @@ class CharacterEditorState extends MusicBeatState
 		#end
 		
 		var lastZoom = FlxG.camera.zoom;
-		if(FlxG.keys.justPressed.R && !FlxG.keys.pressed.CONTROL) FlxG.camera.zoom = 1;
-		else if (FlxG.keys.pressed.E && FlxG.camera.zoom < 3) {
+		if(FlxG.keys.justPressed.R #if mobile || _virtualpad.buttonZ.justPressed #end && !FlxG.keys.pressed.CONTROL) FlxG.camera.zoom = 1;
+		else if (FlxG.keys.pressed.E #if mobile || _virtualpad.buttonX.justPressed #end && FlxG.camera.zoom < 3) {
 			FlxG.camera.zoom += elapsed * FlxG.camera.zoom * shiftMult * ctrlMult;
 			if(FlxG.camera.zoom > 3) FlxG.camera.zoom = 3;
 		}
-		else if (FlxG.keys.pressed.Q && FlxG.camera.zoom > 0.1) {
+		else if (FlxG.keys.pressed.Q #if mobile || _virtualpad.buttonY.justPressed #end && FlxG.camera.zoom > 0.1) {
 			FlxG.camera.zoom -= elapsed * FlxG.camera.zoom * shiftMult * ctrlMult;
 			if(FlxG.camera.zoom < 0.1) FlxG.camera.zoom = 0.1;
 		}
