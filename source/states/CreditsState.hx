@@ -41,7 +41,7 @@ class CreditsState extends MusicBeatState
 		var defaultList:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
 		    ['Android Port'],
 			['Heropowerbrine','Hero','Porter of this mod(and a bunch of other extra key mods)','https://www.youtube.com/c/Heropowerbrine', 'B9AF27'],
-			['Kivers','kivers','Helped with shaders, optimizations and everything else that needed fixing','https://www.youtube.com/channel/UCvCpheMfwNMinm-ucYONImw', 'CF2D2D'],
+			['Kivers','kivers','The other porter of this mod, helped fixed everything I could not :) ','https://github.com/kivers9k', 'CF2D2D'],
 			['Extra Keys Team'],
 			['tposejank', 			'tposejank',		'EK Programmer',			 								'https://twitter.com/tposejank', 		'B9AF27'],	//mensajes subliminales
 			['srPerez', 			'perez', 			'1-9 keys art', 											'https://twitter.com/NewSrPerez', 		'FF9E00'],
