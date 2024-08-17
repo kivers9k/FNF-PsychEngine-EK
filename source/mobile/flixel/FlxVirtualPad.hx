@@ -15,6 +15,9 @@ class FlxVirtualPad extends FlxSpriteGroup {
 	public var buttonC:FlxButton;
 	public var buttonD:FlxButton;
 	public var buttonE:FlxButton;
+	public var buttonF:FlxButton;
+	public var buttonG:FlxButton;
+	public var buttonS:FlxButton;
 	public var buttonV:FlxButton;
 	public var buttonX:FlxButton;
 	public var buttonY:FlxButton;
@@ -184,6 +187,17 @@ class FlxVirtualPad extends FlxSpriteGroup {
 				dPad.add(add(buttonB = createButton(FlxG.width - 258, 125, 132, 127, "b", 0xFFCB00)));
 				dPad.add(add(buttonZ = createButton(FlxG.width - 132, 0, 132, 127, "z", 0xCCB98E)));
 				dPad.add(add(buttonA = createButton(FlxG.width - 132, 125, 132, 127, "a", 0xFF0000)));
+			case CHARACTER_EDITOR:
+				dPad.add(add(buttonV = createButton(FlxG.width - 510, FlxG.height - 255, 132, 127, 'v', 0x49A9B2)));
+				dPad.add(add(buttonD = createButton(FlxG.width - 510, FlxG.height - 135, 132, 127, 'd', 0x0078FF)));
+				dPad.add(add(buttonX = createButton(FlxG.width - 384, FlxG.height - 255, 132, 127, 'x', 0x99062D)));
+				dPad.add(add(buttonC = createButton(FlxG.width - 384, FlxG.height - 135, 132, 127, 'c', 0x44FF00)));
+				dPad.add(add(buttonS = createButton(FlxG.width - 636, FlxG.height - 135, 132, 127, 's', 0xEA00FF)));
+				dPad.add(add(buttonF = createButton(FlxG.width - 410, 0, 132, 127, 'f', 0xFF009D)));
+				dPad.add(add(buttonY = createButton(FlxG.width - 258, FlxG.height - 255, 132, 127, 'y', 0x4A35B9)));
+				dPad.add(add(buttonB = createButton(FlxG.width - 258, FlxG.height - 135, 132, 127, 'b', 0xFFCB00)));
+				dPad.add(add(buttonZ = createButton(FlxG.width - 132, FlxG.height - 255, 132, 127, 'z', 0xCCB98E)));
+				dPad.add(add(buttonA = createButton(FlxG.width - 132, FlxG.height - 135, 132, 127, 'a', 0xFF0000)));
 			case NONE:
 				// do nothing
 		}
@@ -221,6 +235,9 @@ class FlxVirtualPad extends FlxSpriteGroup {
 		buttonC = null;
 		buttonD = null;
 		buttonE = null;
+		buttonF = null;
+		buttonG = null;
+		buttonS = null;
 
 		buttonV = null;
 		buttonX = null;
@@ -265,5 +282,6 @@ enum FlxActionMode {
 	CHART_EDITOR;
 	NOTE_SPLASH_DEBUG;
 	DIALOGUE_PORTRAIT;
+	CHARACTER_EDITOR;
 	NONE;
 }
