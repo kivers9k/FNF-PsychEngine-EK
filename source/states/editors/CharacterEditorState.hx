@@ -863,7 +863,7 @@ class CharacterEditorState extends MusicBeatState
 		var shiftMult:Float = 1;
 		var ctrlMult:Float = 1;
 		var shiftMultBig:Float = 1;
-		if(FlxG.keys.pressed.SHIFT #if mobile || _virtualpad.buttonB.justPressed #end)
+		if(FlxG.keys.pressed.SHIFT #if mobile || _virtualpad.buttonB.pressed #end)
 		{
 			shiftMult = 4;
 			shiftMultBig = 10;
