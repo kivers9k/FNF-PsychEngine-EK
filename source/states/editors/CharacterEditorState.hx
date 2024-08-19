@@ -863,7 +863,7 @@ class CharacterEditorState extends MusicBeatState
 		var shiftMult:Float = 1;
 		var ctrlMult:Float = 1;
 		var shiftMultBig:Float = 1;
-		if(FlxG.keys.pressed.SHIFT #if mobile || _virtualpad.buttonC.justPressed #end)
+		if(FlxG.keys.pressed.SHIFT #if mobile || _virtualpad.buttonB.pressed #end)
 		{
 			shiftMult = 4;
 			shiftMultBig = 10;
@@ -889,11 +889,11 @@ class CharacterEditorState extends MusicBeatState
 		
 		var lastZoom = FlxG.camera.zoom;
 		if(FlxG.keys.justPressed.R #if mobile || _virtualpad.buttonZ.justPressed #end && !FlxG.keys.pressed.CONTROL) FlxG.camera.zoom = 1;
-		else if (FlxG.keys.pressed.E #if mobile || _virtualpad.buttonX.justPressed #end && FlxG.camera.zoom < 3) {
+		else if (FlxG.keys.pressed.E #if mobile || _virtualpad.buttonX.pressed #end && FlxG.camera.zoom < 3) {
 			FlxG.camera.zoom += elapsed * FlxG.camera.zoom * shiftMult * ctrlMult;
 			if(FlxG.camera.zoom > 3) FlxG.camera.zoom = 3;
 		}
-		else if (FlxG.keys.pressed.Q #if mobile || _virtualpad.buttonY.justPressed #end && FlxG.camera.zoom > 0.1) {
+		else if (FlxG.keys.pressed.Q #if mobile || _virtualpad.buttonY.pressed #end && FlxG.camera.zoom > 0.1) {
 			FlxG.camera.zoom -= elapsed * FlxG.camera.zoom * shiftMult * ctrlMult;
 			if(FlxG.camera.zoom < 0.1) FlxG.camera.zoom = 0.1;
 		}
@@ -1012,7 +1012,7 @@ class CharacterEditorState extends MusicBeatState
 			}
 			else holdingFrameTime = 0;
 
-			if(FlxG.keys.justPressed.SPACE)
+			if(FlxG.keys.justPressed.SPACE #if mobile || _virtualpad.buttonC.justPressed #end)
 				character.playAnim(character.getAnimationName(), true);
 
 			var frames:Int = 0;
@@ -1051,15 +1051,29 @@ class CharacterEditorState extends MusicBeatState
 		frameAdvanceText.color = clr;
 
 		// OTHER CONTROLS
-		if(FlxG.keys.justPressed.F12 #if mobile || _virtualpad.buttonS.justPressed #end)
+		if(FlxG.keys.justPressed.F12 #if mobile || _virtualpad.buttonS.justReleased #end)
 			silhouettes.visible = !silhouettes.visible;
 
-		if(FlxG.keys.justPressed.F1 #if mobile || _virtualpad.buttonF.justPressed #end || (helpBg.visible && FlxG.keys.justPressed.ESCAPE))
+		if(FlxG.keys.justPressed.F1 #if mobile || _virtualpad.buttonF.justReleased #end || (helpBg.visible && FlxG.keys.justPressed.ESCAPE))
 		{
 			helpBg.visible = !helpBg.visible;
 			helpTexts.visible = helpBg.visible;
+
+			_virtualpad.buttonLeft.visible = helpBg.visible;
+			_virtualpad.buttonRight.visible = helpBg.visible;
+			_virtualpad.buttonUp.visible = helpBg.visible;
+			_virtualpad.buttonDown.visible = helpBg.visible;
+			_virtualpad.buttonA.visible = helpBg.visible;
+			_virtualpad.buttonB.visible = helpBg.visible;
+			_virtualpad.buttonC.visible = helpBg.visible;
+			_virtualpad.buttonD.visible = helpBg.visible;
+            _virtualpad.buttonS.visible = helpBg.visible;
+			_virtualpad.buttonZ.visible = helpBg.visible;
+			_virtualpad.buttonY.visible = helpBg.visible;
+			_virtualpad.buttonX.visible = helpBg.visible;
+			_virtualpad.buttonV.visible = helpBg.visible;
 		}
-		else if(FlxG.keys.justPressed.ESCAPE #if mobile || _virtualpad.buttonB.justPressed || FlxG.android.justReleased.BACK #end)
+		else if(FlxG.keys.justPressed.ESCAPE #if mobile || FlxG.android.justReleased.BACK #end)
 		{
 			FlxG.mouse.visible = false;
 			if(!_goToPlayState)
