@@ -179,7 +179,8 @@ class CharacterEditorState extends MusicBeatState
 		\n
 		\nOTHER
 		\nS - Toggle Silhouettes
-		\nHold B - Move Offsets 10x faster and Camera 4x faster";
+		\nHold B - Move Offsets 10x faster
+        \nTab And Move - Move Camera";
 
 		helpBg = new FlxSprite().makeGraphic(1, 1, FlxColor.BLACK);
 		helpBg.scale.set(FlxG.width, FlxG.height);
