@@ -273,6 +273,22 @@ class HScript extends SScript
 				else trace('$origin - $msg');
 			}
 		});
+
+		set("getTextFromURL", function(url:String) {
+			var result:String = null;
+
+			var https = new haxe.Http(url);
+		    https.onData = function(data:String) {
+				result = data;
+			}
+			https.onError = function(error:String) {
+				PlayState.addTextToDebug('ERROR: $error', FlxColor.WHITE);
+			}
+			https.request();
+
+			return result;
+		});
+
 		#if LUA_ALLOWED
 		set('parentLua', parentLua);
 		#else

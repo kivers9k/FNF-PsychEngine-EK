@@ -209,6 +209,20 @@ class ExtraFunctions
 		Lua_helper.add_callback(lua, "getTextFromFile", function(path:String, ?ignoreModFolders:Bool = false) {
 			return Paths.getTextFromFile(path, ignoreModFolders);
 		});
+		Lua_helper.add_callback(lua, "getTextFromURL", function(url:String) {
+			var result:String = null;
+
+			var https = new haxe.Http(url);
+			https.onData = function(data:String) {
+				result = data;
+			}
+			https.onError = function(error:String) {
+                PlayState.addTextToDebug('ERROR: $error', FlxColor.WHITE);
+			}
+			https.request();
+
+			return result;
+		});
 		Lua_helper.add_callback(lua, "directoryFileList", function(folder:String) {
 			var list:Array<String> = [];
 			#if sys
