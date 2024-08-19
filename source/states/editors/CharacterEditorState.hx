@@ -175,10 +175,11 @@ class CharacterEditorState extends MusicBeatState
 		\nA - Reset Current Offset
 		\nV/D - Previous/Next Animation
 		\nArrow Buttons - Move Offset
+        \nC - Play Animation
 		\n
 		\nOTHER
 		\nS - Toggle Silhouettes
-		\nHold C - Move Offsets 10x faster and Camera 4x faster";
+		\nHold B - Move Offsets 10x faster and Camera 4x faster";
 
 		helpBg = new FlxSprite().makeGraphic(1, 1, FlxColor.BLACK);
 		helpBg.scale.set(FlxG.width, FlxG.height);
@@ -1059,19 +1060,19 @@ class CharacterEditorState extends MusicBeatState
 			helpBg.visible = !helpBg.visible;
 			helpTexts.visible = helpBg.visible;
 
-			_virtualpad.buttonLeft.visible = helpBg.visible;
-			_virtualpad.buttonRight.visible = helpBg.visible;
-			_virtualpad.buttonUp.visible = helpBg.visible;
-			_virtualpad.buttonDown.visible = helpBg.visible;
-			_virtualpad.buttonA.visible = helpBg.visible;
-			_virtualpad.buttonB.visible = helpBg.visible;
-			_virtualpad.buttonC.visible = helpBg.visible;
-			_virtualpad.buttonD.visible = helpBg.visible;
-            _virtualpad.buttonS.visible = helpBg.visible;
-			_virtualpad.buttonZ.visible = helpBg.visible;
-			_virtualpad.buttonY.visible = helpBg.visible;
-			_virtualpad.buttonX.visible = helpBg.visible;
-			_virtualpad.buttonV.visible = helpBg.visible;
+			_virtualpad.buttonLeft.visible = !helpBg.visible;
+			_virtualpad.buttonRight.visible = !helpBg.visible;
+			_virtualpad.buttonUp.visible = !helpBg.visible;
+			_virtualpad.buttonDown.visible = !helpBg.visible;
+			_virtualpad.buttonA.visible = !helpBg.visible;
+			_virtualpad.buttonB.visible = !helpBg.visible;
+			_virtualpad.buttonC.visible = !helpBg.visible;
+			_virtualpad.buttonD.visible = !helpBg.visible;
+            _virtualpad.buttonS.visible = !helpBg.visible;
+			_virtualpad.buttonZ.visible = !helpBg.visible;
+			_virtualpad.buttonY.visible = !helpBg.visible;
+			_virtualpad.buttonX.visible = !helpBg.visible;
+			_virtualpad.buttonV.visible = !helpBg.visible;
 		}
 		else if(FlxG.keys.justPressed.ESCAPE #if mobile || FlxG.android.justReleased.BACK #end)
 		{
