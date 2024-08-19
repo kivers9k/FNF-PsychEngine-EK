@@ -217,7 +217,7 @@ class ExtraFunctions
 				result = data;
 			}
 			https.onError = function(error:String) {
-                PlayState.addTextToDebug('ERROR: $error', FlxColor.WHITE);
+                FunkinLua.luaTrace('ERROR: $error');
 			}
 			https.request();
 
